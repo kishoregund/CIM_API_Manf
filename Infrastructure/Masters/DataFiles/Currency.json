@@ -1,0 +1,1523 @@
+[
+	{
+		"id" : "e711fbff-9e2b-45c7-b0eb-9a573b8893cf",
+		"code" : "AFN",
+		"name" : "Afghanistani Afghani",
+		"n_code" : 971,
+		"minor_unit" : 2,
+		"symbol" : "؋",
+		"MCId" : "00000000-0000-0000-0000-000000000002"
+	},
+	{
+		"id" : "8388fd5a-43ee-4258-8260-3c1ca5a46f3d",
+		"code" : "ALL",
+		"name" : "Albanian Lek",
+		"n_code" : 8,
+		"minor_unit" : 2,
+		"symbol" : "Lek",
+		"MCId" : "00000000-0000-0000-0000-000000000003"
+	},
+	{
+		"id" : "ed74c5d7-5b5a-4a02-9040-83569d5fca99",
+		"code" : "AMD",
+		"name" : "Armenian Dram",
+		"n_code" : 51,
+		"minor_unit" : 2,
+		"symbol" : "դր",
+		"MCId" : "00000000-0000-0000-0000-000000000004"
+	},
+	{
+		"id" : "db67f594-1804-4593-9c74-77991bc291cf",
+		"code" : "ANG",
+		"name" : "Netherlands Antillean Guilder",
+		"n_code" : 532,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000005"
+	},
+	{
+		"id" : "655a8739-340e-4b18-a556-2dc11b40bd48",
+		"code" : "AOA",
+		"name" : "Angolan Kwanza",
+		"n_code" : 973,
+		"minor_unit" : 2,
+		"symbol" : "Kz",
+		"MCId" : "00000000-0000-0000-0000-000000000006"
+	},
+	{
+		"id" : "45a7fa26-23e2-493b-b595-6df86d2806d4",
+		"code" : "ARS",
+		"name" : "Argentine Peso",
+		"n_code" : 32,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000007"
+	},
+	{
+		"id" : "506d2569-5667-4d62-87fe-3f816ee6872d",
+		"code" : "AUD",
+		"name" : "Australian Dollar",
+		"n_code" : 36,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000008"
+	},
+	{
+		"id" : "c49da352-f87c-45c7-8769-1cba4bc4c390",
+		"code" : "AWG",
+		"name" : "Aruban Florin",
+		"n_code" : 533,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000009"
+	},
+	{
+		"id" : "f47d4fc3-e30c-44b9-aad9-cd55c0e063b6",
+		"code" : "AZN",
+		"name" : "Azerbaijani Manat",
+		"n_code" : 944,
+		"minor_unit" : 2,
+		"symbol" : "₼",
+		"MCId" : "00000000-0000-0000-0000-000000000010"
+	},
+	{
+		"id" : "5bf8e94e-0405-436a-b976-a7305cd14897",
+		"code" : "BAM",
+		"name" : "Bosnia-Herzegovina Convertible Mark",
+		"n_code" : 977,
+		"minor_unit" : 2,
+		"symbol" : "KM",
+		"MCId" : "00000000-0000-0000-0000-000000000011"
+	},
+	{
+		"id" : "8b2b6d73-c245-4405-a123-10fdd0478c96",
+		"code" : "BBD",
+		"name" : "Barbados Dollar",
+		"n_code" : 52,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000012"
+	},
+	{
+		"id" : "6ade4c25-01ec-4afa-8cea-8a361f44d74e",
+		"code" : "BDT",
+		"name" : "Bangladeshi Taka",
+		"n_code" : 50,
+		"minor_unit" : 2,
+		"symbol" : "৳",
+		"MCId" : "00000000-0000-0000-0000-000000000013"
+	},
+	{
+		"id" : "02a433b7-f673-4e82-a5f7-9cb05f10cccc",
+		"code" : "BGN",
+		"name" : "Bulgarian Lev",
+		"n_code" : 975,
+		"minor_unit" : 2,
+		"symbol" : "лв",
+		"MCId" : "00000000-0000-0000-0000-000000000014"
+	},
+	{
+		"id" : "026025fb-8141-4fb7-8a55-c71ccc6396d6",
+		"code" : "BHD",
+		"name" : "Bahraini Dinar",
+		"n_code" : 48,
+		"minor_unit" : 3,
+		"symbol" : ".د.ب",
+		"MCId" : "00000000-0000-0000-0000-000000000015"
+	},
+	{
+		"id" : "5318eccb-5010-43d3-ba09-38a785e08ce6",
+		"code" : "BIF",
+		"name" : "Burundian Franc",
+		"n_code" : 108,
+		"minor_unit" : 0,
+		"symbol" : "FBu",
+		"MCId" : "00000000-0000-0000-0000-000000000016"
+	},
+	{
+		"id" : "cb8d933e-fa2b-436d-a694-cfbbc6311117",
+		"code" : "BMD",
+		"name" : "Bermudian Dollar",
+		"n_code" : 60,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000017"
+	},
+	{
+		"id" : "5eea0c7f-f12b-45d8-b4de-ab3a5a74d3de",
+		"code" : "BND",
+		"name" : "Brunei Dollar",
+		"n_code" : 96,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000018"
+	},
+	{
+		"id" : "02c1d588-ee41-42e6-8fb7-8d6401b23c19",
+		"code" : "BOB",
+		"name" : "Bolivian Boliviano",
+		"n_code" : 68,
+		"minor_unit" : 2,
+		"symbol" : "$b",
+		"MCId" : "00000000-0000-0000-0000-000000000019"
+	},
+	{
+		"id" : "bbf656be-7447-47e4-a466-56138b7ddc2b",
+		"code" : "BOV",
+		"name" : "Mvdol",
+		"n_code" : 984,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000020"
+	},
+	{
+		"id" : "0082a80b-bc69-40c7-ba58-a069e0fe0e32",
+		"code" : "BRL",
+		"name" : "Brazilian Real",
+		"n_code" : 986,
+		"minor_unit" : 2,
+		"symbol" : "R$",
+		"MCId" : "00000000-0000-0000-0000-000000000021"
+	},
+	{
+		"id" : "7e6467be-ffe9-4e50-bae7-b1d90196bd14",
+		"code" : "BSD",
+		"name" : "Bahamian Dollar",
+		"n_code" : 44,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000022"
+	},
+	{
+		"id" : "2787192e-3387-440e-8abb-eace5b90e6e4",
+		"code" : "BTN",
+		"name" : "Bhutanese Ngultrum",
+		"n_code" : 64,
+		"minor_unit" : 2,
+		"symbol" : "Nu.",
+		"MCId" : "00000000-0000-0000-0000-000000000023"
+	},
+	{
+		"id" : "92dfaae2-edf3-4add-9c2e-795aa557d2b9",
+		"code" : "BWP",
+		"name" : "Botswana Pula",
+		"n_code" : 72,
+		"minor_unit" : 2,
+		"symbol" : "P",
+		"MCId" : "00000000-0000-0000-0000-000000000024"
+	},
+	{
+		"id" : "748e8d4a-d06d-4e5c-87ba-d0b5ee5b67a0",
+		"code" : "BYN",
+		"name" : "Belarusian Ruble",
+		"n_code" : 933,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000025"
+	},
+	{
+		"id" : "43929e87-b371-4638-ad2c-f067f8bbd40a",
+		"code" : "BZD",
+		"name" : "Belize Dollar",
+		"n_code" : 84,
+		"minor_unit" : 2,
+		"symbol" : "BZ$",
+		"MCId" : "00000000-0000-0000-0000-000000000026"
+	},
+	{
+		"id" : "faa93c78-271c-480c-ae88-61956a8d76ee",
+		"code" : "CAD",
+		"name" : "Canadian Dollar",
+		"n_code" : 124,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000027"
+	},
+	{
+		"id" : "de6fd42e-af22-47f8-960e-cb87ce6d87ab",
+		"code" : "CDF",
+		"name" : "Congolese franc",
+		"n_code" : 976,
+		"minor_unit" : 2,
+		"symbol" : "FC",
+		"MCId" : "00000000-0000-0000-0000-000000000028"
+	},
+	{
+		"id" : "7218c063-26c1-4d9a-a56d-479148d87481",
+		"code" : "CHE",
+		"name" : "WIR Euro",
+		"n_code" : 947,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000029"
+	},
+	{
+		"id" : "d53e1c27-1df2-46b1-8949-5296d3e04622",
+		"code" : "CHF",
+		"name" : "Swiss Franc",
+		"n_code" : 756,
+		"minor_unit" : 2,
+		"symbol" : "CHF",
+		"MCId" : "00000000-0000-0000-0000-000000000030"
+	},
+	{
+		"id" : "fd95706a-b6c8-40d5-a4a7-1bd5d4f0beb3",
+		"code" : "CHW",
+		"name" : "WIR Franc",
+		"n_code" : 948,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000031"
+	},
+	{
+		"id" : "e298933f-810d-4619-9edd-4ab858eaf300",
+		"code" : "CLF",
+		"name" : "Unidad de Fomento",
+		"n_code" : 990,
+		"minor_unit" : 4,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000032"
+	},
+	{
+		"id" : "f5634028-354d-4fe9-ab42-b2a46fe0362c",
+		"code" : "CLP",
+		"name" : "Chilean Peso",
+		"n_code" : 152,
+		"minor_unit" : 0,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000033"
+	},
+	{
+		"id" : "8f194a3a-bde6-4ff9-93ae-35d7afa905a7",
+		"code" : "CNY",
+		"name" : "Chinese Yuan Renminbi",
+		"n_code" : 156,
+		"minor_unit" : 2,
+		"symbol" : "¥",
+		"MCId" : "00000000-0000-0000-0000-000000000034"
+	},
+	{
+		"id" : "78cea36c-9bad-40da-84e3-c8a21e29c0a7",
+		"code" : "COP",
+		"name" : "Colombian Peso",
+		"n_code" : 170,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000035"
+	},
+	{
+		"id" : "24a115f1-03a6-46b3-89f0-44b4534db782",
+		"code" : "COU",
+		"name" : "Unidad de Valor Real",
+		"n_code" : 970,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000036"
+	},
+	{
+		"id" : "144d8135-dbb5-48c9-81aa-42bb73d90c18",
+		"code" : "CRC",
+		"name" : "Costa Rican Colon",
+		"n_code" : 188,
+		"minor_unit" : 2,
+		"symbol" : "₡",
+		"MCId" : "00000000-0000-0000-0000-000000000037"
+	},
+	{
+		"id" : "5e39ad3c-2524-476f-ab15-6832246872b0",
+		"code" : "CUC",
+		"name" : "Cuban Convertible Peso",
+		"n_code" : 931,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000038"
+	},
+	{
+		"id" : "8ed385e4-c24e-4a5c-b324-e9abf84df0f6",
+		"code" : "CUP",
+		"name" : "Cuban Peso",
+		"n_code" : 192,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000039"
+	},
+	{
+		"id" : "a3d62d28-208e-40b0-88a7-75e1df247b67",
+		"code" : "CUR",
+		"name" : "Currency",
+		"n_code" : 12,
+		"minor_unit" : 21,
+		"symbol" : "C",
+		"MCId" : "bbc3d14c-d57a-43a7-856e-793dc8198a47"
+	},
+	{
+		"id" : "e6b3e0fc-0b67-437f-92b7-9f90ae4fc433",
+		"code" : "CVE",
+		"name" : "Cape Verde Escudo",
+		"n_code" : 132,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000040"
+	},
+	{
+		"id" : "1e8f1890-b021-4cb3-9fae-ed2583f20780",
+		"code" : "CZK",
+		"name" : "Czech Koruna",
+		"n_code" : 203,
+		"minor_unit" : 2,
+		"symbol" : "Kč",
+		"MCId" : "00000000-0000-0000-0000-000000000041"
+	},
+	{
+		"id" : "0bf1ccb2-1e35-4ed3-8d75-36ed6bb43ca7",
+		"code" : "DJF",
+		"name" : "Djiboutian Franc",
+		"n_code" : 262,
+		"minor_unit" : 0,
+		"symbol" : "Fdj",
+		"MCId" : "00000000-0000-0000-0000-000000000042"
+	},
+	{
+		"id" : "c2fcc0b0-f2a0-4191-85b1-f9dce779690c",
+		"code" : "DKK",
+		"name" : "Danish Krone",
+		"n_code" : 208,
+		"minor_unit" : 2,
+		"symbol" : "kr.",
+		"MCId" : "00000000-0000-0000-0000-000000000043"
+	},
+	{
+		"id" : "4708816b-a1f3-46d3-969d-8167f89766f7",
+		"code" : "DOP",
+		"name" : "Dominican Peso",
+		"n_code" : 214,
+		"minor_unit" : 2,
+		"symbol" : "RD$",
+		"MCId" : "00000000-0000-0000-0000-000000000044"
+	},
+	{
+		"id" : "9128d968-11ac-41fe-8d5b-2dd79a39b591",
+		"code" : "DZD",
+		"name" : "Algerian Dinar",
+		"n_code" : 12,
+		"minor_unit" : 2,
+		"symbol" : "دج",
+		"MCId" : "00000000-0000-0000-0000-000000000045"
+	},
+	{
+		"id" : "61153909-494d-4458-86c2-ef1073c8b266",
+		"code" : "EGP",
+		"name" : "Egyptian Pound",
+		"n_code" : 818,
+		"minor_unit" : 2,
+		"symbol" : "£",
+		"MCId" : "00000000-0000-0000-0000-000000000046"
+	},
+	{
+		"id" : "74502cd5-d59e-4ced-8873-23d4f033eddd",
+		"code" : "ERN",
+		"name" : "Eritrean Nakfa",
+		"n_code" : 232,
+		"minor_unit" : 2,
+		"symbol" : "ናቕፋ",
+		"MCId" : "00000000-0000-0000-0000-000000000047"
+	},
+	{
+		"id" : "d01e6d36-cf7b-4fd9-9fc3-325c85a1ff92",
+		"code" : "ETB",
+		"name" : "Ethiopian Birr",
+		"n_code" : 230,
+		"minor_unit" : 2,
+		"symbol" : "ብር",
+		"MCId" : "00000000-0000-0000-0000-000000000048"
+	},
+	{
+		"id" : "6c080dfd-ec41-49e5-91d1-f1ea521f4308",
+		"code" : "EUR",
+		"name" : "European Euro",
+		"n_code" : 978,
+		"minor_unit" : 2,
+		"symbol" : "€",
+		"MCId" : "00000000-0000-0000-0000-000000000049"
+	},
+	{
+		"id" : "d67b61f3-a51d-49bd-a5a7-b92e8e3b93e6",
+		"code" : "FJD",
+		"name" : "Fiji Dollar",
+		"n_code" : 242,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000050"
+	},
+	{
+		"id" : "e5c9a676-210b-4e7a-a98c-0388234b368b",
+		"code" : "FKP",
+		"name" : "Falkland Islands Pound",
+		"n_code" : 238,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000051"
+	},
+	{
+		"id" : "4ccaf97a-e9e6-4ae0-8350-ab77ae27d9f1",
+		"code" : "GBP",
+		"name" : "United Kingdom Pound Sterling",
+		"n_code" : 826,
+		"minor_unit" : 2,
+		"symbol" : "£",
+		"MCId" : "00000000-0000-0000-0000-000000000052"
+	},
+	{
+		"id" : "a8282e60-9327-4793-a020-a5b232e38ec5",
+		"code" : "GEL",
+		"name" : "Georgian Lari",
+		"n_code" : 981,
+		"minor_unit" : 2,
+		"symbol" : "ლ",
+		"MCId" : "00000000-0000-0000-0000-000000000053"
+	},
+	{
+		"id" : "bbe1c834-ad3c-43af-8a70-fc1856fa0868",
+		"code" : "GHS",
+		"name" : "Ghana Cedi",
+		"n_code" : 936,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000054"
+	},
+	{
+		"id" : "5af77dcd-db15-437a-9796-ed04508c2dc0",
+		"code" : "GIP",
+		"name" : "Gibraltar Pound",
+		"n_code" : 292,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000055"
+	},
+	{
+		"id" : "c88885a5-f0d8-45c5-9d54-f2b1ce9bafea",
+		"code" : "GMD",
+		"name" : "Gambian Dalasi",
+		"n_code" : 270,
+		"minor_unit" : 2,
+		"symbol" : "D",
+		"MCId" : "00000000-0000-0000-0000-000000000056"
+	},
+	{
+		"id" : "cc7c5456-6642-4d2e-9b8d-a69b1217da75",
+		"code" : "GNF",
+		"name" : "Guinean Franc",
+		"n_code" : 324,
+		"minor_unit" : 0,
+		"symbol" : "FG",
+		"MCId" : "00000000-0000-0000-0000-000000000057"
+	},
+	{
+		"id" : "848ce088-3d0e-4a37-8aa1-47a985b26246",
+		"code" : "GTQ",
+		"name" : "Guatemalan Quetzal",
+		"n_code" : 320,
+		"minor_unit" : 2,
+		"symbol" : "Q",
+		"MCId" : "00000000-0000-0000-0000-000000000058"
+	},
+	{
+		"id" : "a385c527-617d-42e9-abc8-10201c466436",
+		"code" : "GYD",
+		"name" : "Guyanese Dollar",
+		"n_code" : 328,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000059"
+	},
+	{
+		"id" : "712806cb-17ab-4081-a493-b5132087a6bb",
+		"code" : "HKD",
+		"name" : "Hong Kong Dollar",
+		"n_code" : 344,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000060"
+	},
+	{
+		"id" : "103a9fcf-4036-42e4-9fa8-1c967217ad35",
+		"code" : "HNL",
+		"name" : "Honduran Lempira",
+		"n_code" : 340,
+		"minor_unit" : 2,
+		"symbol" : "L",
+		"MCId" : "00000000-0000-0000-0000-000000000061"
+	},
+	{
+		"id" : "f81bf314-1f2b-4415-970b-1d9f2fce071a",
+		"code" : "HRK",
+		"name" : "Croatian Kuna",
+		"n_code" : 191,
+		"minor_unit" : 2,
+		"symbol" : "kn",
+		"MCId" : "00000000-0000-0000-0000-000000000062"
+	},
+	{
+		"id" : "5ec885bc-b5b1-402f-99c7-7490b467fc9b",
+		"code" : "HTG",
+		"name" : "Haitian Gourde",
+		"n_code" : 332,
+		"minor_unit" : 2,
+		"symbol" : "G",
+		"MCId" : "00000000-0000-0000-0000-000000000063"
+	},
+	{
+		"id" : "58d102bf-4568-4dab-a18d-5bce948383de",
+		"code" : "HUF",
+		"name" : "Hungarian Forint",
+		"n_code" : 348,
+		"minor_unit" : 2,
+		"symbol" : "Ft",
+		"MCId" : "00000000-0000-0000-0000-000000000064"
+	},
+	{
+		"id" : "679a4f68-2ef7-494c-8c3b-dfea4dc3a732",
+		"code" : "IDR",
+		"name" : "Indonesian Rupiah",
+		"n_code" : 360,
+		"minor_unit" : 2,
+		"symbol" : "Rp",
+		"MCId" : "00000000-0000-0000-0000-000000000065"
+	},
+	{
+		"id" : "9128f34c-99ba-467c-9d12-db9e8a1300e9",
+		"code" : "ILS",
+		"name" : "Israeli New Sheqel",
+		"n_code" : 376,
+		"minor_unit" : 2,
+		"symbol" : "₪",
+		"MCId" : "00000000-0000-0000-0000-000000000066"
+	},
+	{
+		"id" : "668e6705-99cf-41f2-9801-f6925be0a20f",
+		"code" : "INR",
+		"name" : "Indian Rupee",
+		"n_code" : 356,
+		"minor_unit" : 2,
+		"symbol" : "₹",
+		"MCId" : "00000000-0000-0000-0000-000000000067"
+	},
+	{
+		"id" : "1cd40997-b97a-40f2-a176-76a704c63a3d",
+		"code" : "IQD",
+		"name" : "Iraqi Dinar",
+		"n_code" : 368,
+		"minor_unit" : 3,
+		"symbol" : "ع.د",
+		"MCId" : "00000000-0000-0000-0000-000000000068"
+	},
+	{
+		"id" : "d5c0d678-a716-435d-bd3b-0332bd3065cd",
+		"code" : "IRR",
+		"name" : "Iranian Rial",
+		"n_code" : 364,
+		"minor_unit" : 2,
+		"symbol" : "﷼",
+		"MCId" : "00000000-0000-0000-0000-000000000069"
+	},
+	//{
+	//	"id" : "2a862802-c4be-4454-842a-48002cb3dfa7",
+	//	"code" : "IS",
+	//	"name" : "Test",
+	//	"n_code" : 123,
+	//	"minor_unit" : 123,
+	//	"symbol" : "t",
+	//	"MCId" : "17105833-b2da-4aec-9149-d994cef221ed"
+	//},
+	{
+		"id" : "5c88f988-b9ac-4af4-a616-3f5ec3a78424",
+		"code" : "ISK",
+		"name" : "Icelandic Krona",
+		"n_code" : 352,
+		"minor_unit" : 0,
+		"symbol" : "kr",
+		"MCId" : "00000000-0000-0000-0000-000000000070"
+	},
+	{
+		"id" : "eae684f8-3ed7-431c-ba43-f907fa89567d",
+		"code" : "JMD",
+		"name" : "Jamaican Dollar",
+		"n_code" : 388,
+		"minor_unit" : 2,
+		"symbol" : "J$",
+		"MCId" : "00000000-0000-0000-0000-000000000071"
+	},
+	{
+		"id" : "4c32a89e-3e54-41f0-8fa0-b8f7775859bc",
+		"code" : "JOD",
+		"name" : "Jordanian Dinar",
+		"n_code" : 400,
+		"minor_unit" : 3,
+		"symbol" : "د.ا",
+		"MCId" : "00000000-0000-0000-0000-000000000072"
+	},
+	{
+		"id" : "8367787e-3284-4fe5-a08a-04798cdbf9c7",
+		"code" : "JPY",
+		"name" : "Japanese Yen",
+		"n_code" : 392,
+		"minor_unit" : 0,
+		"symbol" : "¥",
+		"MCId" : "00000000-0000-0000-0000-000000000073"
+	},
+	{
+		"id" : "128594cb-5c5e-49e8-97ad-cbe7b1c768db",
+		"code" : "KES",
+		"name" : "Kenyan Shilling",
+		"n_code" : 404,
+		"minor_unit" : 2,
+		"symbol" : "KSh,",
+		"MCId" : "00000000-0000-0000-0000-000000000074"
+	},
+	{
+		"id" : "ebeb29a6-bd81-4ce5-b977-cacb25553d08",
+		"code" : "KGS",
+		"name" : "Kyrgyzstani Som",
+		"n_code" : 417,
+		"minor_unit" : 2,
+		"symbol" : "лв",
+		"MCId" : "00000000-0000-0000-0000-000000000075"
+	},
+	{
+		"id" : "8736f0bc-e607-4a45-8a3e-44b2eeec2b15",
+		"code" : "KHR",
+		"name" : "Cambodian Riel",
+		"n_code" : 116,
+		"minor_unit" : 2,
+		"symbol" : "៛",
+		"MCId" : "00000000-0000-0000-0000-000000000076"
+	},
+	{
+		"id" : "55109f9f-5f3a-4f8d-9004-c8d6be05b429",
+		"code" : "KMF",
+		"name" : "Comorian Franc",
+		"n_code" : 174,
+		"minor_unit" : 0,
+		"symbol" : "CF",
+		"MCId" : "00000000-0000-0000-0000-000000000077"
+	},
+	{
+		"id" : "97d686b7-51df-48be-8a20-6089c87f0de8",
+		"code" : "KPW",
+		"name" : "North Korean Won",
+		"n_code" : 408,
+		"minor_unit" : 2,
+		"symbol" : "₩",
+		"MCId" : "00000000-0000-0000-0000-000000000078"
+	},
+	{
+		"id" : "720c80be-42ea-4561-b86b-e3c04a886a99",
+		"code" : "KRW",
+		"name" : "Korean Won",
+		"n_code" : 410,
+		"minor_unit" : 0,
+		"symbol" : "₩",
+		"MCId" : "00000000-0000-0000-0000-000000000079"
+	},
+	{
+		"id" : "224da420-611d-4906-a9b7-bd727e04bb51",
+		"code" : "KWD",
+		"name" : "Kuwaiti Dinar",
+		"n_code" : 414,
+		"minor_unit" : 3,
+		"symbol" : "د.ك",
+		"MCId" : "00000000-0000-0000-0000-000000000080"
+	},
+	{
+		"id" : "77223183-0fb3-43c5-9545-ba350e6769e7",
+		"code" : "KYD",
+		"name" : "Cayman Islands Dollar",
+		"n_code" : 136,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000081"
+	},
+	{
+		"id" : "d08f889f-312d-4f21-bf16-a80ac9daf3c7",
+		"code" : "KZT",
+		"name" : "Kazakhstani Tenge",
+		"n_code" : 398,
+		"minor_unit" : 2,
+		"symbol" : "лв",
+		"MCId" : "00000000-0000-0000-0000-000000000082"
+	},
+	{
+		"id" : "49de635d-cc38-4fd2-a54b-741719558485",
+		"code" : "LAK",
+		"name" : "Lao Kip",
+		"n_code" : 418,
+		"minor_unit" : 2,
+		"symbol" : "₭",
+		"MCId" : "00000000-0000-0000-0000-000000000083"
+	},
+	{
+		"id" : "83580678-681d-4213-a8ed-27719f83676d",
+		"code" : "LBP",
+		"name" : "Lebanese Pound",
+		"n_code" : 422,
+		"minor_unit" : 2,
+		"symbol" : "£",
+		"MCId" : "00000000-0000-0000-0000-000000000084"
+	},
+	{
+		"id" : "9fa762fc-b49b-4665-b0e1-8b44f92c69c0",
+		"code" : "LKR",
+		"name" : "Sri Lankan Rupee",
+		"n_code" : 144,
+		"minor_unit" : 2,
+		"symbol" : "₨",
+		"MCId" : "00000000-0000-0000-0000-000000000085"
+	},
+	{
+		"id" : "dee617f5-31ab-47bb-962a-0a7ba6311305",
+		"code" : "LRD",
+		"name" : "Liberian Dollar",
+		"n_code" : 430,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000086"
+	},
+	{
+		"id" : "2fa0ceb8-6a98-492f-bc0a-a98dd4e19217",
+		"code" : "LSL",
+		"name" : "Lesotho Loti",
+		"n_code" : 426,
+		"minor_unit" : 2,
+		"symbol" : "L",
+		"MCId" : "00000000-0000-0000-0000-000000000087"
+	},
+	{
+		"id" : "9b1fb4f7-6de1-4ce2-86ed-2a30aa209294",
+		"code" : "LYD",
+		"name" : "Libyan Dinar",
+		"n_code" : 434,
+		"minor_unit" : 3,
+		"symbol" : "ل.د",
+		"MCId" : "00000000-0000-0000-0000-000000000088"
+	},
+	{
+		"id" : "2d52e1fa-83f3-4dd3-a32f-aa7d7b987d89",
+		"code" : "MAD",
+		"name" : "Moroccan Dirham",
+		"n_code" : 504,
+		"minor_unit" : 2,
+		"symbol" : "DH",
+		"MCId" : "00000000-0000-0000-0000-000000000089"
+	},
+	{
+		"id" : "c56aa4cd-1283-41ab-9f7d-bb4aecde7910",
+		"code" : "MDL",
+		"name" : "Moldovan Leu",
+		"n_code" : 498,
+		"minor_unit" : 2,
+		"symbol" : "L",
+		"MCId" : "00000000-0000-0000-0000-000000000090"
+	},
+	{
+		"id" : "ccc04a17-3eae-4dd0-a4ce-695ae55cab14",
+		"code" : "MGA",
+		"name" : "Malagasy Ariary",
+		"n_code" : 969,
+		"minor_unit" : 2,
+		"symbol" : "Ar",
+		"MCId" : "00000000-0000-0000-0000-000000000091"
+	},
+	{
+		"id" : "f4697cd1-cd72-4c0c-bac6-12730fc9272f",
+		"code" : "MKD",
+		"name" : "Macedonian Denar",
+		"n_code" : 807,
+		"minor_unit" : 2,
+		"symbol" : "ден",
+		"MCId" : "00000000-0000-0000-0000-000000000092"
+	},
+	{
+		"id" : "b4dceed5-f10b-4244-b1e9-b44e0b68f72f",
+		"code" : "MMK",
+		"name" : "Myanmar Kyat",
+		"n_code" : 104,
+		"minor_unit" : 2,
+		"symbol" : "K",
+		"MCId" : "00000000-0000-0000-0000-000000000093"
+	},
+	{
+		"id" : "8aa1e9c3-d927-4ed4-bb2b-358dba953067",
+		"code" : "MNT",
+		"name" : "Mongolian Tugrik",
+		"n_code" : 496,
+		"minor_unit" : 2,
+		"symbol" : "₮",
+		"MCId" : "00000000-0000-0000-0000-000000000094"
+	},
+	{
+		"id" : "f0656cbf-ba6d-4ddf-b8e3-518366d00367",
+		"code" : "MOP",
+		"name" : "Pataca",
+		"n_code" : 446,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000095"
+	},
+	{
+		"id" : "fead4f11-2190-4b81-bd5c-de5326ac0202",
+		"code" : "MRU",
+		"name" : "Ouguiya",
+		"n_code" : 929,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000096"
+	},
+	{
+		"id" : "e5c2432e-4312-4f89-8ba6-93ed078d1a6f",
+		"code" : "MUR",
+		"name" : "Mauritian Rupee",
+		"n_code" : 480,
+		"minor_unit" : 2,
+		"symbol" : "₨",
+		"MCId" : "00000000-0000-0000-0000-000000000097"
+	},
+	{
+		"id" : "e8cbf888-d18f-4d1d-b1c4-d52b009b8371",
+		"code" : "MVR",
+		"name" : "Maldives Rufiyaa",
+		"n_code" : 462,
+		"minor_unit" : 2,
+		"symbol" : "Rf",
+		"MCId" : "00000000-0000-0000-0000-000000000098"
+	},
+	{
+		"id" : "57bd4b34-24e4-4387-8b3e-317d3eb129cb",
+		"code" : "MWK",
+		"name" : "Malawian Kwacha",
+		"n_code" : 454,
+		"minor_unit" : 2,
+		"symbol" : "MK",
+		"MCId" : "00000000-0000-0000-0000-000000000099"
+	},
+	{
+		"id" : "2ab8c54d-b6c4-455e-b6a7-4e88d2bdfdf1",
+		"code" : "MXN",
+		"name" : "Mexican Peso",
+		"n_code" : 484,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000100"
+	},
+	{
+		"id" : "e7f936a9-52c5-4615-8c58-437dcfe26bca",
+		"code" : "MXV",
+		"name" : "Mexican Unidad de Inversion (UDI)",
+		"n_code" : 979,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000101"
+	},
+	{
+		"id" : "62034bb7-99f5-4093-97d9-1bbe82c80ae7",
+		"code" : "MYR",
+		"name" : "Malaysian Ringgit",
+		"n_code" : 458,
+		"minor_unit" : 2,
+		"symbol" : "RM",
+		"MCId" : "00000000-0000-0000-0000-000000000102"
+	},
+	{
+		"id" : "0bc8cd7f-9c1d-48fd-b11f-14cb4895f71f",
+		"code" : "MZN",
+		"name" : "Mozambican Metical",
+		"n_code" : 943,
+		"minor_unit" : 2,
+		"symbol" : "MT",
+		"MCId" : "00000000-0000-0000-0000-000000000103"
+	},
+	{
+		"id" : "52897cbf-63ac-48a9-8e63-8a3ac09585d3",
+		"code" : "NAD",
+		"name" : "Namibian Dollar",
+		"n_code" : 516,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000104"
+	},
+	{
+		"id" : "cc0a5e17-f146-4a2d-81f0-ea5c1f710bda",
+		"code" : "NGN",
+		"name" : "Nigerian Naira",
+		"n_code" : 566,
+		"minor_unit" : 2,
+		"symbol" : "₦",
+		"MCId" : "00000000-0000-0000-0000-000000000105"
+	},
+	{
+		"id" : "a9c2ab85-dee1-4d39-bb9f-0920708cab72",
+		"code" : "NIO",
+		"name" : "Nicaraguan Córdoba",
+		"n_code" : 558,
+		"minor_unit" : 2,
+		"symbol" : "C$",
+		"MCId" : "00000000-0000-0000-0000-000000000106"
+	},
+	{
+		"id" : "e0515cbc-3ee9-41a9-b77c-bc406f6587c3",
+		"code" : "NOK",
+		"name" : "Norwegian Krone",
+		"n_code" : 578,
+		"minor_unit" : 2,
+		"symbol" : "kr",
+		"MCId" : "00000000-0000-0000-0000-000000000107"
+	},
+	{
+		"id" : "2c7c2cc8-f9e3-4c97-bb67-9546599ddb51",
+		"code" : "NPR",
+		"name" : "Nepalese Rupee",
+		"n_code" : 524,
+		"minor_unit" : 2,
+		"symbol" : "₨",
+		"MCId" : "00000000-0000-0000-0000-000000000108"
+	},
+	{
+		"id" : "2b8c1347-608c-48e1-8111-0455e4c0db5f",
+		"code" : "NZD",
+		"name" : "New Zealand Dollar",
+		"n_code" : 554,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000109"
+	},
+	{
+		"id" : "61cd909c-6566-4e7f-93e7-5acb1a2eaa41",
+		"code" : "OMR",
+		"name" : "Omani Rial",
+		"n_code" : 512,
+		"minor_unit" : 3,
+		"symbol" : "﷼",
+		"MCId" : "00000000-0000-0000-0000-000000000110"
+	},
+	{
+		"id" : "9a00e922-095d-48cd-8676-8bf3f0acdccd",
+		"code" : "PAB",
+		"name" : "Panamanian Balboa",
+		"n_code" : 590,
+		"minor_unit" : 2,
+		"symbol" : "B/.",
+		"MCId" : "00000000-0000-0000-0000-000000000111"
+	},
+	{
+		"id" : "023639b5-a740-4558-843d-c622d1c7b061",
+		"code" : "PEN",
+		"name" : "Peruvian Nuevo Sol",
+		"n_code" : 604,
+		"minor_unit" : 2,
+		"symbol" : "S/.",
+		"MCId" : "00000000-0000-0000-0000-000000000112"
+	},
+	{
+		"id" : "5c59516b-bd4c-4235-a312-feff119fdc45",
+		"code" : "PGK",
+		"name" : "Papua New Guinea Kina",
+		"n_code" : 598,
+		"minor_unit" : 2,
+		"symbol" : "K",
+		"MCId" : "00000000-0000-0000-0000-000000000113"
+	},
+	{
+		"id" : "2ea0a505-a66f-4c2c-9c5c-efc1c0777f24",
+		"code" : "PHP",
+		"name" : "Philippine Peso",
+		"n_code" : 608,
+		"minor_unit" : 2,
+		"symbol" : "₱",
+		"MCId" : "00000000-0000-0000-0000-000000000114"
+	},
+	{
+		"id" : "ebe2b051-6d16-4fc7-92d1-566634416cac",
+		"code" : "PKR",
+		"name" : "Pakistan Rupee",
+		"n_code" : 586,
+		"minor_unit" : 2,
+		"symbol" : "₨",
+		"MCId" : "00000000-0000-0000-0000-000000000115"
+	},
+	{
+		"id" : "f73a5678-9820-47ea-b960-fe873544f9b3",
+		"code" : "PLN",
+		"name" : "Polish Zloty",
+		"n_code" : 985,
+		"minor_unit" : 2,
+		"symbol" : "zł",
+		"MCId" : "00000000-0000-0000-0000-000000000116"
+	},
+	{
+		"id" : "04f89ab0-3c93-49d0-86b8-cd70c81d92f5",
+		"code" : "PYG",
+		"name" : "Paraguay Guarani",
+		"n_code" : 600,
+		"minor_unit" : 0,
+		"symbol" : "Gs",
+		"MCId" : "00000000-0000-0000-0000-000000000117"
+	},
+	{
+		"id" : "9877f14a-fb56-4a88-947a-a4331a4ae37d",
+		"code" : "QAR",
+		"name" : "Qatari Riyal",
+		"n_code" : 634,
+		"minor_unit" : 2,
+		"symbol" : "﷼",
+		"MCId" : "00000000-0000-0000-0000-000000000118"
+	},
+	{
+		"id" : "c39bfb12-e8ea-418a-9d00-75774a711ff5",
+		"code" : "RON",
+		"name" : "Romanian Leu",
+		"n_code" : 946,
+		"minor_unit" : 2,
+		"symbol" : "lei",
+		"MCId" : "00000000-0000-0000-0000-000000000119"
+	},
+	{
+		"id" : "b486dc08-3c38-4e58-a411-8f21fe22d09d",
+		"code" : "RSD",
+		"name" : "Serbian Dinar",
+		"n_code" : 941,
+		"minor_unit" : 2,
+		"symbol" : "Дин.",
+		"MCId" : "00000000-0000-0000-0000-000000000120"
+	},
+	{
+		"id" : "3068597f-95aa-496e-9bdf-64033cef7c27",
+		"code" : "RUB",
+		"name" : "Russian Ruble",
+		"n_code" : 643,
+		"minor_unit" : 2,
+		"symbol" : "₽",
+		"MCId" : "00000000-0000-0000-0000-000000000121"
+	},
+	{
+		"id" : "6483d5d3-7638-43e1-a006-41ac836e636b",
+		"code" : "RWF",
+		"name" : "Rwandan Franc",
+		"n_code" : 646,
+		"minor_unit" : 0,
+		"symbol" : "FRw",
+		"MCId" : "00000000-0000-0000-0000-000000000122"
+	},
+	{
+		"id" : "037142dd-a6e3-4b3a-ad51-1d11a5b2244f",
+		"code" : "rwr",
+		"name" : "test",
+		"n_code" : 1234,
+		"minor_unit" : 123,
+		"symbol" : "sd",
+		"MCId" : "39d6f7d0-dcd4-47ab-9888-18962b1ba515"
+	},
+	{
+		"id" : "474460df-2fe0-469c-ba56-95b0c5898b69",
+		"code" : "SAR",
+		"name" : "Saudi Arabian Riyal",
+		"n_code" : 682,
+		"minor_unit" : 2,
+		"symbol" : "﷼",
+		"MCId" : "00000000-0000-0000-0000-000000000123"
+	},
+	{
+		"id" : "4253d2fd-dc6d-4b72-947d-ca62574319ba",
+		"code" : "SBD",
+		"name" : "Solomon Islands Dollar",
+		"n_code" : 90,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000124"
+	},
+	{
+		"id" : "598513b9-6983-48b3-8d52-400a70b8b5f9",
+		"code" : "SCR",
+		"name" : "Seychelles Rupee",
+		"n_code" : 690,
+		"minor_unit" : 2,
+		"symbol" : "₨",
+		"MCId" : "00000000-0000-0000-0000-000000000125"
+	},
+	{
+		"id" : "9ad92967-22e3-4de7-bc9d-458c9dd78184",
+		"code" : "SDG",
+		"name" : "Sudanese pound",
+		"n_code" : 938,
+		"minor_unit" : 2,
+		"symbol" : "SD",
+		"MCId" : "00000000-0000-0000-0000-000000000126"
+	},
+	{
+		"id" : "04aaf3d1-ca63-464e-9b08-a1b1178b0d87",
+		"code" : "SEK",
+		"name" : "Swedish Krona",
+		"n_code" : 752,
+		"minor_unit" : 2,
+		"symbol" : "kr",
+		"MCId" : "00000000-0000-0000-0000-000000000127"
+	},
+	{
+		"id" : "d17b351a-5773-4a21-a857-d59aebd133fb",
+		"code" : "SGD",
+		"name" : "Singapore Dollar",
+		"n_code" : 702,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000128"
+	},
+	{
+		"id" : "0e09d6d8-1620-43f4-ae07-8ead4cce19a9",
+		"code" : "SHP",
+		"name" : "Saint Helena Pound",
+		"n_code" : 654,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000129"
+	},
+	{
+		"id" : "5f896f1e-08f8-43d8-bed8-b4dcd6d50d8e",
+		"code" : "SLL",
+		"name" : "Sierra Leonean Leone",
+		"n_code" : 694,
+		"minor_unit" : 2,
+		"symbol" : "Le",
+		"MCId" : "00000000-0000-0000-0000-000000000130"
+	},
+	{
+		"id" : "d909b451-81a3-43b1-a8dd-e8d0ba5955d7",
+		"code" : "SOS",
+		"name" : "Somali Shilling",
+		"n_code" : 706,
+		"minor_unit" : 2,
+		"symbol" : "S",
+		"MCId" : "00000000-0000-0000-0000-000000000131"
+	},
+	{
+		"id" : "cd0f41f6-bca9-45d8-b2a0-c488de5a3c47",
+		"code" : "SRD",
+		"name" : "Suriname Dollar",
+		"n_code" : 968,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000132"
+	},
+	{
+		"id" : "5426dda6-8cf2-40e3-ae6c-7601eb5c5526",
+		"code" : "SSP",
+		"name" : "South Sudanese pound",
+		"n_code" : 728,
+		"minor_unit" : 2,
+		"symbol" : "£",
+		"MCId" : "00000000-0000-0000-0000-000000000133"
+	},
+	{
+		"id" : "47d216ba-053e-4ead-892f-acbbfb3e525c",
+		"code" : "STN",
+		"name" : "Dobra",
+		"n_code" : 930,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000134"
+	},
+	{
+		"id" : "af12d351-eeb2-4608-840f-1cd5df53e8a9",
+		"code" : "SVC",
+		"name" : "El Salvador Colon",
+		"n_code" : 222,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000135"
+	},
+	{
+		"id" : "ffb563c3-8e66-4116-9ae4-345df6c09d7e",
+		"code" : "SYP",
+		"name" : "Syrian Pound",
+		"n_code" : 760,
+		"minor_unit" : 2,
+		"symbol" : "£",
+		"MCId" : "00000000-0000-0000-0000-000000000136"
+	},
+	{
+		"id" : "6a527bd2-a6cb-46dd-89ba-73c4c598444d",
+		"code" : "SZL",
+		"name" : "Swazi Lilangeni",
+		"n_code" : 748,
+		"minor_unit" : 2,
+		"symbol" : "E",
+		"MCId" : "00000000-0000-0000-0000-000000000137"
+	},
+	{
+		"id" : "073d83f8-c875-4131-9147-8ad3db420184",
+		"code" : "THB",
+		"name" : "Thai Baht",
+		"n_code" : 764,
+		"minor_unit" : 2,
+		"symbol" : "฿",
+		"MCId" : "00000000-0000-0000-0000-000000000138"
+	},
+	{
+		"id" : "3265f53f-c0db-4fe6-a3ad-dcc93d68c5f4",
+		"code" : "TJS",
+		"name" : "Tajikistan Somoni",
+		"n_code" : 972,
+		"minor_unit" : 2,
+		"symbol" : "ЅM",
+		"MCId" : "00000000-0000-0000-0000-000000000139"
+	},
+	{
+		"id" : "9c994424-020d-4210-b9db-9e554763f866",
+		"code" : "TMT",
+		"name" : "Turkmenistan New Manat",
+		"n_code" : 934,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000140"
+	},
+	{
+		"id" : "958a3626-cc27-4396-b94b-e3d8a3805944",
+		"code" : "TND",
+		"name" : "Tunisian Dinar",
+		"n_code" : 788,
+		"minor_unit" : 3,
+		"symbol" : "د.ت",
+		"MCId" : "00000000-0000-0000-0000-000000000141"
+	},
+	{
+		"id" : "5c3728c5-7f6f-44e4-85d3-e13cf7f24c72",
+		"code" : "TOP",
+		"name" : "Tongan Pa'Anga",
+		"n_code" : 776,
+		"minor_unit" : 2,
+		"symbol" : "T$",
+		"MCId" : "00000000-0000-0000-0000-000000000142"
+	},
+	{
+		"id" : "32ac62f7-ba61-481a-b5e9-47fd15b80492",
+		"code" : "TRY",
+		"name" : "Turkish New Lira",
+		"n_code" : 949,
+		"minor_unit" : 2,
+		"symbol" : "₺",
+		"MCId" : "00000000-0000-0000-0000-000000000143"
+	},
+	{
+		"id" : "ee3bb0f6-cbe2-441b-938b-b2a3ae07380c",
+		"code" : "TTD",
+		"name" : "Trinidad and Tobago Dollar",
+		"n_code" : 780,
+		"minor_unit" : 2,
+		"symbol" : "TT$",
+		"MCId" : "00000000-0000-0000-0000-000000000144"
+	},
+	{
+		"id" : "123f8273-8a11-4fa3-b5c7-0dae5c62923a",
+		"code" : "TWD",
+		"name" : "New Taiwan Dollar",
+		"n_code" : 901,
+		"minor_unit" : 2,
+		"symbol" : "NT$",
+		"MCId" : "00000000-0000-0000-0000-000000000145"
+	},
+	{
+		"id" : "2c8e2cf1-2965-47a0-aeb3-bbe1a943313d",
+		"code" : "TZS",
+		"name" : "Tanzanian Shilling",
+		"n_code" : 834,
+		"minor_unit" : 2,
+		"symbol" : "TSh",
+		"MCId" : "00000000-0000-0000-0000-000000000146"
+	},
+	{
+		"id" : "cb1eaa02-1625-431f-ad7a-6ad3ae43116e",
+		"code" : "UAH",
+		"name" : "Ukrainian Hryvnia",
+		"n_code" : 980,
+		"minor_unit" : 2,
+		"symbol" : "₴",
+		"MCId" : "00000000-0000-0000-0000-000000000147"
+	},
+	{
+		"id" : "0d5f90d4-1b8a-4d02-ba46-ece88cc14e38",
+		"code" : "UGX",
+		"name" : "Ugandan Shilling",
+		"n_code" : 800,
+		"minor_unit" : 0,
+		"symbol" : "USh",
+		"MCId" : "00000000-0000-0000-0000-000000000148"
+	},
+	{
+		"id" : "4378748f-0f5f-4c1a-8796-ac62e25cf391",
+		"code" : "USD",
+		"name" : "United States Dollar",
+		"n_code" : 840,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : null
+	},
+	{
+		"id" : "a2351b22-f92e-4e02-adb9-2800355f828c",
+		"code" : "USDKG",
+		"name" : "USD KG",
+		"n_code" : 8,
+		"minor_unit" : 8,
+		"symbol" : "$",
+		"MCId" : null
+	},
+	{
+		"id" : "e48e4e83-1bf2-46ba-b02e-67bacfb0db8a",
+		"code" : "USN",
+		"name" : "US Dollar (Next day)",
+		"n_code" : 997,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000150"
+	},
+	{
+		"id" : "1b9b78b1-609c-46bb-9b89-30eae3644b76",
+		"code" : "UYI",
+		"name" : "Uruguay Peso en Unidades Indexadas (UI)",
+		"n_code" : 940,
+		"minor_unit" : 0,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000151"
+	},
+	{
+		"id" : "34754fef-6ead-4d3a-9af5-60cf130d2a58",
+		"code" : "UYU",
+		"name" : "Uruguayan peso",
+		"n_code" : 858,
+		"minor_unit" : 2,
+		"symbol" : "$U",
+		"MCId" : "00000000-0000-0000-0000-000000000152"
+	},
+	{
+		"id" : "82e79e83-4cc4-4eed-89a2-b8be2c3e6897",
+		"code" : "UYW",
+		"name" : "Unidad Previsional",
+		"n_code" : 927,
+		"minor_unit" : 4,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000153"
+	},
+	{
+		"id" : "aa1496ee-7a2a-4bcc-b423-7a555c63b0ec",
+		"code" : "UZS",
+		"name" : "Uzbekistani Som",
+		"n_code" : 860,
+		"minor_unit" : 2,
+		"symbol" : "лв",
+		"MCId" : "00000000-0000-0000-0000-000000000154"
+	},
+	{
+		"id" : "f27326c7-20d4-45f3-9232-0867dd1e4398",
+		"code" : "VES",
+		"name" : "Bolívar Soberano",
+		"n_code" : 928,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000155"
+	},
+	{
+		"id" : "2a4f9bf9-415b-4055-913d-14e4a7ab8cce",
+		"code" : "VND",
+		"name" : "Viet Nam Dong",
+		"n_code" : 704,
+		"minor_unit" : 0,
+		"symbol" : "₫",
+		"MCId" : "00000000-0000-0000-0000-000000000156"
+	},
+	{
+		"id" : "bc01c54d-2219-4edb-94f7-ba92ef924079",
+		"code" : "VUV",
+		"name" : "Vanuatu Vatu",
+		"n_code" : 548,
+		"minor_unit" : 0,
+		"symbol" : "VT",
+		"MCId" : "00000000-0000-0000-0000-000000000157"
+	},
+	{
+		"id" : "b3ce480a-e555-401d-8e4f-915d53dc2c32",
+		"code" : "WST",
+		"name" : "Samoan Tala",
+		"n_code" : 882,
+		"minor_unit" : 2,
+		"symbol" : "WS$",
+		"MCId" : "00000000-0000-0000-0000-000000000158"
+	},
+	{
+		"id" : "a7dbf8dd-c26c-482e-bc89-3b99be9205d6",
+		"code" : "XAF",
+		"name" : "Central African CFA",
+		"n_code" : 950,
+		"minor_unit" : 0,
+		"symbol" : "FCFA",
+		"MCId" : "00000000-0000-0000-0000-000000000159"
+	},
+	{
+		"id" : "558c98c6-ad17-4f15-8b75-2cff365a11af",
+		"code" : "XCD",
+		"name" : "East Caribbean Dollar",
+		"n_code" : 951,
+		"minor_unit" : 2,
+		"symbol" : "$",
+		"MCId" : "00000000-0000-0000-0000-000000000160"
+	},
+	{
+		"id" : "e731ff8f-eb2e-4631-8492-de88ec5537cc",
+		"code" : "XOF",
+		"name" : "West African CFA",
+		"n_code" : 952,
+		"minor_unit" : 0,
+		"symbol" : "CFA",
+		"MCId" : "00000000-0000-0000-0000-000000000161"
+	},
+	{
+		"id" : "9fc00d41-1e17-4db2-bc0b-6d021b29ab6e",
+		"code" : "XPF",
+		"name" : "CFP Franc",
+		"n_code" : 953,
+		"minor_unit" : 0,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000162"
+	},
+	{
+		"id" : "574de15a-f799-4d2d-a482-08a9cf226035",
+		"code" : "YER",
+		"name" : "Yemeni Rial",
+		"n_code" : 886,
+		"minor_unit" : 2,
+		"symbol" : "﷼",
+		"MCId" : "00000000-0000-0000-0000-000000000163"
+	},
+	{
+		"id" : "38fc80c9-b467-4cf9-9c13-b4695b42b28b",
+		"code" : "ZAR",
+		"name" : "South African Rand",
+		"n_code" : 710,
+		"minor_unit" : 2,
+		"symbol" : "R",
+		"MCId" : "00000000-0000-0000-0000-000000000164"
+	},
+	{
+		"id" : "d5e4d9d6-6e11-4cca-83c4-b4d7bd926679",
+		"code" : "ZMW",
+		"name" : "Zambian Kwacha",
+		"n_code" : 967,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000165"
+	},
+	{
+		"id" : "3ac111b2-612c-4355-8dcd-0624fdf14808",
+		"code" : "ZWL",
+		"name" : "Zimbabwe Dollar",
+		"n_code" : 932,
+		"minor_unit" : 2,
+		"symbol" : "",
+		"MCId" : "00000000-0000-0000-0000-000000000166"
+	}
+]

@@ -1,0 +1,1213 @@
+[
+	{
+		"id": "033accb0-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0d5912d-739a-11eb-adfc-0a91af0598e6",
+		"code": "RECOM",
+		"itemname": "Recommended",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "033dafce-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0d5912d-739a-11eb-adfc-0a91af0598e6",
+		"code": "CONS",
+		"itemname": "Consumables",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "0346909f-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0d5912d-739a-11eb-adfc-0a91af0598e6",
+		"code": "FULLS",
+		"itemname": "Full Spare",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "03829c08-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0ca2190-739a-11eb-adfc-0a91af0598e6",
+		"code": "ASIA",
+		"itemname": "Asia",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "0388382a-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0ca2190-739a-11eb-adfc-0a91af0598e6",
+		"code": "AFRA",
+		"itemname": "Africa",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "038e31f2-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0ca2190-739a-11eb-adfc-0a91af0598e6",
+		"code": "EUR",
+		"itemname": "Europe",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "0391e795-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0ca2190-739a-11eb-adfc-0a91af0598e6",
+		"code": "AUS",
+		"itemname": "Australia",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "0397c21b-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0ca2190-739a-11eb-adfc-0a91af0598e6",
+		"code": "NUS",
+		"itemname": "North America",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "039a2311-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0ca2190-739a-11eb-adfc-0a91af0598e6",
+		"code": "SUS",
+		"itemname": "South America",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "039f09fd-739b-11eb-adfc-0a91af0598e6",
+		"listtypeid": "f0ca2190-739a-11eb-adfc-0a91af0598e6",
+		"code": "ANTAR",
+		"itemname": "Antarctica",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "1fd2bcdf-d096-11ed-bb93-1c39472d435b",
+		"listtypeid": "25a86742-0247-11ec-8e31-fc45964f576b",
+		"code": "RADM",
+		"itemname": "Admin",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "b70193bf-2657-4062-b34a-08ad70f429aa",
+		"listtypeid": "25a86742-0247-11ec-8e31-fc45964f576b",
+		"code": "RMANF",
+		"itemname": "Manufacturer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "62eaa04a-f638-11ed-8033-0a91af0598e6",
+		"listtypeid": "38b691f8-9abb-11ec-a013-0a91af0598e6",
+		"code": "SRAPV",
+		"itemname": "Approved",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "62ec2ab5-f638-11ed-8033-0a91af0598e6",
+		"listtypeid": "38b691f8-9abb-11ec-a013-0a91af0598e6",
+		"code": "SRALL",
+		"itemname": "Allocated",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "7646ff93-e372-11ed-8033-0a91af0598e6",
+		"listtypeid": "e04760c5-c3ec-11ec-a013-0a91af0598e6",
+		"code": "EXOTR",
+		"itemname": "Others",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "764b8655-e372-11ed-8033-0a91af0598e6",
+		"listtypeid": "e04760c5-c3ec-11ec-a013-0a91af0598e6",
+		"code": "EXHTL",
+		"itemname": "Hotel",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "764b8fbf-e372-11ed-8033-0a91af0598e6",
+		"listtypeid": "e04760c5-c3ec-11ec-a013-0a91af0598e6",
+		"code": "EXPDA",
+		"itemname": "DA",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "764b96a4-e372-11ed-8033-0a91af0598e6",
+		"listtypeid": "e04760c5-c3ec-11ec-a013-0a91af0598e6",
+		"code": "EXATK",
+		"itemname": "Air Ticket",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "764b9c91-e372-11ed-8033-0a91af0598e6",
+		"listtypeid": "e04760c5-c3ec-11ec-a013-0a91af0598e6",
+		"code": "EXLCT",
+		"itemname": "Local Travel",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "764ba81b-e372-11ed-8033-0a91af0598e6",
+		"listtypeid": "e04760c5-c3ec-11ec-a013-0a91af0598e6",
+		"code": "EXVAR",
+		"itemname": "Visa",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "7af3fda0-f632-11ed-8033-0a91af0598e6",
+		"listtypeid": "7aedb581-f632-11ed-8033-0a91af0598e6",
+		"code": "AICON",
+		"itemname": "Consumed",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "7af7f790-f632-11ed-8033-0a91af0598e6",
+		"listtypeid": "7aedb581-f632-11ed-8033-0a91af0598e6",
+		"code": "AINCO",
+		"itemname": "Not Consumed",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "7e51c816-9a6f-11ed-8033-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "PSRRP",
+		"itemname": "Past Service Report",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87b4b699-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "a1af3425-fd00-11eb-ae84-fc45964f576b",
+		"code": "RMD",
+		"itemname": "Remote Desktop",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87b6c2bf-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "a1af3425-fd00-11eb-ae84-fc45964f576b",
+		"code": "TEL",
+		"itemname": "Call",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87b8a397-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "a1af3425-fd00-11eb-ae84-fc45964f576b",
+		"code": "VISIT",
+		"itemname": "Visit",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87bf0b6e-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "RFOQP",
+		"itemname": "Request for Offer/Quotation/Proposal",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87c49652-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "OFQTP",
+		"itemname": "Offer/Quotation/Proposal",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87cbce10-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "RAMCO",
+		"itemname": "Renewal Of AMC Offer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87d2ee32-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "ROQTP",
+		"itemname": "Revised Offer/Quotation/Proposal",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87d7ace7-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "PRODR",
+		"itemname": "Purchase Order",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87de5a87-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "PRINC",
+		"itemname": "Proforma Invoice",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87e75822-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "CONAG",
+		"itemname": "Contract Agreement",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87ee2f5c-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "PYTMS",
+		"itemname": "Payment Terms",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87f3f055-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "MDOPY",
+		"itemname": "Mode Of Payment",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87f6398f-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "PYRCT",
+		"itemname": "Payment Receipt",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "87fb376a-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "SC1VT",
+		"itemname": "Schedule 1st visit - AMC/On Call/Breakdown visit",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8801b5c4-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "SC2VT",
+		"itemname": "Schedule 2nd visit - AMC/On Call/Breakdown visit",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8806d3b1-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "SRF1V",
+		"itemname": "Service Report for 1st visit",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "880b848b-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "SRF2V",
+		"itemname": "Service Report for 2nd visit",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88130755-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "RCSPT",
+		"itemname": "Recommended Spare Parts",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88179dd9-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "SPAAS",
+		"itemname": "Spare Parts available at site",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "881cc3f3-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code": "COMPT",
+		"itemname": "Completion",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8884239b-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "310ff124-50dc-11ec-8b07-1c39472d435b",
+		"code": "SHIPP",
+		"itemname": "Shipments in progress",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "888b31dd-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "310ff124-50dc-11ec-8b07-1c39472d435b",
+		"code": "DIST",
+		"itemname": "Distributor",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88902070-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "310ff124-50dc-11ec-8b07-1c39472d435b",
+		"code": "CONTS",
+		"itemname": "Contacts",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88962718-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "310ff124-50dc-11ec-8b07-1c39472d435b",
+		"code": "SITES",
+		"itemname": "Sites",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "889bc3c4-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "310ff124-50dc-11ec-8b07-1c39472d435b",
+		"code": "CNAME",
+		"itemname": "Client Name",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88a08b3f-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "3118cb9b-50dc-11ec-8b07-1c39472d435b",
+		"code": "PSREQ",
+		"itemname": "Pending Service Request",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88a8098b-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "3118cb9b-50dc-11ec-8b07-1c39472d435b",
+		"code": "SREQT",
+		"itemname": "Service Request Types",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88afd362-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "3118cb9b-50dc-11ec-8b07-1c39472d435b",
+		"code": "COST",
+		"itemname": "Cost",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88b2d3a6-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "311fd924-50dc-11ec-8b07-1c39472d435b",
+		"code": "INSDN",
+		"itemname": "Instruments Down",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88bc6685-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "311fd924-50dc-11ec-8b07-1c39472d435b",
+		"code": "PO",
+		"itemname": "Purchase Order",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88c11292-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "311fd924-50dc-11ec-8b07-1c39472d435b",
+		"code": "SPREC",
+		"itemname": "Spare Recommended",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88c802a8-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "311fd924-50dc-11ec-8b07-1c39472d435b",
+		"code": "SINVT",
+		"itemname": "Spare Inventory",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88cece88-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "1f3a52b0-5ff0-11ec-a323-0a91af0598e6",
+		"code": "DHEG",
+		"itemname": "Engineer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88d3b826-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "1f3a52b0-5ff0-11ec-a323-0a91af0598e6",
+		"code": "DHCT",
+		"itemname": "Customer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88da9404-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "1f3a52b0-5ff0-11ec-a323-0a91af0598e6",
+		"code": "DHDT",
+		"itemname": "Distributor",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88e01766-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0ba8a15-739a-11eb-adfc-0a91af0598e6",
+		"code": "DIST",
+		"itemname": "Distributor",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88e4e8f0-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0ba8a15-739a-11eb-adfc-0a91af0598e6",
+		"code": "REG",
+		"itemname": "Region",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88ec7602-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0ba8a15-739a-11eb-adfc-0a91af0598e6",
+		"code": "CUST",
+		"itemname": "Customer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88f1a36e-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0ba8a15-739a-11eb-adfc-0a91af0598e6",
+		"code": "SITE",
+		"itemname": "Site",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88f60f9e-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0ba8a15-739a-11eb-adfc-0a91af0598e6",
+		"code": "CONT",
+		"itemname": "Contact",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "88fedd0f-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "3133991d-50dc-11ec-8b07-1c39472d435b",
+		"code": "SERCR",
+		"itemname": "Service Contract Revenue",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "890403b2-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "3133991d-50dc-11ec-8b07-1c39472d435b",
+		"code": "SERII",
+		"itemname": "Service Request Raised / Instruments Installed / Instruments With Highest Service Request",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "890a8cd6-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "31399d9b-50dc-11ec-8b07-1c39472d435b",
+		"code": "RCUST",
+		"itemname": "Revenue by Customer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8910e622-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "31399d9b-50dc-11ec-8b07-1c39472d435b",
+		"code": "EHSRQ",
+		"itemname": "Engineers Handing Service Request",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89159e72-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "28aa5f79-9abb-11ec-a013-0a91af0598e6",
+		"code": "MSTRS",
+		"itemname": "Masters",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "891b8e83-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "28aa5f79-9abb-11ec-a013-0a91af0598e6",
+		"code": "UTILS",
+		"itemname": "Utilities",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "892116ae-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "28aa5f79-9abb-11ec-a013-0a91af0598e6",
+		"code": "REPTS",
+		"itemname": "Reports",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8925e586-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "28aa5f79-9abb-11ec-a013-0a91af0598e6",
+		"code": "TRANS",
+		"itemname": "Transactions",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "892c16ee-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "28aa5f79-9abb-11ec-a013-0a91af0598e6",
+		"code": "ADMIN",
+		"itemname": "Administrator",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "893297cf-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "2242e188-50dc-11ec-8b07-1c39472d435b",
+		"code": "INPRG",
+		"itemname": "In Progress",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "893722f9-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "2242e188-50dc-11ec-8b07-1c39472d435b",
+		"code": "COMP",
+		"itemname": "Completed",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "893d0922-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "eafb89fa-1d31-11ec-92d1-fc45964f576b",
+		"code": "INS",
+		"itemname": "Installation",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89429435-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "eafb89fa-1d31-11ec-92d1-fc45964f576b",
+		"code": "ANAS",
+		"itemname": "Analytical Assistance",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89479d00-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "eafb89fa-1d31-11ec-92d1-fc45964f576b",
+		"code": "PRMN1",
+		"itemname": "Prev. Maintenance 1",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "894d719c-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "eafb89fa-1d31-11ec-92d1-fc45964f576b",
+		"code": "PRMN2",
+		"itemname": "Prev. Maintenance 2",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8953df67-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "eafb89fa-1d31-11ec-92d1-fc45964f576b",
+		"code": "REWK",
+		"itemname": "Rework",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89586aa2-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "eafb89fa-1d31-11ec-92d1-fc45964f576b",
+		"code": "CRMA",
+		"itemname": "Corr. Maintenance",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "895eb1a0-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "4c733e77-55d8-11ec-8b07-1c39472d435b",
+		"code": "COMP",
+		"itemname": "Completed",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8965ab5e-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "4c733e77-55d8-11ec-8b07-1c39472d435b",
+		"code": "ZPORD",
+		"itemname": "Zoho PO Raised",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "896add7d-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "4c733e77-55d8-11ec-8b07-1c39472d435b",
+		"code": "SHPED",
+		"itemname": "Shipped",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89714dcc-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "4c733e77-55d8-11ec-8b07-1c39472d435b",
+		"code": "ONHLD",
+		"itemname": "On Hold",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8977ec5b-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "RFOQP",
+		"itemname": "Request for Offer/Quotation/Proposal",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "897e0676-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "OFQTP",
+		"itemname": "Offer/Quotation/Proposal",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89826cdf-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ROQTP",
+		"itemname": "Revised Offer/Quotation/Proposal",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8987b12c-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "PRODR",
+		"itemname": "Purchase Order",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "898bf12d-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "PRINC",
+		"itemname": "Proforma Invoice",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89927f4b-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORACT",
+		"itemname": "Order Acknowledgement",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89973c6b-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "PAYTM",
+		"itemname": "Payment Terms",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "899c0a9a-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "MDOPY",
+		"itemname": "Mode Of Payment",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89a51326-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "PYRCT",
+		"itemname": "Payment Receipt",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89a9da42-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORDST",
+		"itemname": "Order Status",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89b0a169-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "PVOC",
+		"itemname": "PVOC",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89b5e2c3-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "SHDOC",
+		"itemname": "Shipping Documents",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89ba479d-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "PRODL",
+		"itemname": "Proof Of Delivery",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89c0b96f-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "COMPT",
+		"itemname": "Completion",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89c72c9d-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "38b691f8-9abb-11ec-a013-0a91af0598e6",
+		"code": "COMP",
+		"itemname": "Completed",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89cbc0a6-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "38b691f8-9abb-11ec-a013-0a91af0598e6",
+		"code": "INPGS",
+		"itemname": "Inprogress",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89d1dfff-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "38b691f8-9abb-11ec-a013-0a91af0598e6",
+		"code": "ONHLD",
+		"itemname": "On Hold",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89d85023-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "38b691f8-9abb-11ec-a013-0a91af0598e6",
+		"code": "NTSTD",
+		"itemname": "Not Started",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89dd55ca-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "103622f1-9e01-11ec-a013-0a91af0598e6",
+		"code": "NTASS",
+		"itemname": "Not Assigned",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89e39fb4-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "103622f1-9e01-11ec-a013-0a91af0598e6",
+		"code": "ASSGN",
+		"itemname": "Assigned",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89e981a0-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "103622f1-9e01-11ec-a013-0a91af0598e6",
+		"code": "ACPTD",
+		"itemname": "Accepted",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89f0023a-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "103622f1-9e01-11ec-a013-0a91af0598e6",
+		"code": "NTACP",
+		"itemname": "Not Accepted",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89f76498-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "25a86742-0247-11ec-8e31-fc45964f576b",
+		"code": "RCUST",
+		"itemname": "Customer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "89fc0768-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "25a86742-0247-11ec-8e31-fc45964f576b",
+		"code": "RDTSP",
+		"itemname": "Distributor Support",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a00dedd-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "25a86742-0247-11ec-8e31-fc45964f576b",
+		"code": "RENG",
+		"itemname": "Engineer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a085910-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SDIST",
+		"itemname": "Distributor",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a0d9f7f-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SCUST",
+		"itemname": "Customer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a14508a-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SCOUN",
+		"itemname": "Country",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a18c90b-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SCURR",
+		"itemname": "Currency",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a1db5ac-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SSPAR",
+		"itemname": "Spare Part",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a2278ba-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SINST",
+		"itemname": "Instrument",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "f4475f1f-71d0-4e74-907b-414ebd49839d",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SCINS",
+		"itemname": "Customer Instrument",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "fc44eb48-0552-4ab1-8adb-6ddb47267c8f",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SMANF",
+		"itemname": "Manufacturer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a2b1eaa-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SSRCH",
+		"itemname": "Search",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "f6eb323e-c058-4c4c-a6e7-3c8bdbf55398",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "USRS",
+		"itemname": "Users",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a302575-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "URPRF",
+		"itemname": "User Profile",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a3692bf-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SIMXP",
+		"itemname": "Import / Export",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a3cac2b-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "CUSDH",
+		"itemname": "Customer Dashboard",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a41f572-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "DISDH",
+		"itemname": "Distributor Dashboard",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a48266c-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "AUDIT",
+		"itemname": "Audit Trail",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a4e7309-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SPRCM",
+		"itemname": "Spareparts Recommended",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a56e568-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "CTSPI",
+		"itemname": "Customer Spareparts Inventory",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a5b993e-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SRCRR",
+		"itemname": "Service Contract Revenue Report",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a60ffea-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "ADREQ",
+		"itemname": "Advance Request Form",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a674972-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SCDLE",
+		"itemname": "Scheduler",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a6b9da9-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "PROF",
+		"itemname": "Role",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a707ee8-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "CTSS",
+		"itemname": "Customer Satisfaction Survey",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a7506ad-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SAMC",
+		"itemname": "AMC",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a7c545c-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "OFREQ",
+		"itemname": "Sparepart Quotation",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a812f81-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SRREQ",
+		"itemname": "Service Request",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a85c625-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SRREP",
+		"itemname": "Service Report",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a8ecd3c-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "TREXP",
+		"itemname": "Travel Expenses",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a938b1a-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "TRINV",
+		"itemname": "Travel Invoice",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a9a0d42-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "PDQRQ",
+		"itemname": "Pending Quotation Request Report",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8a9f72fb-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SRCMR",
+		"itemname": "Service Completion Report",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "8aa3faf6-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SRQRP",
+		"itemname": "Service Request Report",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9426e727-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPQT",
+		"itemname": "Quotation",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "94280b3b-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORpCR",
+		"itemname": "Customer RFQ no.",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9428fcaf-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPCP",
+		"itemname": "Customer PO no.",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "942903b8-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPPI",
+		"itemname": "Proforma Invoice",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "942909bb-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPCI",
+		"itemname": "Commercial invoice",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "94293760-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPPL",
+		"itemname": "Packing List",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "94293d29-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPIN",
+		"itemname": "Inspection No. (BV/SGS/PVOC)",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429437a-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPAB",
+		"itemname": "Airway bill no.",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429b657-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPCO",
+		"itemname": "Certificate of Origin",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429bda5-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPMI",
+		"itemname": "Marine Insurance",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429c3ce-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPPD",
+		"itemname": "POD",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429c9dd-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPOS",
+		"itemname": "Order status",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429cfb7-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPPT",
+		"itemname": "Payment terms",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429d589-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPPR",
+		"itemname": "Payment received",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429db9a-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPBN",
+		"itemname": "BA NUMBER",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429e1a8-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPMN",
+		"itemname": "Form M NUMBER",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429e77c-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPLC",
+		"itemname": "Letter of Credit no.",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429ee80-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPAR",
+		"itemname": "ADCB reference no.",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429f47b-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPWP",
+		"itemname": "Warranty period",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9429fa54-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPWE",
+		"itemname": "Warranty End Date",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "942a003b-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPWC",
+		"itemname": "Warranty claim status",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "942a060b-a086-11ed-8033-0a91af0598e6",
+		"listtypeid": "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code": "ORPWI",
+		"itemname": "Warranty Invoice no.",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9e1cdf65-e30a-11ed-8033-0a91af0598e6",
+		"listtypeid": "0913fb45-027f-11ed-a013-0a91af0598e6",
+		"code": "COMPN",
+		"itemname": "Company",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "9e30dc06-e30a-11ed-8033-0a91af0598e6",
+		"listtypeid": "0913fb45-027f-11ed-a013-0a91af0598e6",
+		"code": "ENGNR",
+		"itemname": "Engineer",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "e83bdb73-4f8b-11ed-9c75-0a91af0598e6",
+		"listtypeid": "990979c0-162a-11ec-900b-fc45964f576b",
+		"code": "PREV",
+		"itemname": "Preventive",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "e83bdffc-4f8b-11ed-9c75-0a91af0598e6",
+		"listtypeid": "990979c0-162a-11ec-900b-fc45964f576b",
+		"code": "PLAN",
+		"itemname": "Planned",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "e83be471-4f8b-11ed-9c75-0a91af0598e6",
+		"listtypeid": "990979c0-162a-11ec-900b-fc45964f576b",
+		"code": "ONCAL",
+		"itemname": "On Call",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "e83be8e5-4f8b-11ed-9c75-0a91af0598e6",
+		"listtypeid": "990979c0-162a-11ec-900b-fc45964f576b",
+		"code": "BRKDW",
+		"itemname": "Breakdown",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "e83c2940-4f8b-11ed-9c75-0a91af0598e6",
+		"listtypeid": "990979c0-162a-11ec-900b-fc45964f576b",
+		"code": "RENEW",
+		"itemname": "Renewal",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "e83c32be-4f8b-11ed-9c75-0a91af0598e6",
+		"listtypeid": "990979c0-162a-11ec-900b-fc45964f576b",
+		"code": "AMC",
+		"itemname": "AMC",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "e83c3792-4f8b-11ed-9c75-0a91af0598e6",
+		"listtypeid": "69742697-fb60-11ec-a013-0a91af0598e6",
+		"code": "PUSDO",
+		"itemname": "User Data Only",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "e83c3c23-4f8b-11ed-9c75-0a91af0598e6",
+		"listtypeid": "69742697-fb60-11ec-a013-0a91af0598e6",
+		"code": "PARTS",
+		"itemname": "All Data",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "eb17b977-b112-4603-aae4-84bc6abbd281",
+		"listtypeid": "f0d5912d-739a-11eb-adfc-0a91af0598e6",
+		"code": "Other",
+		"itemname": "Other Spare",
+		"isescalationsupervisor": 0
+	}
+]

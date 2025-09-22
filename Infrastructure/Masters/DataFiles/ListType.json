@@ -1,0 +1,260 @@
+[
+	{
+		"id" : "0913fb45-027f-11ed-a013-0a91af0598e6",
+		"code" : "EXINB",
+		"listname" : "Expense Incurred By",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "103622f1-9e01-11ec-a013-0a91af0598e6",
+		"code" : "SRQST",
+		"listname" : "Service Request Stage",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+		"code" : "CINSS",
+		"listname" : "Current Instrument Status",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "GPAYT",
+		"listname" : "Distributor Payment Terms",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "1f3a52b0-5ff0-11ec-a323-0a91af0598e6",
+		"code" : "DASH",
+		"listname" : "Dashboard Type",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "2242e188-50dc-11ec-8b07-1c39472d435b",
+		"code" : "TKTST",
+		"listname" : "Ticket Status",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "25a86742-0247-11ec-8e31-fc45964f576b",
+		"code" : "SEGMENTS",
+		"listname" : "Segments",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "28aa5f79-9abb-11ec-a013-0a91af0598e6",
+		"code" : "PRGRP",
+		"listname" : "Profile Groups",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "310ff124-50dc-11ec-8b07-1c39472d435b",
+		"code" : "CDRW1",
+		"listname" : "Customer Dashboard Row 1",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "3118cb9b-50dc-11ec-8b07-1c39472d435b",
+		"code" : "CDRW2",
+		"listname" : "Customer Dashboard Row 2",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "311fd924-50dc-11ec-8b07-1c39472d435b",
+		"code" : "CDRW3",
+		"listname" : "Customer Dashboard Row 3",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "3133991d-50dc-11ec-8b07-1c39472d435b",
+		"code" : "DDRW1",
+		"listname" : "Distributor Dashboard Row 1",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "31399d9b-50dc-11ec-8b07-1c39472d435b",
+		"code" : "DDRW2",
+		"listname" : "Distributor Dashboard Row 2",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "38b691f8-9abb-11ec-a013-0a91af0598e6",
+		"code" : "SRSAT",
+		"listname" : "Service Request Status",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "3988cb54-22c5-11ec-92d1-fc45964f576b",
+		"code" : "DPART",
+		"listname" : "Department",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "4c733e77-55d8-11ec-8b07-1c39472d435b",
+		"code" : "SQDTS",
+		"listname" : "Spare Quote Status",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "62f9bde9-ac05-11ec-a013-0a91af0598e6",
+		"code" : "ORQPT",
+		"listname" : "Offer Request: Payment Terms",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "6661d396-1b63-11ec-92d1-fc45964f576b",
+		"code" : "BDOD",
+		"listname" : "BreakdownOccurranceDetails",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "69742697-fb60-11ec-a013-0a91af0598e6",
+		"code" : "PVGLS",
+		"listname" : "Privilages",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "7aedb581-f632-11ed-8033-0a91af0598e6",
+		"code" : "AISTA",
+		"listname" : "AMC Item Status",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "95c077c6-5ff1-11ec-a323-0a91af0598e6",
+		"code" : "PMCL",
+		"listname" : "Preventive Maintenance Checklist- Location ",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "990979c0-162a-11ec-900b-fc45964f576b",
+		"code" : "SERTY",
+		"listname" : "ServiceType",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "a1af3425-fd00-11eb-ae84-fc45964f576b",
+		"code" : "ACTKN",
+		"listname" : "ActionTaken",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "a1c65d28-fd00-11eb-ae84-fc45964f576b",
+		"code" : "TRPTY",
+		"listname" : "TripType",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "a210703f-fd00-11eb-ae84-fc45964f576b",
+		"code" : "CLTRA",
+		"listname" : "ClassOfTravel",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "a2692430-fd00-11eb-ae84-fc45964f576b",
+		"code" : "TRRQT",
+		"listname" : "TravelRequestType",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "a27967a7-fd00-11eb-ae84-fc45964f576b",
+		"code" : "ACCOM",
+		"listname" : "AccommodationType",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "a28ae02d-fd00-11eb-ae84-fc45964f576b",
+		"code" : "VISAT",
+		"listname" : "VisaType",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "c6f39ea0-d57e-11ec-a013-0a91af0598e6",
+		"code" : "OFRQP",
+		"listname" : "Spare Part Quotation: Process",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "dbf25b97-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "INSEG",
+		"listname" : "Industry Segment",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "dd693c98-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "BUSUT",
+		"listname" : "Business Unit",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "de65ea89-be21-11ec-a013-0a91af0598e6",
+		"code" : "AMCSG",
+		"listname" : "AMC Stages",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "def5698e-b112-11ec-a013-0a91af0598e6",
+		"code" : "ORQST",
+		"listname" : "Offer Request: Stages",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "e04760c5-c3ec-11ec-a013-0a91af0598e6",
+		"code" : "NOEXP",
+		"listname" : "Nature Of Expense",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "eafb89fa-1d31-11ec-92d1-fc45964f576b",
+		"code" : "SRT",
+		"listname" : "Sub Request Type",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "f0ba8a15-739a-11eb-adfc-0a91af0598e6",
+		"code" : "RF",
+		"listname" : "RecordsFor",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "DESIG",
+		"listname" : "Designation",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "CONTY",
+		"listname" : "ConfigType",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "INSTY",
+		"listname" : "InstrumentType",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "f0ca2190-739a-11eb-adfc-0a91af0598e6",
+		"code" : "CONTI",
+		"listname" : "Continent",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "f0d5912d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "PART",
+		"listname" : "PartType",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "SCRNS",
+		"listname" : "Screens",
+		"isdeleted" : 0
+	},
+	{
+		"id" : "f657ccc7-22c2-11ec-92d1-fc45964f576b",
+		"code" : "SUPPL",
+		"listname" : "Supplier",
+		"isdeleted" : 0
+	}
+]

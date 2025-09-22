@@ -1,0 +1,940 @@
+[
+	{
+		"id" : "7e86ec67-d23b-46ec-84e6-3bf6e97ae6be",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "001",
+		"itemname" : "1",
+		"isescalationsupervisor" : 0
+	},
+	//{
+	//	"id" : "05b598cd-b5fe-42d4-be6f-a9ed2f487da6",
+	//	"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+	//	"code" : "001",
+	//	"itemname" : "1",
+	//	"isescalationsupervisor" : 0
+	//},
+	{
+		"id" : "a68a86ac-ec38-4b19-9ef9-64c8c567f381",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "001",
+		"itemname" : "100%",
+		"isescalationsupervisor" : 0
+	},
+	//{
+	//	"id" : "0de4e677-791b-41e4-a7ae-f714a947e873",
+	//	"listtypeid" : "62f9bde9-ac05-11ec-a013-0a91af0598e6",
+	//	"code" : "001",
+	//	"itemname" : "100%",
+	//	"isescalationsupervisor" : 0
+	//},
+	//{
+	//	"id" : "1e774b01-269f-4e48-a9e3-88ba14ba52de",
+	//	"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+	//	"code" : "004",
+	//	"itemname" : "100% Advance Payment",
+	//	"isescalationsupervisor" : 0
+	//},
+	{
+		"id" : "eee65e96-bcbd-47f1-a96e-d6ba08be7c37",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "001",
+		"itemname" : "100% Advance payment",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "6973563e-6c51-4b67-a7bb-4a9826e42972",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "002",
+		"itemname" : "100% Letter of credit ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "be7d5d5b-7c16-4dfd-8fdf-c7c3dbb445c6",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "001",
+		"itemname" : "100% payment ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "327e45af-e2db-402f-88f9-7553fbe4dc84",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "003",
+		"itemname" : "50% advance and 50% prior to shipment ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b6184fa-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "1",
+		"itemname" : "Air Pump",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "763c2895-bc0e-4e5b-9bc7-87f1f3acd5d8",
+		"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "004",
+		"itemname" : "ARL  PerformX ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "41ffefff-d430-4454-b6f4-ae97f8481520",
+		"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "006",
+		"itemname" : "ARL 3460",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "4f4e686c-7b02-4c9b-92ef-84e768633831",
+		"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "006",
+		"itemname" : "ARL 4460",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "5a4d8641-c1d1-46c1-98d3-7c6969620bd6",
+		"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "ARL 9900",
+		"isescalationsupervisor" : 0
+	},
+	//{
+	//	"id" : "9831e0f2-ddf1-488b-98e9-be6deb2926a5",
+	//	"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+	//	"code" : "001",
+	//	"itemname" : "ARL 9900",
+	//	"isescalationsupervisor" : 0
+	//},
+	//{
+	//	"id" : "d262d845-e9d0-421f-8bd7-2e4e5ca09b09",
+	//	"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+	//	"code" : "001",
+	//	"itemname" : "ARL 9900",
+	//	"isescalationsupervisor" : 0
+	//},
+	{
+		"id" : "13148fa5-1c46-46c9-b26f-881ffff4fb72",
+		"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "005",
+		"itemname" : "ARL ISPARK",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "2e7fce74-ae99-4467-af0a-5e71864316c7",
+		"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "001",
+		"itemname" : "ARL OPTIMX",
+		"isescalationsupervisor" : 0
+	},
+	//{
+	//	"id" : "7ce3eb65-acd0-4b05-9754-e6edd2f966b8",
+	//	"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+	//	"code" : "003",
+	//	"itemname" : "ARL OptimX",
+	//	"isescalationsupervisor" : 0
+	//},
+	{
+		"id" : "a68e9c21-a55c-4e6e-b374-f5666e498aaf",
+		"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "003",
+		"itemname" : "ARL PERFORMX",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "a6e22cf3-ba0b-4499-bf2f-03c4300457f0",
+		"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+		"code" : "004",
+		"itemname" : "ARL QUANTX",
+		"isescalationsupervisor" : 0
+	},
+	//{
+	//	"id" : "634d4eef-ef23-4786-998d-d66b8bf88fda",
+	//	"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+	//	"code" : "002",
+	//	"itemname" : "ARL QuantX",
+	//	"isescalationsupervisor" : 0
+	//},
+	//{
+	//	"id" : "73127560-aec9-4a47-95c7-b018dd3cb046",
+	//	"listtypeid" : "f0c7fcdb-739a-11eb-adfc-0a91af0598e6",
+	//	"code" : "002",
+	//	"itemname" : "ARL QuantX",
+	//	"isescalationsupervisor" : 0
+	//},
+	{
+		"id" : "7936324d-99c6-4429-bb5f-aaccb6411924",
+		"listtypeid" : "dd693c98-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "001",
+		"itemname" : "BEA",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63aa91-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "2",
+		"itemname" : "Bearing",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63aadb-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "3",
+		"itemname" : "Bell",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ab10-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "4",
+		"itemname" : "Belt",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "6cb2b3bf-0edc-4099-885b-bc061406a7bd",
+		"listtypeid" : "dbf25b97-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "Beverages",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ab3d-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "5",
+		"itemname" : "BLOC",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "14c9046b-fb18-464d-aac3-05b69873119b",
+		"listtypeid" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+		"code" : "ISBD",
+		"itemname" : "Breakdown",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "bbb72de6-3b2a-4ae3-be4c-426506c59d62",
+		"listtypeid" : "6661d396-1b63-11ec-92d1-fc45964f576b",
+		"code" : "BD001",
+		"itemname" : "Breakdown",
+		"isescalationsupervisor" : 0
+	},
+	//{
+	//	"id" : "1a20d790-4ef0-47c7-98d7-ae1111b82476",
+	//	"listtypeid" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+	//	"code" : "002",
+	//	"itemname" : "breakdown",
+	//	"isescalationsupervisor" : 0
+	//},
+	{
+		"id" : "3b63ab6b-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "6",
+		"itemname" : "Breaker",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ab98-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "7",
+		"itemname" : "Bulb",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63abc5-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "8",
+		"itemname" : "Cable",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63abf3-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "9",
+		"itemname" : "CAPOT",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "354e14e2-d8d9-464c-9d28-28dd491dc961",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "004",
+		"itemname" : "Cash Against Document",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ac26-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "10",
+		"itemname" : "Cassette",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ac53-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "11",
+		"itemname" : "Cells",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "f3dc4504-8504-4edb-9248-5dd945562eaf",
+		"listtypeid" : "dbf25b97-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "003",
+		"itemname" : "Cement ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "334d9df9-6180-450d-ba59-75dc51e85a19",
+		"listtypeid" : "dbf25b97-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "001",
+		"itemname" : "Cement Industry",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ac7f-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "12",
+		"itemname" : "Clamp",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63acaa-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "13",
+		"itemname" : "Collar",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63acd7-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "14",
+		"itemname" : "Collimator",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ad03-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "15",
+		"itemname" : "Contactor",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ad30-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "16",
+		"itemname" : "CRYSTAL",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ad5e-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "17",
+		"itemname" : "Cylinder",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ad8c-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "18",
+		"itemname" : "Detector",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63adba-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "19",
+		"itemname" : "Disk",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "0c13f0ad-f3c5-4c46-8b9a-c27336f53807",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "DIOPS",
+		"itemname" : "Distributor-Service operations",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ade7-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "20",
+		"itemname" : "Duct",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ae13-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "21",
+		"itemname" : "Electronics",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ae43-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "22",
+		"itemname" : "EMESTOP",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ae6f-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "23",
+		"itemname" : "Encoder",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63ae9c-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "24",
+		"itemname" : "Ex Tube",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63aec8-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "25",
+		"itemname" : "Fan",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "e69355b6-a88e-4f79-bd5d-d877af10b217",
+		"listtypeid" : "6661d396-1b63-11ec-92d1-fc45964f576b",
+		"code" : "001",
+		"itemname" : "faulty",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "d46a96c9-4534-4905-badb-51cc353161ef",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "005",
+		"itemname" : "Field Service Engineer",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "d82726dc-f6c0-44f3-96a7-f3e2bd2ce0d8",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "006",
+		"itemname" : "Field Service Manager",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63aef4-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "26",
+		"itemname" : "Filter",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63af21-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "27",
+		"itemname" : "Fitting",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3ae67c44-f64a-434f-8a7a-b7bfe6c4e1c6",
+		"listtypeid" : "dbf25b97-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "001",
+		"itemname" : "Food ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63af4e-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "28",
+		"itemname" : "Fuse",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63af7a-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "29",
+		"itemname" : "Gas Line",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63afa6-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "30",
+		"itemname" : "Gas Valve",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63afd2-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "31",
+		"itemname" : "Gasket",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63afff-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "32",
+		"itemname" : "Gear",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "a54af5a9-3dd1-43a0-9345-bcc6760b1f38",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "003",
+		"itemname" : "Global Service Coordinator",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b02b-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "33",
+		"itemname" : "Grease",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "703c765e-7f54-4563-8f12-1bc7dafcf03c",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "Head Of Field Service",
+		"isescalationsupervisor" : 1
+	},
+	{
+		"id" : "c11ccd5b-e19e-46d6-a8b8-32fd47661202",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "001",
+		"itemname" : "Head Of Service Operations",
+		"isescalationsupervisor" : 1
+	},
+	{
+		"id" : "d1a266e8-9735-4acb-8347-8792923fe49c",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "010",
+		"itemname" : "Head Service Manager ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b05a-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "34",
+		"itemname" : "Kit",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "5f1d4820-e682-477a-a62b-dc7cd3a0a5c3",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "004",
+		"itemname" : "KITO   Ring",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "6a829f72-21d5-469d-be10-2cb26a0f9c64",
+		"listtypeid" : "3988cb54-22c5-11ec-92d1-fc45964f576b",
+		"code" : "003",
+		"itemname" : "Lab ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "15d9930e-61c3-494e-a668-5ea6290bf3bd",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "007",
+		"itemname" : "Laboratory Manager",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "bc674f40-2074-4d27-9e0d-80afbbd9703b",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "002",
+		"itemname" : "LC payment",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b086-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "35",
+		"itemname" : "LED",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b0b4-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "36",
+		"itemname" : "Mechanics",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "82124299-4136-4969-aa5d-2df57b6b1a58",
+		"listtypeid" : "dbf25b97-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "003",
+		"itemname" : "Metals",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "31f04d12-2e02-4758-a8b5-4f68b498421a",
+		"listtypeid" : "dbf25b97-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "Mining",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "e1128974-1eb4-4348-a2c9-075331661ce3",
+		"listtypeid" : "dbf25b97-c3f0-11ec-a013-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "Mining Industry",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b0e1-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "37",
+		"itemname" : "Motor",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "e187b8c0-d060-41a2-9165-37441ddbb278",
+		"listtypeid" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "need more spare parts ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "984139fd-5ef8-4749-9bf3-290b3b79b907",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "001",
+		"itemname" : "Net 30 ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "7eb2d726-76ff-4ac8-a217-00d4113d255a",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "002",
+		"itemname" : "Net 60",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "afbe7312-d637-4bc0-90ee-d08c8d1a079c",
+		"listtypeid" : "1c9fb228-d23b-11ed-91f0-1c39472d435b",
+		"code" : "003",
+		"itemname" : "Net 90",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b10e-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "38",
+		"itemname" : "O Ring",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b13a-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "39",
+		"itemname" : "O Rings",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b166-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "40",
+		"itemname" : "Oil",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b192-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "41",
+		"itemname" : "PIN",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b1be-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "42",
+		"itemname" : "Pipe",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b1e9-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "43",
+		"itemname" : "Plug",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b215-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "44",
+		"itemname" : "Preamplifier",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "075668a9-787c-405e-bd70-d3810ea22bdc",
+		"listtypeid" : "3988cb54-22c5-11ec-92d1-fc45964f576b",
+		"code" : "001",
+		"itemname" : "Procurement",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b242-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "45",
+		"itemname" : "Pulley",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b26f-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "46",
+		"itemname" : "Pump",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "310f8fde-9637-4e98-9eb4-d2e0f140d527",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "009",
+		"itemname" : "Purchase & Logistics Coordinator",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "db6f8ac7-e993-4b6d-9b09-6680d3adcb24",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "004",
+		"itemname" : "Regional Service Coordinator",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b29b-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "47",
+		"itemname" : "Regulator",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "6a7d8b82-5594-47c4-99a2-95e5781354b5",
+		"listtypeid" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+		"code" : "001",
+		"itemname" : "repair",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "cc59ded7-7403-4d44-b4f9-95d9b9068f9a",
+		"listtypeid" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+		"code" : "003",
+		"itemname" : "replacement of board",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "cd729384-b841-4500-ae9c-c19350fd0a4b",
+		"listtypeid" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+		"code" : "004",
+		"itemname" : "replacement of Xray tube",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b2c7-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "48",
+		"itemname" : "Ring",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b2f2-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "49",
+		"itemname" : "Safety",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b31f-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "50",
+		"itemname" : "Sensor",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "6f7f5e94-4813-4268-9033-d9109abc2205",
+		"listtypeid" : "3988cb54-22c5-11ec-92d1-fc45964f576b",
+		"code" : "002",
+		"itemname" : "Service",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "b21979dc-150f-4e1d-8280-1f0e7f30e7a3",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "013",
+		"itemname" : "Service Coordinator",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "a32a594d-51c0-4a8b-9cc0-f3e3080f9d39",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "003",
+		"itemname" : "Service Engineer",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "47ac0959-105e-45c2-a40c-708e6a9cfdf7",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "Service Manager ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b34b-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "51",
+		"itemname" : "Sheet",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b379-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "52",
+		"itemname" : "Shutter",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b3a5-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "53",
+		"itemname" : "SILENCER",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "4b40652f-7e6b-4c1a-ada2-49ca5c6771e3",
+		"listtypeid" : "f0bd444a-739a-11eb-adfc-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "SITE ENGINEER",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "ac014106-b2ea-497c-a87b-bb7e5540921c",
+		"listtypeid" : "6661d396-1b63-11ec-92d1-fc45964f576b",
+		"code" : "003",
+		"itemname" : "software issues",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b3d1-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "54",
+		"itemname" : "Spring",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b3fc-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "55",
+		"itemname" : "Sulphur trap",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b42e-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "56",
+		"itemname" : "Support",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b45a-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "57",
+		"itemname" : "Switch",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "ae1ceedc-e911-4f40-b464-28b2b1aa1830",
+		"listtypeid" : "6661d396-1b63-11ec-92d1-fc45964f576b",
+		"code" : "002",
+		"itemname" : "System error",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b486-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "58",
+		"itemname" : "Tool",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b4b2-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "59",
+		"itemname" : "Tube",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b63b4dd-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "60",
+		"itemname" : "Tyrad",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "0d73e965-7819-44a7-8cf5-02d635959408",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "002",
+		"itemname" : "Vaccum pump",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "b0d24efb-439e-4063-846d-589d671f0b89",
+		"listtypeid" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+		"code" : "005",
+		"itemname" : "vacuum pump failure",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b65d7ee-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "61",
+		"itemname" : "Valve",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b65d871-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "62",
+		"itemname" : "Washer",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b65d8a7-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "63",
+		"itemname" : "Window",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "1e295ea1-d57a-491c-8c07-1344863dad2f",
+		"listtypeid" : "1515e11e-9abb-11ec-a013-0a91af0598e6",
+		"code" : "IS001",
+		"itemname" : "Working",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "3b65d8d5-4bb9-11ee-9f39-0a91af0598e6",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "64",
+		"itemname" : "X Ray Tube",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "7c0b7656-1352-4795-abfe-b5e0760a00ad",
+		"listtypeid" : "6661d396-1b63-11ec-92d1-fc45964f576b",
+		"code" : "004",
+		"itemname" : "X-ray tube failure",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "176ffe67-a4db-4d97-bb90-9f4c07a98352",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "003",
+		"itemname" : "XPSI Board ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "4c3bbc45-918f-45f0-ac13-cd8d75b36701",
+		"listtypeid" : "f0bf6d8d-739a-11eb-adfc-0a91af0598e6",
+		"code" : "001",
+		"itemname" : "Xray  Tube ",
+		"isescalationsupervisor" : 0
+	},
+	{
+		"id" : "d4e98a7f-4509-45c5-a77c-de12146d14c5",
+		"listtypeid" : "6661d396-1b63-11ec-92d1-fc45964f576b",
+		"code" : "005",
+		"itemname" : "XRAY raised some alarm ",
+		"isescalationsupervisor" : 0
+	}
+]
