@@ -3,6 +3,7 @@
     public class DistributorResponse
     {
         public Guid Id { get; set; }
+        public Guid ManfBusinessUnitId { get; set; }
         public string DistName { get; set; }
         public string Payterms { get; set; }
         public string PaytermsName { get; set; }

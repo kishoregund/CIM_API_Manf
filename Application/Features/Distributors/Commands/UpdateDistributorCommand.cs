@@ -28,6 +28,7 @@ namespace Application.Features.Distributors.Commands
             distributorInDb.Place = request.DistributorRequest.Place;
             distributorInDb.Street = request.DistributorRequest.Street;
             distributorInDb.Zip = request.DistributorRequest.Zip;
+            distributorInDb.ManfBusinessUnitId = request.DistributorRequest.ManfBusinessUnitId;
 
             var updateDistributorId = await distributorService.UpdateDistributorAsync(distributorInDb);
 

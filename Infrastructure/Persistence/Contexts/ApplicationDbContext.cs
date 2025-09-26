@@ -24,6 +24,7 @@ namespace Infrastructure.Persistence.Contexts
         public DbSet<Sparepart> Spareparts => Set<Sparepart>();
         public DbSet<Brand> Brand => Set<Brand>();
         public DbSet<BusinessUnit> BusinessUnit => Set<BusinessUnit>();
+        public DbSet<ManfBusinessUnit> ManfBusinessUnit => Set<ManfBusinessUnit>();
         public DbSet<ConfigTypeValues> ConfigTypeValues => Set<ConfigTypeValues>();
         public DbSet<UserProfiles> UserProfiles => Set<UserProfiles>();
         public DbSet<Domain.Entities.Instrument> Instrument => Set<Domain.Entities.Instrument>();

@@ -75,6 +75,7 @@ namespace Infrastructure
                 .AddScoped<ISRPEngWorkTimeService, SRPEngWorkTimeService>()
                 .AddScoped<IUserProfilesService, UserProfilesService>()
                 .AddScoped<IBusinessUnitService, BusinessUnitService>()
+                .AddScoped<IManfBusinessUnitService, ManfBusinessUnitService>()
                 .AddScoped<IBrandService, BrandService>()
                 .AddScoped<IAppBasicService, AppBasicService>()
                 .AddScoped<ICustomerSurveyService, CustomerSurveyService>()

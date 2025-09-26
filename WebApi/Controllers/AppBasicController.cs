@@ -181,5 +181,68 @@ namespace WebApi.Controllers
             return NotFound(response);
         }
 
+        /////////// Manufacturer Business Units
+
+        ///  Business Unit
+        [HttpPost("MBUadd")]
+        [ShouldHavePermission(CimAction.Create, CimFeature.ManfBusinessUnit)]
+        public async Task<IActionResult> CreateManfBusinessUnitAsync([FromBody] ManfBusinessUnitRequest createManfBusinessUnit)
+        {
+            var response = await Sender.Send(new CreateManfBusinessUnitCommand { Request = createManfBusinessUnit });
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpPut("MBUupdate")]
+        [ShouldHavePermission(CimAction.Update, CimFeature.ManfBusinessUnit)]
+        public async Task<IActionResult> UpdateManfBusinessUnitAsync([FromBody] UpdateManfBusinessUnitRequest updateManfBusinessUnit)
+        {
+            var response = await Sender.Send(new UpdateManfBusinessUnitCommand { Request = updateManfBusinessUnit });
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpDelete("MBUdelete/{ManfBusinessUnitId}")]
+        [ShouldHavePermission(CimAction.Delete, CimFeature.ManfBusinessUnit)]
+        public async Task<IActionResult> DeleteManfBusinessUnitAsync(Guid ManfBusinessUnitId)
+        {
+            var response = await Sender.Send(new DeleteManfBusinessUnitByIdCommand { Id = ManfBusinessUnitId });
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpGet("MBUby-id/{ManfBusinessUnitId}")]
+        [ShouldHavePermission(CimAction.View, CimFeature.Base)]
+        public async Task<IActionResult> GetManfBusinessUnitByIdAsync(Guid ManfBusinessUnitId)
+        {
+            var response = await Sender.Send(new GetManfBusinessUnitByIdQuery { ManfBusinessUnitId = ManfBusinessUnitId });
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return NotFound(response);
+        }
+
+        [HttpGet("MBUall")]
+        [ShouldHavePermission(CimAction.View, CimFeature.Base)]
+        public async Task<IActionResult> GetManfBusinessUnitsAsync()
+        {
+            var response = await Sender.Send(new GetManfBusinessUnitsQuery());
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return NotFound(response);
+        }
+
     }
 }

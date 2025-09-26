@@ -3,7 +3,7 @@
     public class DistributorRequest
     {
         public Guid Id { get; set; }
-        public Guid CompanyId { get; set; }
+        public Guid ManfBusinessUnitId { get; set; }
         public bool IsActive { get; set; } = true;
         public bool IsDeleted { get; set; } = false;
         public Guid CreatedBy { get; set; }

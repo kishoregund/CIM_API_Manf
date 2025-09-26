@@ -3,6 +3,7 @@
    // [Table("distributor")]
     public class Distributor : BaseEntity
     {
+        public Guid ManfBusinessUnitId { get; set; }
         public string DistName { get; set; }
         public string Payterms { get; set; }
         public bool IsBlocked { get; set; }        

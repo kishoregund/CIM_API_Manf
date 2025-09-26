@@ -27,6 +27,7 @@ namespace Infrastructure.Identity.Constants
         public const string Currency = nameof(Currency);
         public const string Spare_Part = nameof(Spare_Part);
         public const string BusinessUnit = nameof(BusinessUnit);
+        public const string ManfBusinessUnit = nameof(ManfBusinessUnit);
         public const string Brand = nameof(Brand);
         public const string User_Profile = nameof(User_Profile);
         public const string Customer = nameof(Customer);
@@ -116,6 +117,11 @@ namespace Infrastructure.Identity.Constants
             new CimPermission("Create UserProfile", CimAction.Create, CimFeature.User_Profile),
             new CimPermission("Update UserProfile", CimAction.Update, CimFeature.User_Profile),
             new CimPermission("Delete UserProfile", CimAction.Delete, CimFeature.User_Profile),
+
+            new CimPermission("View ManfBusinessUnit", CimAction.View, CimFeature.ManfBusinessUnit),
+            new CimPermission("Create ManfBusinessUnit", CimAction.Create, CimFeature.ManfBusinessUnit),
+            new CimPermission("Update ManfBusinessUnit", CimAction.Update, CimFeature.ManfBusinessUnit),
+            new CimPermission("Delete ManfBusinessUnit", CimAction.Delete, CimFeature.ManfBusinessUnit),
 
             new CimPermission("View BusinessUnit", CimAction.View, CimFeature.BusinessUnit),
             new CimPermission("Create BusinessUnit", CimAction.Create, CimFeature.BusinessUnit),
