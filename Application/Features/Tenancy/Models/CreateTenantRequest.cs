@@ -8,5 +8,6 @@
         public string AdminEmail { get; set; }
         public DateTime ValidUpTo { get; set; }
         public bool IsActive { get; set; }
+        public bool SubscribedBy { get; set; }
     }
 }

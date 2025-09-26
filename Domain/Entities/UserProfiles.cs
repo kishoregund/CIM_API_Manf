@@ -12,5 +12,6 @@
         public string CustSites { get; set; }
         public string ManfSalesRegions { get; set; }
         public string Description { get; set; }
+        public bool IsManfSubscribed { get; set; }
     }
 }

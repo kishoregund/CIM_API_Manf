@@ -13,6 +13,7 @@ namespace Application.Features.Distributors
         Task<bool> DeleteDistributorAsync(Guid id);
         Task<List<DistributorResponse>> GetDistributorsByContactAsync(Guid contactId);        
         Task<bool> IsDuplicateAsync(string distributorName);
+        bool IsManfBURequired();
 
         //Task<List<RegionContact>> GetDistributorRegionEngineers(Guid id);
         //Task<List<RegionContact>> GetDistributorRegionContacts(Guid id);

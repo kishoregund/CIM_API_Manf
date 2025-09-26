@@ -32,6 +32,13 @@ namespace Application.Features.Distributors.Validators
 
             RuleFor(x => x).Must(x => !distributorService.IsDuplicateAsync(x.DistributorRequest.DistName).Result)
                 .WithMessage("Distributor already exists.");
+
+            RuleFor(x => x.DistributorRequest.ManfBusinessUnitId)                
+                .Must(x => distributorService.IsManfBURequired())
+                .NotEmpty()
+                .WithMessage("Manufacturer Business Unit is required.");
+
+            
         }
 
     }

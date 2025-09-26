@@ -101,7 +101,8 @@ namespace Infrastructure.Tenancy
                 AdminEmail = tenantInDb.AdminEmail,
                 ConnectionString = tenantInDb.ConnectionString,
                 ValidUpTo = tenantInDb.ValidUpTo.Date.ToString("dd/MM/yyyy"),
-                IsActive = tenantInDb.IsActive
+                IsActive = tenantInDb.IsActive,
+                SubscribedBy = tenantInDb.SubscribedBy
             };
             #endregion
 
@@ -124,7 +125,8 @@ namespace Infrastructure.Tenancy
                     AdminEmail = tenant.AdminEmail,
                     ConnectionString = tenant.ConnectionString,
                     ValidUpTo = tenant.ValidUpTo.Date.ToString("dd/MM/yyyy"),
-                    IsActive = tenant.IsActive
+                    IsActive = tenant.IsActive,
+                    SubscribedBy = tenant.SubscribedBy
                 });
             }
 

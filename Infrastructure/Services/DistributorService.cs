@@ -8,6 +8,7 @@ using Domain.Views;
 using Application.Features.Distributors.Responses;
 using System.Collections.Generic;
 using System.Security.Cryptography.Xml;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructure.Services
 {
@@ -39,6 +40,7 @@ namespace Infrastructure.Services
                                           Place = d.Place,
                                           Street = d.Street,
                                           Zip = d.Zip,
+                                          ManfBusinessUnitId = d.ManfBusinessUnitId
                                       }).ToListAsync();
 
             if (userProfile != null && userProfile.ContactType.ToUpper() == "DR")
@@ -138,6 +140,7 @@ namespace Infrastructure.Services
                                     Place = d.Place,
                                     Street = d.Street,
                                     Zip = d.Zip,
+                                    ManfBusinessUnitId = d.ManfBusinessUnitId
                                 }).ToList();
             }
             return distributors;
@@ -146,5 +149,8 @@ namespace Infrastructure.Services
         public async Task<bool> IsDuplicateAsync(string distributorName)
            => await context.Distributor.AnyAsync(x => x.DistName.ToUpper() == distributorName.ToUpper());
 
+
+        public bool IsManfBURequired()
+            => context.UserProfiles.Where(x => x.UserId == Guid.Parse(currentUserService.GetUserId())).FirstOrDefault().IsManfSubscribed;
     }
 }
