@@ -96,6 +96,16 @@ namespace Infrastructure.Persistence.DbConfigurations
         }
     }
 
+    internal class ManfBusinessUnitConfig : IEntityTypeConfiguration<ManfBusinessUnit>
+    {
+        public void Configure(EntityTypeBuilder<ManfBusinessUnit> builder)
+        {
+            builder
+                .ToTable("ManfBusinessUnit", SchemaNames.Masters)
+                .IsMultiTenant();
+        }
+    }
+
     internal class BrandConfig : IEntityTypeConfiguration<Brand>
     {
         public void Configure(EntityTypeBuilder<Brand> builder)

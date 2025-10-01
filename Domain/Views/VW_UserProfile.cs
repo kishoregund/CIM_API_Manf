@@ -40,5 +40,6 @@ namespace Domain.Views
         public Guid DesignationId { get; set; }
         public string Designation { get; set; }
         public string Company { get; set; }
+        public bool IsManfSubscribed { get; set; }
     }
 }

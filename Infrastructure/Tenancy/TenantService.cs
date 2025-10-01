@@ -44,7 +44,8 @@ namespace Infrastructure.Tenancy
                 ConnectionString = @"Data Source=" + appSetting.DBServerName + "; Initial Catalog=" + createTenant.ConnectionString + ";user id=" + appSetting.DBUserId + ";password=" + appSetting.DBPassword + ";TrustServerCertificate=True; MultipleActiveResultSets=True;",
                 AdminEmail = createTenant.AdminEmail,
                 ValidUpTo = createTenant.ValidUpTo,
-                IsActive = createTenant.IsActive
+                IsActive = createTenant.IsActive,
+                SubscribedBy = createTenant.SubscribedBy
             };
 
             await tenantStore.TryAddAsync(newTenant);

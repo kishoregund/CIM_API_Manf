@@ -44,7 +44,7 @@ namespace Infrastructure.Identity
         public async Task<bool> DeleteContactUserAsync(string contactType, bool activation, Guid contactId)
         {
             var userContact = await context.UserContactMappings.FirstOrDefaultAsync(x => x.ContactType == contactType && x.ContactId == contactId);
-                        
+
             var userProfile = await context.UserProfiles.FirstOrDefaultAsync(x => x.UserId == userContact.UserId);
 
             var userRole = await context.UserRoles.FirstOrDefaultAsync(x => x.UserId == userContact.UserId.ToString());
@@ -162,7 +162,7 @@ namespace Infrastructure.Identity
                     CreatedBy = Guid.Parse(currentUserService.GetUserId()),
                     UpdatedBy = Guid.Parse(currentUserService.GetUserId()),
                 };
-                
+
                 await context.UserContactMappings.AddAsync(userContactMapping);
                 await context.SaveChangesAsync();
 
@@ -174,7 +174,7 @@ namespace Infrastructure.Identity
                 };
 
                 await CreateTenantUserAsync(tenantUser);
-                                
+
                 CommonMethods commonMethods = new(context, currentUserService, configuration);
                 var roleId = commonMethods.CreateUserProfile(request, Guid.Parse(newUser.Id));
 
@@ -321,7 +321,7 @@ namespace Infrastructure.Identity
 
         public async Task<UserDetailsDto> GetUserDetailsAsync(string email, CancellationToken ct)
         {
-            
+
             var userDto = await GetUserByEmailAsync(email, ct);
             var userInDb = await GetUserAsync(userDto.Id, ct);
             var userRoles = await userManager.GetRolesAsync(userInDb);
@@ -359,13 +359,14 @@ namespace Infrastructure.Identity
                 var userRoles = await userManager.GetRolesAsync(userInDb);
                 if (userRoles.Count > 0 && userRoles[0] == RoleConstants.Admin)
                 {
-                    
+
                     profile.UserId = Guid.Parse(userInDb.Id);
                     profile.UserName = userInDb.FirstName + " " + userInDb.LastName;
                     profile.Email = userInDb.Email;
                     profile.FirstName = userInDb.FirstName;
                     profile.LastName = userInDb.LastName;
                     profile.UserRole = userRoles[0].ToString();
+                    profile.IsManfSubscribed = GetSubsribedBy(email);
 
                     return profile;
                 }
@@ -374,7 +375,7 @@ namespace Infrastructure.Identity
             }
             catch (Exception ex)
             {
-                
+
             }
             return profile;
         }
@@ -397,7 +398,7 @@ namespace Infrastructure.Identity
 
             return new UserDto
             {
-                Id =  user.Id,
+                Id = user.Id,
                 Email = email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -439,6 +440,20 @@ namespace Infrastructure.Identity
             con.Close();
             return "Success";
         }
+
+        private bool GetSubsribedBy(string email)
+        {
+            SqlConnection con = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+            con.Open();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter("select SubscribedBy from CIMSaaS.Multitenancy.Tenants where AdminEmail ='" + email + "'", con);
+            da.Fill(dt);
+            var isManfSubsribed = dt.Rows.Count > 0 ? bool.Parse(dt.Rows[0][0].ToString()) : false;
+            con.Close();
+            return isManfSubsribed;
+        }
+
+
         public async Task<List<string>> GetUserRegionsAsync()
         {
             CommonMethods commonMethods = new CommonMethods(context, currentUserService, configuration);

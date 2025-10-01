@@ -153,6 +153,7 @@ namespace Infrastructure.Persistence.Contexts
             modelBuilder.Entity<Brand>().HasQueryFilter(x => !x.IsDeleted && x.IsActive);
             modelBuilder.Entity<BusinessUnit>().HasIndex(x =>x.BusinessUnitName).IsUnique().HasDatabaseName("INDUQ_BUSINESSUNIT");
             modelBuilder.Entity<BusinessUnit>().HasQueryFilter(x => !x.IsDeleted && x.IsActive);
+            modelBuilder.Entity<ManfBusinessUnit>().HasQueryFilter(x => !x.IsDeleted && x.IsActive);
 
 
 
