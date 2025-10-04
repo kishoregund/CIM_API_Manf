@@ -210,7 +210,7 @@ namespace Infrastructure.Common
             //create user profile
             switch (userRequest.ContactType)
             {
-                case "MF":
+                case "MSR":
                     userContact = GetManfUserByContact(userRequest.ContactId);
                     p.Id = Guid.NewGuid();
                     p.ProfileFor = context.VW_ListItems.FirstOrDefault(x => x.ListName.ToUpper() == "RECORDSFOR" && x.ItemName.ToUpper() == "MANUFACTURER").ListTypeItemId;

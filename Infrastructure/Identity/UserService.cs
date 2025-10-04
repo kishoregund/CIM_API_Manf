@@ -134,7 +134,14 @@ namespace Infrastructure.Identity
             {
                 throw new ConflictException("Email already taken.");
             }
-
+            if (request.ContactType == "DR" && !context.BusinessUnit.Any())
+            {
+                throw new ConflictException("Business Unit and Brand does not exsits.");
+            }
+            if (request.ContactType == "MSR" && !context.ManfBusinessUnit.Any())
+            {
+                throw new ConflictException("Manufacturer BU's does not exsits.");
+            }
             var newUser = new ApplicationUser
             {
                 FirstName = request.FirstName,

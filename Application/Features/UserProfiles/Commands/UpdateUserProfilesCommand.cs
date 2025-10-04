@@ -25,6 +25,7 @@ namespace Application.Features.UserProfiles.Commands
             UserProfilesInDb.RoleId = request.UserProfilesRequest.RoleId;
             UserProfilesInDb.UserId = request.UserProfilesRequest.UserId;
             UserProfilesInDb.ProfileFor = request.UserProfilesRequest.ProfileFor;
+            UserProfilesInDb.ManfBUIds = request.UserProfilesRequest.ManfBUIds;
             UserProfilesInDb.UpdatedBy = request.UserProfilesRequest.UpdatedBy;
 
             var updateUserProfilesId = await UserProfilesService.UpdateUserProfilesAsync(UserProfilesInDb);

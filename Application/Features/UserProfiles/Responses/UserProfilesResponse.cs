@@ -24,6 +24,7 @@ namespace Application.Features.UserProfiles.Responses
         public Guid BusinessUnitId { get; set; }
         public string DistRegions { get; set; }
         public string CustSites { get; set; }
+        public string ManfBUIds { get; set; }
         public string Description { get; set; }
     }
 }

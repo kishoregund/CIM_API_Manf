@@ -28,6 +28,8 @@ namespace Application.Features.UserProfiles.Requests
         public string DistRegions { get; set; }
         [SkipGlobalValidation]
         public string CustSites { get; set; }
+        [SkipGlobalValidation]
+        public string ManfBUIds { get; set; }
         public string Description { get; set; }
     }
 }

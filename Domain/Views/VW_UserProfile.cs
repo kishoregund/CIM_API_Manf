@@ -19,6 +19,7 @@ namespace Domain.Views
         public string CustSites { get; set; }
         public string DistRegions { get; set; }
         public string ManfSalesRegions { get; set; }
+        public string ManfBUIds { get; set; }
         public bool ActiveUserProfile { get; set; }
         public Guid ProfileFor { get; set; }
         public Guid RoleId { get; set; }
