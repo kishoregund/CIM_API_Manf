@@ -210,6 +210,18 @@ namespace Infrastructure.Common
             //create user profile
             switch (userRequest.ContactType)
             {
+                case "MF":
+                    userContact = GetManfUserByContact(userRequest.ContactId);
+                    p.Id = Guid.NewGuid();
+                    p.ProfileFor = context.VW_ListItems.FirstOrDefault(x => x.ListName.ToUpper() == "RECORDSFOR" && x.ItemName.ToUpper() == "MANUFACTURER").ListTypeItemId;
+                    p.RoleId = Guid.Parse(context.Roles.FirstOrDefault(x => x.Name.ToUpper().Trim() == "MANUFACTURER").Id);
+                    p.SegmentId = context.VW_ListItems.FirstOrDefault(x => x.ListName.ToUpper() == "SEGMENTS" && x.ItemCode.ToUpper() == "RMANF").ListTypeItemId;
+                    p.DistRegions = null;
+                    p.CustSites = null;  
+                    p.ManfSalesRegions = userContact.ChildId.ToString();
+                    p.ManfBUIds = context.ManfBusinessUnit.FirstOrDefault().Id.ToString();
+                    
+                    break;
                 case "DR":
                     userContact = GetDistUserByContact(userRequest.ContactId);
                     p.Id = Guid.NewGuid();
@@ -258,6 +270,34 @@ namespace Infrastructure.Common
 
             return p.RoleId;
         }
+
+        public UserByContactResponse GetManfUserByContact(Guid contactId)
+        {
+            var regions = (from rc in context.SalesRegionContact
+                           join r1 in context.SalesRegion on rc.SalesRegionId equals r1.Id
+                           join d1 in context.Manufacturer on r1.ManfId equals d1.Id
+                           join des in context.VW_ListItems on rc.DesignationId equals des.ListTypeItemId
+                           where rc.Id == contactId
+                           select new UserByContactResponse()
+                           {
+                               ContactId = rc.Id,
+                               ChildId = r1.Id,
+                               ChildName = r1.SalesRegionName,
+                               ContactType = "MF",
+                               Designation = des.ItemName,
+                               DesignationId = des.ListTypeItemId,
+                               Email = rc.PrimaryEmail,
+                               FirstName = rc.FirstName,
+                               IsActive = rc.IsActive,
+                               LastName = rc.LastName,
+                               ParentId = d1.Id,
+                               ParentName = d1.ManfName,
+                               PhoneNumber = rc.PrimaryContactNo
+                           }).FirstOrDefault();
+
+            return regions;
+        }
+
         public UserByContactResponse GetDistUserByContact(Guid contactId)
         {
             var regions = (from rc in context.RegionContact
@@ -285,6 +325,7 @@ namespace Infrastructure.Common
 
             return regions;
         }
+       
         public UserByContactResponse GetCustUserByContact(Guid contactId)
         {
             var regions = (from sc in context.SiteContact

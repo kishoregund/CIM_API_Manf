@@ -9,10 +9,13 @@ using Application.Features.Distributors.Responses;
 using System.Collections.Generic;
 using System.Security.Cryptography.Xml;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Data;
 
 namespace Infrastructure.Services
 {
-    public class DistributorService(ApplicationDbContext context, ICurrentUserService currentUserService) : IDistributorService
+    public class DistributorService(ApplicationDbContext context, IConfiguration configuration, ICurrentUserService currentUserService) : IDistributorService
     {
         public async Task<List<DistributorResponse>> GetDistributorsAsync()
         {
@@ -151,6 +154,15 @@ namespace Infrastructure.Services
 
 
         public bool IsManfBURequired()
-            => context.UserProfiles.Where(x => x.UserId == Guid.Parse(currentUserService.GetUserId())).FirstOrDefault().IsManfSubscribed;
+        {
+            SqlConnection con = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+            con.Open();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter("select SubscribedBy from CIMSaaS.Multitenancy.Tenants where id ='" + currentUserService.GetUserTenant() + "'", con);
+            da.Fill(dt);
+            var isManfSubsribed = dt.Rows.Count > 0 ? bool.Parse(dt.Rows[0][0].ToString()) : false;
+            con.Close();
+            return isManfSubsribed;
+        }
     }
 }

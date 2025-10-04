@@ -371,6 +371,11 @@ namespace Infrastructure.Persistence.DbInitializers
                 {
                     await AssignCustomPermissionsToRole(roleName, "EngineerRole", cancellationToken);
                 }
+                else if (roleName == RoleConstants.Manufacturer && await roleManager.Roles.SingleOrDefaultAsync(role => role.Name == roleName, cancellationToken)
+                        is not ApplicationRole incomingRoleM)
+                {
+                    await AssignCustomPermissionsToRole(roleName, "ManufacturerRole", cancellationToken);
+                }
             }
         }
 

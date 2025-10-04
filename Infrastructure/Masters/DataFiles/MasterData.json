@@ -406,6 +406,13 @@
 		"isescalationsupervisor": 0
 	},
 	{
+		"id": "88e01771-134f-11ed-ba7d-0a91af0598e6",
+		"listtypeid": "f0ba8a15-739a-11eb-adfc-0a91af0598e6",
+		"code": "MANF",
+		"itemname": "Manufacturer",
+		"isescalationsupervisor": 0
+	},
+	{
 		"id": "88e01766-134f-11ed-ba7d-0a91af0598e6",
 		"listtypeid": "f0ba8a15-739a-11eb-adfc-0a91af0598e6",
 		"code": "DIST",

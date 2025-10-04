@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Domain.Entities;
+using System.Collections.ObjectModel;
 
 namespace Infrastructure.Identity.Constants
 {
@@ -11,6 +12,7 @@ namespace Infrastructure.Identity.Constants
         public const string Distributor_Operations = nameof(Distributor_Operations);
         public const string Distributor_Operations_Region = nameof(Distributor_Operations_Region);
         public const string Engineer = nameof(Engineer);
+        public const string Manufacturer = nameof(Manufacturer);
 
         public static IReadOnlyList<string> DefaultRoles { get; } = new ReadOnlyCollection<string>(
         [
@@ -20,7 +22,8 @@ namespace Infrastructure.Identity.Constants
             Site,
             Distributor_Operations,
             Distributor_Operations_Region,
-            Engineer
+            Engineer,
+            Manufacturer
         ]);
 
         public static bool IsDefault(string roleName) => DefaultRoles.Any(role => role == roleName);

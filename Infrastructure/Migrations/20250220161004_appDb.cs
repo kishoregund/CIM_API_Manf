@@ -1602,6 +1602,7 @@ namespace Infrastructure.Migrations
                     BusinessUnitIds = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DistRegions = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustSites = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ManfBUIds = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ManfSalesRegions = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TenantId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
