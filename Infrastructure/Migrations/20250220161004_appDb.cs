@@ -1906,8 +1906,8 @@ namespace Infrastructure.Migrations
             ALTER TABLE Masters.SalesRegionContact ADD CONSTRAINT [FK_SalRegionCon_ListItem_DesigId] FOREIGN KEY (DesignationId) REFERENCES Masters.ListTypeItems([Id]) ON DELETE NO ACTION; 
             ALTER TABLE Masters.SalesRegionContact ADD CONSTRAINT [FK_SalRegionCon_Country_AddrCountryId] FOREIGN KEY (AddrCountryId) REFERENCES Masters.Country([Id]) ON DELETE NO ACTION; 
 
-            ALTER TABLE Masters.Instrument ADD CONSTRAINT [FK_Instr_BU_BUId] FOREIGN KEY (BusinessUnitId) REFERENCES Masters.BusinessUnit([Id]) ON DELETE NO ACTION; 
-            ALTER TABLE Masters.Instrument ADD CONSTRAINT [FK_Instr_Brand_BrandId] FOREIGN KEY (BrandId) REFERENCES Masters.Brand([Id]) ON DELETE NO ACTION; 
+            -- ALTER TABLE Masters.Instrument ADD CONSTRAINT [FK_Instr_BU_BUId] FOREIGN KEY (BusinessUnitId) REFERENCES Masters.BusinessUnit([Id]) ON DELETE NO ACTION; -- issue when subscribed by manf
+            -- ALTER TABLE Masters.Instrument ADD CONSTRAINT [FK_Instr_Brand_BrandId] FOREIGN KEY (BrandId) REFERENCES Masters.Brand([Id]) ON DELETE NO ACTION; -- issue when subscribed by manf
             ALTER TABLE Masters.Instrument ADD CONSTRAINT [FK_Instr_Manf_ManufId] FOREIGN KEY (ManufId) REFERENCES Masters.Manufacturer([Id]) ON DELETE NO ACTION; 
 
             ALTER TABLE Masters.InstrumentAccessory ADD CONSTRAINT [FK_InstrAcc_Instr_InstrId] FOREIGN KEY (InstrumentId) REFERENCES Masters.Instrument([Id]) ON DELETE NO ACTION; 
