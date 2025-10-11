@@ -265,6 +265,29 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InstrumentAllocation",
+                schema: "Masters",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InstrumentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DistributorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BusinessUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TenantId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InstrumentAllocation", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ConfigTypeValues",
                 schema: "Masters",
                 columns: table => new
@@ -1830,6 +1853,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.Sql(@"
                     ALTER TABLE MASTERS.BUSINESSUNIT ADD CONSTRAINT INDUQ_BUSINESSUNIT UNIQUE (BUSINESSUNITNAME);
                     ALTER TABLE MASTERS.BRAND ADD CONSTRAINT INDUQ_BRAND UNIQUE (BUSINESSUNITID, BRANDNAME);
+                    ALTER TABLE MASTERS.INSTRUMENTALLOCATION ADD CONSTRAINT INDUQ_INSTRUMENTALLOCATION UNIQUE (INSTRUMENTID, DISTRIBUTORID, BUSINESSUNITID);
                     ALTER TABLE MASTERS.CONFIGTYPEVALUES ADD CONSTRAINT INDUQ_CONFIGTYPEVALUES UNIQUE (LISTTYPEITEMID, CONFIGVALUE);
                     ALTER TABLE MASTERS.COUNTRY ADD CONSTRAINT INDUQ_COUNTRY UNIQUE ([NAME]);
                     ALTER TABLE MASTERS.CURRENCY ADD CONSTRAINT INDUQ_CURRENCY UNIQUE ([NAME]);
@@ -1877,6 +1901,10 @@ namespace Infrastructure.Migrations
             ALTER TABLE Masters.Customer ADD CONSTRAINT [FK_Cust_Country_CountryId] FOREIGN KEY (CountryId) REFERENCES Masters.Country([Id]) ON DELETE NO ACTION; 
             -- ALTER TABLE Masters.Customer ADD CONSTRAINT [FK_Cust_Country_AddrCountryId] FOREIGN KEY (AddrCountryId) REFERENCES Masters.Country([Id]) ON DELETE NO ACTION;  -- coln not in use
             ALTER TABLE Masters.Customer ADD CONSTRAINT [FK_Cust_Dist_DistId] FOREIGN KEY (DefDistId) REFERENCES Masters.Distributor([Id]) ON DELETE NO ACTION; 
+
+            ALTER TABLE Masters.INSTRUMENTALLOCATION ADD CONSTRAINT [FK_InsAllo_BU_BUId] FOREIGN KEY (BusinessUnitId) REFERENCES Masters.BusinessUnit([Id]) ON DELETE NO ACTION; 
+            ALTER TABLE Masters.INSTRUMENTALLOCATION ADD CONSTRAINT [FK_InsAllo_Ins_InsId] FOREIGN KEY (InstrumentId) REFERENCES Masters.Instrument([Id]) ON DELETE NO ACTION; 
+            ALTER TABLE Masters.INSTRUMENTALLOCATION ADD CONSTRAINT [FK_InsAllo_Dist_DistId] FOREIGN KEY (DistributorId) REFERENCES Masters.Distributor([Id]) ON DELETE NO ACTION; 
 
             ALTER TABLE Masters.Site ADD CONSTRAINT [FK_Site_Cust_CustId] FOREIGN KEY (CustomerId) REFERENCES Masters.Customer([Id]) ON DELETE NO ACTION; 
             ALTER TABLE Masters.Site ADD CONSTRAINT [FK_Site_Country_CountryId] FOREIGN KEY (CountryId) REFERENCES Masters.Country([Id]) ON DELETE NO ACTION; 

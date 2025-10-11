@@ -812,6 +812,13 @@
 		"isescalationsupervisor": 0
 	},
 	{
+		"id": "317E0002-8A87-42D9-BB08-15DC96EF1F09",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "SINAL",
+		"itemname": "Instrument Allocation",
+		"isescalationsupervisor": 0
+	},
+	{
 		"id": "f4475f1f-71d0-4e74-907b-414ebd49839d",
 		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
 		"code": "SCINS",

@@ -25,6 +25,7 @@ namespace Infrastructure.Persistence.Contexts
         public DbSet<Brand> Brand => Set<Brand>();
         public DbSet<BusinessUnit> BusinessUnit => Set<BusinessUnit>();
         public DbSet<ManfBusinessUnit> ManfBusinessUnit => Set<ManfBusinessUnit>();
+        public DbSet<InstrumentAllocation> InstrumentAllocation => Set<InstrumentAllocation>();
         public DbSet<ConfigTypeValues> ConfigTypeValues => Set<ConfigTypeValues>();
         public DbSet<UserProfiles> UserProfiles => Set<UserProfiles>();
         public DbSet<Domain.Entities.Instrument> Instrument => Set<Domain.Entities.Instrument>();
@@ -154,6 +155,8 @@ namespace Infrastructure.Persistence.Contexts
             modelBuilder.Entity<BusinessUnit>().HasIndex(x =>x.BusinessUnitName).IsUnique().HasDatabaseName("INDUQ_BUSINESSUNIT");
             modelBuilder.Entity<BusinessUnit>().HasQueryFilter(x => !x.IsDeleted && x.IsActive);
             modelBuilder.Entity<ManfBusinessUnit>().HasQueryFilter(x => !x.IsDeleted && x.IsActive);
+            modelBuilder.Entity<InstrumentAllocation>().HasQueryFilter(x => !x.IsDeleted && x.IsActive);
+            modelBuilder.Entity<InstrumentAllocation>().HasIndex(x => new { x.InstrumentId, x.DistributorId, x.BusinessUnitId }).IsUnique().HasDatabaseName("INDUQ_INSTRUMENTALLOCATION");
 
 
 

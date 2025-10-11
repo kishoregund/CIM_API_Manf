@@ -116,6 +116,16 @@ namespace Infrastructure.Persistence.DbConfigurations
         }
     }
 
+    internal class InstrumentAllocationConfig : IEntityTypeConfiguration<InstrumentAllocation>
+    {
+        public void Configure(EntityTypeBuilder<InstrumentAllocation> builder)
+        {
+            builder
+                .ToTable("InstrumentAllocation", SchemaNames.Masters)
+                .IsMultiTenant();
+        }
+    }
+
     internal class CustomerConfig : IEntityTypeConfiguration<Customer>
     {
         public void Configure(EntityTypeBuilder<Customer> builder)

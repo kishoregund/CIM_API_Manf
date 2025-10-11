@@ -30,65 +30,32 @@ namespace Infrastructure.Services
 
         public async Task<InstrumentResponse> GetInstrumentAsync(Guid id)
         {
-            //var userProf = Context.VW_UserProfile.Where(x => x.UserId == Guid.Parse(currentUserService.GetUserId())).FirstOrDefault();
             InstrumentResponse instrument = new();
 
-            //if (userProf.IsManfSubscribed)
-            //{
-                instrument = await (from i in Context.Instrument
-                                    join m in Context.Manufacturer on i.ManufId equals m.Id
-                                    join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
-                                    where i.Id == id
-                                    select new InstrumentResponse
-                                    {
-                                        Id = i.Id,
-                                        InsTypeName = it.ItemName,
-                                        BrandId = i.BrandId,
-                                        BusinessUnitId = i.BusinessUnitId,
-                                        Image = i.Image,
-                                        InsMfgDt = Convert.ToDateTime(i.InsMfgDt).ToString("dd/MM/yyyy"),
-                                        InsType = i.InsType,
-                                        InsVersion = i.InsVersion,
-                                        IsActive = i.IsActive,
-                                        IsDeleted = i.IsDeleted,
-                                        ManufId = i.ManufId,
-                                        ManufName = m.ManfName,
-                                        SerialNos = i.SerialNos,
-                                        CreatedBy = i.CreatedBy,
-                                        CreatedOn = i.CreatedOn
-                                    }).FirstOrDefaultAsync();
-            //}
-            //else
-            //{
-            //    instrument = await (from i in Context.Instrument
-            //                        join b in Context.BusinessUnit on i.BusinessUnitId equals b.Id
-            //                        join br in Context.Brand on i.BrandId equals br.Id
-            //                        join m in Context.Manufacturer on i.ManufId equals m.Id
-            //                        join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
-            //                        where i.Id == id
-            //                        select new InstrumentResponse
-            //                        {
-            //                            Id = i.Id,
-            //                            InsTypeName = it.ItemName,
-            //                            BrandId = br.Id,
-            //                            BrandName = br.BrandName,
-            //                            BusinessUnitId = b.Id,
-            //                            BusinessUnitName = b.BusinessUnitName,
-            //                            Image = i.Image,
-            //                            InsMfgDt = i.InsMfgDt,
-            //                            InsType = i.InsType,
-            //                            InsVersion = i.InsVersion,
-            //                            IsActive = i.IsActive,
-            //                            IsDeleted = i.IsDeleted,
-            //                            ManufId = i.ManufId,
-            //                            ManufName = m.ManfName,
-            //                            SerialNos = i.SerialNos,
-            //                            CreatedBy = i.CreatedBy,
-            //                            CreatedOn = i.CreatedOn
-            //                        }).FirstOrDefaultAsync();
-            //}
-            //if (instrument != null)
-            //    instrument.Image = getImage(instrument.Image);
+            instrument = await (from i in Context.Instrument
+                                join m in Context.Manufacturer on i.ManufId equals m.Id
+                                join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
+                                where i.Id == id
+                                select new InstrumentResponse
+                                {
+                                    Id = i.Id,
+                                    InsTypeName = it.ItemName,
+                                    BrandId = i.BrandId,
+                                    BusinessUnitId = i.BusinessUnitId,
+                                    Image = i.Image,
+                                    InsMfgDt = Convert.ToDateTime(i.InsMfgDt).ToString("dd/MM/yyyy"),
+                                    InsType = i.InsType,
+                                    InsVersion = i.InsVersion,
+                                    IsActive = i.IsActive,
+                                    IsDeleted = i.IsDeleted,
+                                    ManufId = i.ManufId,
+                                    ManufName = m.ManfName,
+                                    SerialNos = i.SerialNos,
+                                    CreatedBy = i.CreatedBy,
+                                    CreatedOn = i.CreatedOn
+                                }).FirstOrDefaultAsync();
+            if (instrument != null)
+                instrument.Image = getImage(instrument.Image);
 
             return instrument;
         }

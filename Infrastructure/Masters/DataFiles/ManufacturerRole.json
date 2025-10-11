@@ -378,6 +378,24 @@
 		"companyid": "fd395ac9-8bb8-4d9c-9b55-e21eec2fa6eb"
 	},
 	{
+		"id": "a0b91ed6-1768-45dc-beba-8c78db35bfb1",
+		"createdby": "dbd91c1e-739a-11eb-adfc-0a91af0598e6",
+		"createdon": "2023-04-11 16:52:01",
+		"updatedby": "dbd91c1e-739a-11eb-adfc-0a91af0598e6",
+		"updatedon": "2023-04-11 16:52:01",
+		"isdeleted": 0,
+		"roleId": "6b3e93c7-65b9-48bb-8082-3aa8e9f7b52d",
+		"screenid": "317E0002-8A87-42D9-BB08-15DC96EF1F09", // Instrument Allocation
+		"create": 0,
+		"read": 1,
+		"update": 0,
+		"delete": 0,
+		"category": "89159e72-134f-11ed-ba7d-0a91af0598e6",
+		"commercial": 0,
+		"privilages": "e83c3c23-4f8b-11ed-9c75-0a91af0598e6",
+		"companyid": "fd395ac9-8bb8-4d9c-9b55-e21eec2fa6eb"
+	},
+	{
 		"id": "a0b91ed6-1768-45dc-beba-7c68db35bfb1",
 		"createdby": "dbd91c1e-739a-11eb-adfc-0a91af0598e6",
 		"createdon": "2023-04-11 16:52:01",
