@@ -17,6 +17,7 @@ namespace Infrastructure.Services
 
             var brands = await (from b in context.Brand
                                 join bu in context.BusinessUnit on b.BusinessUnitId equals bu.Id
+                                where bu.Id == businessUnitId
                                 select new BrandResponse
                                 {
                                     BusinessUnitName = bu.BusinessUnitName,
@@ -31,8 +32,8 @@ namespace Infrastructure.Services
                                     UpdatedOn = b.UpdatedOn
                                 }).ToListAsync();
 
-            if (userProfile != null && userProfile.ContactType == "DR" && userProfile.SegmentCode == "RDTSP")
-                brands.Where(x => x.BusinessUnitId == businessUnitId).ToList();
+            //if (userProfile != null && userProfile.ContactType == "DR" && userProfile.SegmentCode == "RDTSP")
+            //    brands = brands.Where(x => x.BusinessUnitId == businessUnitId).ToList();
 
             return brands;
         }
@@ -58,7 +59,7 @@ namespace Infrastructure.Services
                                 }).ToListAsync();
 
             if (userProfile != null && userProfile.ContactType == "DR" && userProfile.SegmentCode == "RDTSP")
-                brands.Where(x => lstBusinessUnit.Contains(x.BusinessUnitId.ToString())).ToList();
+                brands = brands.Where(x => lstBusinessUnit.Contains(x.BusinessUnitId.ToString())).ToList();
 
             return brands;
         }

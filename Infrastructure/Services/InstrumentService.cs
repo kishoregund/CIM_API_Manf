@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Application.Features.Instruments.Responses;
 using Domain.Entities;
 using Application.Features.Customers.Requests;
+using Mapster;
 //using Instrument = Domain.Entities.Instrument;
 
 namespace Infrastructure.Services
@@ -40,8 +41,8 @@ namespace Infrastructure.Services
                                 {
                                     Id = i.Id,
                                     InsTypeName = it.ItemName,
-                                    BrandId = i.BrandId,
-                                    BusinessUnitId = i.BusinessUnitId,
+                                    //BrandId = i.BrandId,
+                                    //BusinessUnitId = i.BusinessUnitId,
                                     Image = i.Image,
                                     InsMfgDt = Convert.ToDateTime(i.InsMfgDt).ToString("dd/MM/yyyy"),
                                     InsType = i.InsType,
@@ -62,9 +63,7 @@ namespace Infrastructure.Services
 
         public async Task<InstrumentResponse> GetInstrumentBySerialNoAsync(string serialNo)
         {
-            var instrument = await (from i in Context.Instrument
-                                    join b in Context.BusinessUnit on i.BusinessUnitId equals b.Id
-                                    join br in Context.Brand on i.BrandId equals br.Id
+            var instrument = await (from i in Context.Instrument                                    
                                     join m in Context.Manufacturer on i.ManufId equals m.Id
                                     join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
                                     where i.SerialNos == serialNo
@@ -72,10 +71,10 @@ namespace Infrastructure.Services
                                     {
                                         Id = i.Id,
                                         InsTypeName = it.ItemName,
-                                        BrandId = br.Id,
-                                        BrandName = br.BrandName,
-                                        BusinessUnitId = b.Id,
-                                        BusinessUnitName = b.BusinessUnitName,
+                                        //BrandId = br.Id,
+                                        //BrandName = br.BrandName,
+                                        //BusinessUnitId = b.Id,
+                                        //BusinessUnitName = b.BusinessUnitName,
                                         Image = i.Image,
                                         InsMfgDt = Convert.ToDateTime(i.InsMfgDt).ToString("dd/MM/yyyy"),
                                         InsType = i.InsType,
@@ -116,66 +115,60 @@ namespace Infrastructure.Services
         public async Task<List<InstrumentResponse>> GetInstrumentsAsync(string businessUnitId, string brandId)
         {
             List<InstrumentResponse> lstInstruments = new();
-            if (string.IsNullOrEmpty(businessUnitId) || Guid.Parse(businessUnitId) == Guid.Empty)
+            List<Instrument> lstInstrs = new();
+            var userProfile = await Context.VW_UserProfile.FirstOrDefaultAsync(x => x.UserId.ToString() == currentUserService.GetUserId());
+            if (userProfile == null) /// for admin
             {
-                lstInstruments = await (from i in Context.Instrument
-                                        join m in Context.Manufacturer on i.ManufId equals m.Id
-                                        join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
-                                        select new InstrumentResponse
-                                        {
-                                            Id = i.Id,
-                                            InsTypeName = it.ItemName,
-                                            BrandId = i.BrandId,
-                                            BusinessUnitId = i.BusinessUnitId,
-                                            Image = i.Image,
-                                            InsMfgDt = Convert.ToDateTime(i.InsMfgDt).ToString("dd/MM/yyyy"),
-                                            InsType = i.InsType,
-                                            InsVersion = i.InsVersion,
-                                            IsActive = i.IsActive,
-                                            IsDeleted = i.IsDeleted,
-                                            ManufId = i.ManufId,
-                                            ManufName = m.ManfName,
-                                            SerialNos = i.SerialNos,
-                                            CreatedBy = i.CreatedBy,
-                                            CreatedOn = i.CreatedOn
-                                        }).ToListAsync();
+                lstInstrs = await Context.Instrument.ToListAsync();
             }
-            else
+            else if (userProfile != null && userProfile.ContactType == "DR")
             {
-                lstInstruments = await (from i in Context.Instrument
-                                        join b in Context.BusinessUnit on i.BusinessUnitId equals b.Id
-                                        join br in Context.Brand on i.BrandId equals br.Id
-                                        join m in Context.Manufacturer on i.ManufId equals m.Id
-                                        join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
-                                        select new InstrumentResponse
-                                        {
-                                            Id = i.Id,
-                                            InsTypeName = it.ItemName,
-                                            BrandId = i.BrandId,
-                                            BrandName = br.BrandName,
-                                            BusinessUnitId = i.BusinessUnitId,
-                                            BusinessUnitName = b.BusinessUnitName,
-                                            Image = i.Image,
-                                            InsMfgDt = Convert.ToDateTime(i.InsMfgDt).ToString("dd/MM/yyyy"),
-                                            InsType = i.InsType,
-                                            InsVersion = i.InsVersion,
-                                            IsActive = i.IsActive,
-                                            IsDeleted = i.IsDeleted,
-                                            ManufId = i.ManufId,
-                                            ManufName = m.ManfName,
-                                            SerialNos = i.SerialNos,
-                                            CreatedBy = i.CreatedBy,
-                                            CreatedOn = i.CreatedOn
-                                        }).ToListAsync();
+                if (userProfile.BusinessUnitIds.Contains(businessUnitId))
+                {
+                    lstInstrs = await (from i in Context.Instrument
+                                       join ia in Context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                                       where ia.BusinessUnitId == Guid.Parse(businessUnitId) && ia.BrandId == Guid.Parse(brandId)
+                                       select i).ToListAsync();
+                }
+            }
+            else if (userProfile != null && userProfile.ContactType == "MSR")
+            {
+                lstInstrs = await (from i in Context.Instrument
+                                   join ia in Context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                                   join d in Context.Distributor.Where(x => userProfile.ManfBUIds.Contains(x.ManfBusinessUnitId.ToString()))
+                                   on ia.DistributorId equals d.Id
+                                   select i).ToListAsync();
 
-                lstInstruments = lstInstruments.Where(x => x.BusinessUnitId.ToString() == businessUnitId && x.BrandId.ToString() == brandId).ToList();
-            }
+            }//customer should not be shown instruments.
+
+            lstInstruments = (from i in lstInstrs
+                              join m in Context.Manufacturer on i.ManufId equals m.Id
+                              join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
+                              select new InstrumentResponse
+                              {
+                                  Id = i.Id,
+                                  InsTypeName = it.ItemName,
+                                  //BrandId = i.BrandId,
+                                  //BusinessUnitId = i.BusinessUnitId,
+                                  Image = i.Image,
+                                  InsMfgDt = Convert.ToDateTime(i.InsMfgDt).ToString("dd/MM/yyyy"),
+                                  InsType = i.InsType,
+                                  InsVersion = i.InsVersion,
+                                  IsActive = i.IsActive,
+                                  IsDeleted = i.IsDeleted,
+                                  ManufId = i.ManufId,
+                                  ManufName = m.ManfName,
+                                  SerialNos = i.SerialNos,
+                                  CreatedBy = i.CreatedBy,
+                                  CreatedOn = i.CreatedOn
+                              }).ToList();
+
             return lstInstruments;
         }
 
         public async Task<Guid> CreateInstrumentAsync(Domain.Entities.Instrument Instrument)
         {
-            if (!Context.Instrument.Any(x => x.InsType == Instrument.InsType && x.InsVersion == Instrument.InsVersion 
+            if (!Context.Instrument.Any(x => x.InsType == Instrument.InsType && x.InsVersion == Instrument.InsVersion
             && x.SerialNos == Instrument.SerialNos && x.ManufId == Instrument.ManufId))
             {
                 Instrument.CreatedOn = DateTime.Now;

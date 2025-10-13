@@ -219,7 +219,7 @@ namespace Infrastructure.Common
                     p.DistRegions = null;
                     p.CustSites = null;  
                     p.ManfSalesRegions = userContact.ChildId.ToString();
-                    p.ManfBUIds = context.ManfBusinessUnit.FirstOrDefault().Id.ToString();
+                    p.ManfBUIds = context.ManfBusinessUnit.Any() ? context.ManfBusinessUnit.FirstOrDefault().Id.ToString() : null;
                     
                     break;
                 case "DR":
@@ -229,7 +229,6 @@ namespace Infrastructure.Common
 
                     p.RoleId = Guid.Parse(context.Roles.FirstOrDefault(x => x.Name.ToUpper().Trim() == "DISTRIBUTOR_OPERATIONS_REGION").Id);
                     p.SegmentId = context.VW_ListItems.FirstOrDefault(x => x.ListName.ToUpper() == "SEGMENTS" && x.ItemCode.ToUpper() == "RDTSP").ListTypeItemId;
-
 
                     p.DistRegions = userContact.ChildId.ToString();
                     p.CustSites = null;
@@ -243,10 +242,10 @@ namespace Infrastructure.Common
                     }
 
 
-                    p.BusinessUnitIds = context.BusinessUnit.FirstOrDefault().Id.ToString();
+                    p.BusinessUnitIds = context.BusinessUnit.FirstOrDefault(x => x.DistributorId == userContact.ParentId).Id.ToString();
                     p.BrandIds = context.Brand.FirstOrDefault(x => x.BusinessUnitId == Guid.Parse(p.BusinessUnitIds)).Id.ToString();
 
-                    buName = context.BusinessUnit.FirstOrDefault().BusinessUnitName;
+                    buName = context.BusinessUnit.FirstOrDefault(x => x.DistributorId == userContact.ParentId).BusinessUnitName;
                     brandName = context.Brand.FirstOrDefault(x => x.BusinessUnitId == Guid.Parse(p.BusinessUnitIds)).BrandName;
                     break;
 
