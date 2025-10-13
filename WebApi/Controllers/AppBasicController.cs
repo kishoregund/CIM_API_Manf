@@ -80,7 +80,20 @@ namespace WebApi.Controllers
             }
             return NotFound(response);
         }
-              
+
+        [HttpGet("BUDistall/{DistributorId}")]
+        [ShouldHavePermission(CimAction.View, CimFeature.Base)]
+        public async Task<IActionResult> GetBusinessUnitsByDistributorAsync(Guid DistributorId)
+        {
+            var response = await Sender.Send(new GetBUsByDistributorQuery { DistributorId = DistributorId});
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return NotFound(response);
+        }
+
+
         [HttpGet("BUall")]
         [ShouldHavePermission(CimAction.View, CimFeature.Base)]
         public async Task<IActionResult> GetBusinessUnitsAsync()

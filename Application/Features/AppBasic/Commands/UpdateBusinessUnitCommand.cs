@@ -14,8 +14,9 @@ namespace Application.Features.AppBasic.Commands
             CancellationToken cancellationToken)
         {
             var businessUnit = await businessUnitService.GetBusinessUnitByIdAsync(request.Request.Id);
+            businessUnit.DistributorId = request.Request.DistributorId;
             businessUnit.BusinessUnitName = request.Request.BusinessUnitName;
-
+            
             var result = await businessUnitService.UpdateBusinessUnitAsync(businessUnit);
             return await ResponseWrapper<Guid>.SuccessAsync(data: result, message: "Record updated successfully.");
         }

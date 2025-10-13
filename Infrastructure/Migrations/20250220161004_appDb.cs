@@ -228,6 +228,7 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DistributorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BusinessUnitName = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     TenantId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -1901,6 +1902,8 @@ namespace Infrastructure.Migrations
             ALTER TABLE Masters.Customer ADD CONSTRAINT [FK_Cust_Country_CountryId] FOREIGN KEY (CountryId) REFERENCES Masters.Country([Id]) ON DELETE NO ACTION; 
             -- ALTER TABLE Masters.Customer ADD CONSTRAINT [FK_Cust_Country_AddrCountryId] FOREIGN KEY (AddrCountryId) REFERENCES Masters.Country([Id]) ON DELETE NO ACTION;  -- coln not in use
             ALTER TABLE Masters.Customer ADD CONSTRAINT [FK_Cust_Dist_DistId] FOREIGN KEY (DefDistId) REFERENCES Masters.Distributor([Id]) ON DELETE NO ACTION; 
+
+            ALTER TABLE Masters.BusinessUnit ADD CONSTRAINT [FK_BU_Dist_DistId] FOREIGN KEY (DistributorId) REFERENCES Masters.Distributor([Id]) ON DELETE NO ACTION; 
 
             ALTER TABLE Masters.INSTRUMENTALLOCATION ADD CONSTRAINT [FK_InsAllo_BU_BUId] FOREIGN KEY (BusinessUnitId) REFERENCES Masters.BusinessUnit([Id]) ON DELETE NO ACTION; 
             ALTER TABLE Masters.INSTRUMENTALLOCATION ADD CONSTRAINT [FK_InsAllo_Ins_InsId] FOREIGN KEY (InstrumentId) REFERENCES Masters.Instrument([Id]) ON DELETE NO ACTION; 

@@ -91,6 +91,7 @@ namespace Infrastructure
                 .AddScoped<IAdvanceRequestService, AdvanceRequestService>()
                 .AddScoped<IBankDetailsService, BankDetailsService>()
                 .AddScoped<IPastServiceReportService, PastServiceReportService>()
+                .AddScoped<IInstrumentAllocationService, InstrumentAllocationService>()
                 .AddScoped<INotificationsService, NotificationsService>();
         }
 

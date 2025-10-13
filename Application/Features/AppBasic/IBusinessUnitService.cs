@@ -1,8 +1,11 @@
-﻿namespace Application.Features.AppBasic
+﻿using Application.Features.AppBasic.Responses;
+
+namespace Application.Features.AppBasic
 {
     public interface IBusinessUnitService
     {
-        Task<List<BusinessUnit>> GetBusinessUnitsAsync();
+        Task<List<BusinessUnitResponse>> GetBusinessUnitsAsync();
+        Task<List<BusinessUnit>> GetBusinessUnitsByDistributorAsync(Guid distributorId);
         Task<BusinessUnit> GetBusinessUnitByIdAsync(Guid id);
         Task<Guid> CreateBusinessUnitAsync(BusinessUnit businessUnit);
         Task<bool> DeleteBusinessUnitAsync(Guid requestId);

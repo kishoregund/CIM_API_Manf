@@ -1,4 +1,5 @@
 ﻿using Application.Features.AppBasic;
+using Application.Features.AppBasic.Responses;
 using Application.Features.Identity.Users;
 using Domain.Entities;
 using Infrastructure.Persistence.Contexts;
@@ -8,15 +9,30 @@ namespace Infrastructure.Services
 {
     public class BusinessUnitService(ApplicationDbContext context, ICurrentUserService currentUserService) : IBusinessUnitService
     {
-        public async Task<List<BusinessUnit>> GetBusinessUnitsAsync()
+        public async Task<List<BusinessUnitResponse>> GetBusinessUnitsAsync()
         {
             var userProfile = await context.VW_UserProfile.FirstOrDefaultAsync(x => x.UserId.ToString() == currentUserService.GetUserId());
+            var businessUnits = await context.BusinessUnit.ToListAsync();
             if (userProfile != null && userProfile.ContactType == "DR")
             {
                 var bus = userProfile.BusinessUnitIds.Split(',');
-                return await context.BusinessUnit.Where(x => bus.Contains(x.Id.ToString())).ToListAsync();
+                businessUnits = businessUnits.Where(x => bus.Contains(x.Id.ToString())).ToList();                
             }
-            return await context.BusinessUnit.ToListAsync();
+
+            return (from b in businessUnits
+                       join d in context.Distributor on b.DistributorId equals d.Id
+                       select new BusinessUnitResponse
+                       {
+                           Id = b.Id,
+                           DistributorId = b.DistributorId,
+                           BusinessUnitName = b.BusinessUnitName,
+                           DistributorName = d.DistName
+                       }).ToList();
+        }
+
+        public async Task<List<BusinessUnit>> GetBusinessUnitsByDistributorAsync(Guid distributorId)
+        {
+            return await context.BusinessUnit.Where(x => x.DistributorId == distributorId).ToListAsync();
         }
 
         public async Task<BusinessUnit> GetBusinessUnitByIdAsync(Guid id)

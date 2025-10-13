@@ -30,11 +30,13 @@ namespace Infrastructure.Services
                     join bu in context.BusinessUnit on b.BusinessUnitId equals bu.Id
                     join ins in context.Instrument on b.InstrumentId equals ins.Id  
                     join d in context.Distributor on b.DistributorId equals d.Id
+                    join br in context.Brand on b.BrandId equals br.Id
                     select new InstrumentAllocationResponse
                     {
                         BusinessUnit = bu.BusinessUnitName,
                         BusinessUnitId = b.BusinessUnitId,
                         BrandId = b.BrandId,
+                        BrandName = br.BrandName,
                         Instrument = ins.SerialNos,
                         InstrumentId = ins.Id,
                         DistributorId = d.Id,

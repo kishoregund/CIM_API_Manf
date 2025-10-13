@@ -254,7 +254,7 @@ namespace WebApi.Controllers
             return BadRequest(response);
         }
 
-        [HttpGet("InAllby-id/{InsAllocationId}")]
+        [HttpGet("InAllby-id/{InstrumentAllocationId}")]
         [ShouldHavePermission(CimAction.View, CimFeature.InstrumentAllocation)]
         public async Task<IActionResult> GetInstrumentAllocationByIdAsync(Guid InstrumentAllocationId)
         {

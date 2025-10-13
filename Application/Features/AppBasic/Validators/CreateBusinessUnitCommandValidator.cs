@@ -17,10 +17,14 @@ namespace Application.Features.AppBasic.Validators
     {
         public CreateBusinessUnitCommandValidator(IBusinessUnitService businessUnitService)
         {
+            RuleFor(request => request.Request.DistributorId)
+              .NotEmpty()
+                  .WithMessage("Distributor is required.");
+
             RuleFor(request => request.Request.BusinessUnitName)
               .NotEmpty()
                   .WithMessage("BusinessUnitName is required.");
-                        
+
             //RuleFor(x => x).Must(x => !businessUnitService.IsDuplicateAsync(x.Request.BusinessUnitName).Result)
             //    .WithMessage("Business Unit already exists.");
         }
