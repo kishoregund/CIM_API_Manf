@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using Infrastructure.Common;
 
 namespace Infrastructure.Services
 {
@@ -155,14 +156,16 @@ namespace Infrastructure.Services
 
         public bool IsManfBURequired()
         {
-            SqlConnection con = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
-            con.Open();
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter("select SubscribedBy from CIMSaaS.Multitenancy.Tenants where id ='" + currentUserService.GetUserTenant() + "'", con);
-            da.Fill(dt);
-            var isManfSubsribed = dt.Rows.Count > 0 ? bool.Parse(dt.Rows[0][0].ToString()) : false;
-            con.Close();
-            return isManfSubsribed;
+            CommonMethods commonMethods = new CommonMethods(context, currentUserService, configuration);
+            return commonMethods.IsManfSubscribed();            
+        }
+
+        public async Task<bool> IsDistributorSubscribedAsync()
+        {
+            CommonMethods commonMethods = new CommonMethods(context, currentUserService, configuration);
+            if (!commonMethods.IsManfSubscribed() && await context.Distributor.CountAsync() > 0)
+                return false;
+            else return true;
         }
     }
 }

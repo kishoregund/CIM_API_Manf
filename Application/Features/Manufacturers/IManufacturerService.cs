@@ -12,5 +12,6 @@ namespace Application.Features.Manufacturers
         Task<Guid> UpdateManufacturerAsync(Domain.Entities.Manufacturer Manufacturer);
         Task<bool> DeleteManufacturerAsync(Guid id);
         Task<bool> IsDuplicateAsync(string manufacturerName);
+        Task<bool> IsManfSubscribedAsync();
     }
 }

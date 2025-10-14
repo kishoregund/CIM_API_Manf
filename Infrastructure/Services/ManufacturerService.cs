@@ -1,14 +1,16 @@
 ﻿//using Dapper;
+using Application.Features.Identity.Users;
 using Application.Features.Manufacturers;
+using Application.Features.Manufacturers.Responses;
+using Domain.Entities;
+using Infrastructure.Common;
 using Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
-using Application.Features.Identity.Users;
-using Domain.Entities;
-using Application.Features.Manufacturers.Responses;
+using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Services
 {
-    public class ManufacturerService(ApplicationDbContext context, ICurrentUserService currentUserService) : IManufacturerService
+    public class ManufacturerService(ApplicationDbContext context, ICurrentUserService currentUserService, IConfiguration configuration) : IManufacturerService
     {
         public async Task<List<ManufacturerResponse>> GetManufacturersAsync()
         {
@@ -79,5 +81,12 @@ namespace Infrastructure.Services
         public async Task<bool> IsDuplicateAsync(string manufacturerName)
             => await context.Manufacturer.AnyAsync(x => x.ManfName.ToUpper() == manufacturerName.ToUpper());
 
+        public async Task<bool> IsManfSubscribedAsync()
+        {
+            CommonMethods commonMethods = new CommonMethods(context, currentUserService, configuration);
+            if (commonMethods.IsManfSubscribed() && await context.Manufacturer.CountAsync() > 0)
+                return false;
+            else return true;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Application.Features.Customers.Commands;
 using Application.Features.Customers.Requests;
 using Application.Features.Distributors.Commands;
+using Application.Features.Manufacturers;
 using Application.Features.Schools;
 using Application.Features.Schools.Commands;
 using Application.Features.Schools.Validators;
@@ -32,6 +33,9 @@ namespace Application.Features.Distributors.Validators
 
             RuleFor(x => x).Must(x => !distributorService.IsDuplicateAsync(x.DistributorRequest.DistName).Result)
                 .WithMessage("Distributor already exists.");
+
+            RuleFor(x => x).Must(x => distributorService.IsDistributorSubscribedAsync().Result)
+              .WithMessage("You cannot create multiple Distributors.");
 
             RuleFor(x => x.DistributorRequest.ManfBusinessUnitId)                
                 .Must(x => distributorService.IsManfBURequired())

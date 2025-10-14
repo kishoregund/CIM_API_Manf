@@ -14,6 +14,7 @@ namespace Application.Features.Distributors
         Task<List<DistributorResponse>> GetDistributorsByContactAsync(Guid contactId);        
         Task<bool> IsDuplicateAsync(string distributorName);
         bool IsManfBURequired();
+        Task<bool> IsDistributorSubscribedAsync();
 
         //Task<List<RegionContact>> GetDistributorRegionEngineers(Guid id);
         //Task<List<RegionContact>> GetDistributorRegionContacts(Guid id);

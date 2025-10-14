@@ -32,19 +32,22 @@ namespace Infrastructure.Services
         public async Task<List<CustomerInstrumentResponse>> GetAssignedCustomerInstrumentsAsync(string businessUnitId, string brandId)
         {
             var userProfile = await Context.VW_UserProfile.FirstOrDefaultAsync(x => x.UserId == Guid.Parse(currentUserService.GetUserId()));
-            
+
             CommonMethods commonMethods = new CommonMethods(Context, currentUserService, configuration);
             List<Instrument> lstInstruments = new();
             List<Site> lstSites = new();
             if (userProfile != null && userProfile.ContactType.ToUpper() == "DR")
             {
-                if (userProfile.SegmentCode == "RDTSP")
+                if (userProfile.SegmentCode == "RDTSP")   /// dist support
                 {
                     var lstRegionsProfile = commonMethods.GetDistRegionsByUserIdAsync().Result.ToArray();
                     lstSites = Context.Site.Where(x => lstRegionsProfile.Contains(x.RegionId.ToString())).ToList();
-                    lstInstruments = await Context.Instrument.Where(x => businessUnitId.Contains(x.BusinessUnitId.ToString()) && brandId.Contains(x.BrandId.ToString())).ToListAsync();
+                    lstInstruments = await (from i in Context.Instrument
+                                            join ia in Context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                                            where businessUnitId.Contains(ia.BusinessUnitId.ToString()) && brandId.Contains(ia.BrandId.ToString())
+                                            select i).ToListAsync();
                 }
-                else
+                else  // eng
                 {
                     lstSites = Context.Site.Where(x => x.DistId == userProfile.EntityParentId).ToList();
                     lstInstruments = await (from i in Context.Instrument
@@ -60,7 +63,7 @@ namespace Infrastructure.Services
                 lstInstruments = await Context.Instrument.ToListAsync();
                 lstSites = Context.Site.Where(x => lstSitesProfile.Contains(x.Id.ToString())).ToList();
             }
-            else
+            else  // admin
             {
                 lstInstruments = await Context.Instrument.ToListAsync();
                 lstSites = await Context.Site.ToListAsync();
@@ -104,8 +107,8 @@ namespace Infrastructure.Services
                                    InsVersion = i.InsVersion,
                                    ManufId = i.ManufId,
                                    SerialNos = i.SerialNos,
-                                   MachineEng = Context.SiteContact.Where(x=>x.Id == ci.InstruEngineerId).FirstOrDefault(),
-                                   OperatorEng = Context.SiteContact.Where(x=>x.Id == ci.OperatorId).FirstOrDefault()
+                                   MachineEng = Context.SiteContact.Where(x => x.Id == ci.InstruEngineerId).FirstOrDefault(),
+                                   OperatorEng = Context.SiteContact.Where(x => x.Id == ci.OperatorId).FirstOrDefault()
                                }).ToList();
 
             return instruments;
@@ -113,37 +116,73 @@ namespace Infrastructure.Services
 
         public async Task<List<InstrumentResponse>> GetCustomersInstrumentBySiteAsync(Guid siteId)
         {
-
-            var instruments = await (from i in Context.Instrument
-                                     join b in Context.BusinessUnit on i.BusinessUnitId equals b.Id
-                                     join br in Context.Brand on i.BrandId equals br.Id
-                                     join m in Context.Manufacturer on i.ManufId equals m.Id
-                                     join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
-                                     select new InstrumentResponse
-                                     {
-                                         Id = i.Id,
-                                         InsTypeName = it.ItemName,
-                                         BrandId = br.Id,
-                                         BrandName = br.BrandName,
-                                         BusinessUnitId = b.Id,
-                                         BusinessUnitName = b.BusinessUnitName,
-                                         Image = i.Image,
-                                         InsMfgDt = i.InsMfgDt,
-                                         InsType = i.InsType,
-                                         InsVersion = i.InsVersion,
-                                         IsActive = i.IsActive,
-                                         IsDeleted = i.IsDeleted,
-                                         ManufId = i.ManufId,
-                                         ManufName = m.ManfName,
-                                         SerialNos = i.SerialNos,
-                                         CreatedBy = i.CreatedBy,
-                                         CreatedOn = i.CreatedOn
-                                     }).ToListAsync();
-
-            return (from i in instruments
-                    join ci in Context.CustomerInstrument on i.Id equals ci.InstrumentId
-                    where ci.CustSiteId == siteId
-                    select i).ToList();
+            //CommonMethods commonMethods = new CommonMethods(Context, currentUserService, configuration);
+            List<InstrumentResponse> lstInstruments = new();
+            List<Site> lstSites = new();
+            var userProfile = await Context.VW_UserProfile.FirstOrDefaultAsync(x => x.UserId == Guid.Parse(currentUserService.GetUserId()));
+            if (userProfile.SegmentCode == "RDTSP")   /// dist support
+            {
+                var lstRegionsProfile = userProfile.DistRegions; //commonMethods.GetDistRegionsByUserIdAsync().Result.ToArray();
+                lstSites = Context.Site.Where(x => lstRegionsProfile.Contains(x.RegionId.ToString()) && x.Id == siteId).ToList();
+                if (lstSites.Count > 0)
+                {
+                    lstInstruments = await (from i in Context.Instrument
+                                            join ia in Context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                                            join ci in Context.CustomerInstrument on i.Id equals ci.InstrumentId
+                                            join ma in Context.Manufacturer on i.ManufId equals ma.Id
+                                            join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
+                                            where userProfile.BusinessUnitIds.Contains(ia.BusinessUnitId.ToString()) && userProfile.BrandIds.Contains(ia.BrandId.ToString())
+                                            && ci.CustSiteId == siteId
+                                            select new InstrumentResponse
+                                            {
+                                                Id = i.Id,
+                                                InsTypeName = it.ItemName,
+                                                BrandId = ia.Id,
+                                                //BrandName = br.BrandName,
+                                                BusinessUnitId = ia.Id,
+                                                //BusinessUnitName = b.BusinessUnitName,
+                                                Image = i.Image,
+                                                InsMfgDt = i.InsMfgDt,
+                                                InsType = i.InsType,
+                                                InsVersion = i.InsVersion,
+                                                IsActive = i.IsActive,
+                                                IsDeleted = i.IsDeleted,
+                                                ManufId = i.ManufId,
+                                                ManufName = ma.ManfName,
+                                                SerialNos = i.SerialNos,
+                                                CreatedBy = i.CreatedBy,
+                                                CreatedOn = i.CreatedOn
+                                            }).ToListAsync();
+                }
+            }
+            else
+            {
+                lstInstruments = await (from i in Context.Instrument
+                                        join ci in Context.CustomerInstrument on i.Id equals ci.InstrumentId
+                                        join m in Context.Manufacturer on i.ManufId equals m.Id
+                                        join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
+                                        select new InstrumentResponse
+                                        {
+                                            Id = i.Id,
+                                            InsTypeName = it.ItemName,
+                                            //BrandId = ia.Id,
+                                            //BrandName = br.BrandName,
+                                            //BusinessUnitId = ia.Id,
+                                            //BusinessUnitName = b.BusinessUnitName,
+                                            Image = i.Image,
+                                            InsMfgDt = i.InsMfgDt,
+                                            InsType = i.InsType,
+                                            InsVersion = i.InsVersion,
+                                            IsActive = i.IsActive,
+                                            IsDeleted = i.IsDeleted,
+                                            ManufId = i.ManufId,
+                                            ManufName = m.ManfName,
+                                            SerialNos = i.SerialNos,
+                                            CreatedBy = i.CreatedBy,
+                                            CreatedOn = i.CreatedOn
+                                        }).ToListAsync();
+            }
+            return lstInstruments;
         }
 
         public async Task<Guid> CreateCustomerInstrumentAsync(CustomerInstrument CustomerInstrument)

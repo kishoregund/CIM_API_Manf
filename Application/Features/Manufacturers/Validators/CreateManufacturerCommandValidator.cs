@@ -28,6 +28,9 @@ namespace Application.Features.Manufacturers.Validators
                         
             RuleFor(x => x).Must(x => !manufacturerService.IsDuplicateAsync(x.ManufacturerRequest.ManfName).Result)
                 .WithMessage("Manufacturer already exists.");
+
+            RuleFor(x => x).Must(x => manufacturerService.IsManfSubscribedAsync().Result)
+                .WithMessage("You cannot create multiple Manufacturers.");
         }
 
     }

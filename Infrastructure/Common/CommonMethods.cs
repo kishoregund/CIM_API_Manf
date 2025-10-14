@@ -6,11 +6,13 @@ using Application.Models;
 using Domain.Entities;
 using Domain.Views;
 using Infrastructure.Persistence.Contexts;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -640,6 +642,18 @@ namespace Infrastructure.Common
             }
         }
 
+
+        public bool IsManfSubscribed()
+        {
+            SqlConnection con = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+            con.Open();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter("select SubscribedBy from CIMSaaS.Multitenancy.Tenants where id ='" + currentUserService.GetUserTenant() + "'", con);
+            da.Fill(dt);
+            var isManfSubscribed = dt.Rows.Count > 0 ? bool.Parse(dt.Rows[0][0].ToString()) : false;
+            con.Close();
+            return isManfSubscribed;
+        }
 
         ///// not neeeded
         ///

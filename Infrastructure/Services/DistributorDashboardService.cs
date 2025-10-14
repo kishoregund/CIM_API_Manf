@@ -41,7 +41,10 @@ namespace Infrastructure.Services
                 var lstSites = await commonMethods.GetSitesByUserIdAsync();
                 var lstRegionsprofile = await commonMethods.GetDistRegionsByUserIdAsync();
 
-                var instruments = context.Instrument.Where(x => x.BusinessUnitId == dashboardDate.BusinessUnitId && x.BrandId == dashboardDate.BrandId).ToList();
+                var instruments = (from i in context.Instrument
+                                   join ia in context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                                   where ia.BusinessUnitId == dashboardDate.BusinessUnitId && ia.BrandId == dashboardDate.BrandId
+                                   select i).ToList();
 
                 //var serviceRequest = new List<ServiceRequest>();
                 int serviceRequestCnt = 0;
@@ -125,11 +128,11 @@ namespace Infrastructure.Services
 
                 #endregion
 
-                var engHSerReq = (from s in context.ServiceRequest.Where(x=> lstSites.Contains(x.SiteId.ToString()))
+                var engHSerReq = (from s in context.ServiceRequest.Where(x => lstSites.Contains(x.SiteId.ToString()))
                                   join rc in context.RegionContact on s.AssignedTo equals rc.Id
                                   join site in context.Site on s.SiteId equals site.Id
                                   join c in context.Customer on s.CustId equals c.Id
-                                  where s.DistId == userProfile.EntityParentId  && !s.IsReportGenerated
+                                  where s.DistId == userProfile.EntityParentId && !s.IsReportGenerated
                                   select new DashboardDataResponse()
                                   {
                                       CustId = c.Id.ToString(),
@@ -202,9 +205,15 @@ namespace Infrastructure.Services
 
             //var privilage = context.Vw_Privilages.FirstOrDefault(x =>
             //    x.UserId == userId && x.ScreenCode == "SRREQ" && x.UserName != "admin");
-            var instruments = (from a in context.ServiceRequest.Where(x => !x.IsDeleted)
-                               join b in context.Instrument.Where(x => x.BusinessUnitId.ToString() == businessUnitId && x.BrandId.ToString() == brandId)
-                                   on a.MachinesNo equals b.Id.ToString()
+
+            var instrs = (from i in context.Instrument
+                          join ia in context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                          where ia.BusinessUnitId == Guid.Parse(businessUnitId) && ia.BrandId == Guid.Parse(brandId)
+                          select i).ToList();
+
+
+            var instruments = (from a in context.ServiceRequest
+                               join b in instrs on a.MachinesNo equals b.Id.ToString()
                                where a.DistId == userProfile.EntityParentId
                                select new ServiceRequest
                                {
@@ -273,9 +282,15 @@ namespace Infrastructure.Services
             //                  on a.Machinesno equals b.Id
             //              select a);
 
-            var instruments = (from a in context.ServiceRequest.Where(x => !x.IsDeleted)
-                               join b in context.Instrument.Where(x => x.BusinessUnitId.ToString() == businessUnitId && x.BrandId.ToString() == brandId)
-                                   on a.MachinesNo equals b.Id.ToString()
+            var instrs = (from i in context.Instrument
+                          join ia in context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                          where ia.BusinessUnitId == Guid.Parse(businessUnitId) && ia.BrandId == Guid.Parse(brandId)
+                          select i).ToList();
+
+
+
+            var instruments = (from a in context.ServiceRequest
+                               join b in instrs on a.MachinesNo equals b.Id.ToString()
                                where a.DistId == userProfile.EntityParentId
                                select a).OrderByDescending(x => x.CreatedOn).ToList();
 
@@ -311,7 +326,12 @@ namespace Infrastructure.Services
             var commonMethods = new CommonMethods(context, currentUserService, configuration);
             var lstRegionsprofile = await commonMethods.GetDistRegionsByUserIdAsync();
 
-            var instruments = context.Instrument.Where(x => x.BusinessUnitId == dashboardDate.BusinessUnitId && x.BrandId == dashboardDate.BrandId).ToList();
+            var instruments = (from i in context.Instrument
+                               join ia in context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                               where ia.BusinessUnitId == dashboardDate.BusinessUnitId && ia.BrandId == dashboardDate.BrandId
+                               select i).ToList();
+
+
             var sites = context.Site.Where(x => lstRegionsprofile.Contains(x.RegionId.ToString())).ToList();
             var iInstruments = (from i in instruments
                                 join ci in context.CustomerInstrument on i.Id equals ci.InstrumentId
@@ -366,7 +386,14 @@ namespace Infrastructure.Services
 
             //var privilage = context.Vw_Privilages.FirstOrDefault(x =>
             //    x.UserId == userId && x.ScreenCode == "SINST" && x.UserName != "admin");
-            var instruments = (from i in context.Instrument.Where(x => !x.IsDeleted && x.BrandId.ToString() == brandId && x.BusinessUnitId.ToString() == businessUnitId).ToList()
+
+
+            var instrs = (from i in context.Instrument
+                          join ia in context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                          where ia.BusinessUnitId == Guid.Parse(businessUnitId) && ia.BrandId == Guid.Parse(brandId)
+                          select i).ToList();
+
+            var instruments = (from i in instrs
                                join ci in context.CustomerInstrument on i.Id equals ci.InstrumentId
                                where ci.InstallBy == userProfile.EntityParentId.ToString()
                                select i).OrderByDescending(x => x.CreatedOn).ToList();
@@ -411,9 +438,15 @@ namespace Infrastructure.Services
 
             //var privilage = context.Vw_Privilages.FirstOrDefault(x =>
             //    x.UserId == userId && x.ScreenCode == "SRREQ" && x.UserName != "admin");
-            var serReqs = (from a in context.ServiceRequest.Where(x => !x.IsDeleted)
-                           join b in context.Instrument.Where(x => x.BusinessUnitId.ToString() == businessUnitId && x.BrandId.ToString() == brandId)
-                               on a.MachinesNo equals b.Id.ToString()
+
+
+            var instrs = (from i in context.Instrument
+                          join ia in context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                          where ia.BusinessUnitId == Guid.Parse(businessUnitId) && ia.BrandId == Guid.Parse(brandId)
+                          select i).ToList();
+
+            var serReqs = (from a in context.ServiceRequest
+                           join b in instrs on a.MachinesNo equals b.Id.ToString()
                            where a.DistId == userProfile.EntityParentId
                            select a).OrderByDescending(x => x.CreatedOn).ToList();
 
@@ -458,11 +491,16 @@ namespace Infrastructure.Services
             //var amcprivilage = context.Vw_Privilages.FirstOrDefault(x =>
             //    x.UserId == userId && x.ScreenCode == "DISDH" && x.UserName != "admin");
 
-            var amc = from a in context.AMC.Where(x => !x.IsDeleted)
-                      join b in context.AMCInstrument.Where(x => !x.IsDeleted) on a.Id equals b.AMCId
-                      join c in context.Instrument.Where(x => x.BusinessUnitId == dashboardDate.BusinessUnitId && x.BrandId == dashboardDate.BrandId)
-                          on b.InstrumentId equals c.Id
-                      select a;
+
+            var lstInstrs = await (from i in context.Instrument
+                                   join ia in context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                                   where ia.BusinessUnitId == dashboardDate.BusinessUnitId && ia.BrandId == dashboardDate.BrandId
+                                   select i).ToListAsync();
+
+            var allAmc = (from a in context.AMC
+                          join b in context.AMCInstrument.Where(b => lstInstrs.Select(c => c.Id).Contains(b.InstrumentId))
+                          on a.Id equals b.AMCId
+                          select a).ToList();
 
             //if (amcprivilage != null && amcprivilage.PrivilageCode != "PARTS" && (amcprivilage._create ||
             //        amcprivilage._read || amcprivilage._update || amcprivilage._delete))
@@ -470,16 +508,15 @@ namespace Infrastructure.Services
 
             //var custprivilage = context.Vw_Privilages.FirstOrDefault(x =>
             //    x.UserId == userId && x.ScreenCode == "DISDH" && x.UserName != "admin");
-            var cust = context.Customer.Where(x => !x.IsDeleted);
+            //var cust = context.Customer.Where(x => !x.IsDeleted);
 
             //if (custprivilage != null && custprivilage.PrivilageCode != "PARTS" && (custprivilage._create ||
             //        custprivilage._read || custprivilage._update || custprivilage._delete))
             //    cust = cust.Where(x => x.Createdby == userId);
 
-            var allAmc = amc.ToList();
-            var customers = cust.Where(x => lstRegionsprofile.Contains(x.DefDistRegionId.ToString())).ToList();
+            var customers = context.Customer.Where(x => lstRegionsprofile.Contains(x.DefDistRegionId.ToString())).ToList();
             var sites = context.Site.ToList();
-            var instruments = (from i in context.Instrument.Where(x => x.BusinessUnitId == dashboardDate.BusinessUnitId && x.BrandId == dashboardDate.BrandId).ToList()
+            var instruments = (from i in lstInstrs
                                join ci in context.CustomerInstrument on i.Id equals ci.Id
                                select ci).ToList();
             var spareParts = (from s in context.Spareparts
@@ -536,7 +573,7 @@ namespace Infrastructure.Services
         public async Task<ServiceContractRevenueResponse> GetServiceContractRevenue(DashboardDateRequest dashboardDate)
         {
             var commonMethods = new CommonMethods(context, currentUserService, configuration);
-            var lstRegionsprofile = commonMethods.GetDistRegionsByUserIdAsync().Result;
+            var lstRegionsprofile = await commonMethods.GetDistRegionsByUserIdAsync();
 
             decimal? amcRevenue = 0;
             decimal? breakdownRevenue = 0;
@@ -544,15 +581,19 @@ namespace Infrastructure.Services
             decimal? oncallRevenue = 0;
             decimal? plannedRevenue = 0;
 
-            var Amc = await (from a in context.AMC
-                             join b in context.AMCInstrument on a.Id equals b.AMCId
-                             join c in context.Instrument.Where(x => x.BusinessUnitId == dashboardDate.BusinessUnitId && x.BrandId == dashboardDate.BrandId)
-                                 on b.InstrumentId equals c.Id
-                             select a).ToListAsync();
-            var cust = context.Customer;
+            var lstInstrs = (from i in context.Instrument
+                                   join ia in context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                                   where ia.BusinessUnitId == dashboardDate.BusinessUnitId && ia.BrandId == dashboardDate.BrandId
+                                   select i).ToList();
 
-            var allAmc = Amc.ToList();
-            var customers = cust.Where(x => lstRegionsprofile.Contains(x.DefDistRegionId.ToString())).ToList();
+
+            var allAmc = (from a in context.AMC
+                          join b in context.AMCInstrument.Where(b => lstInstrs.Select(c => c.Id).Contains(b.InstrumentId))
+                          on a.Id equals b.AMCId
+                          select a).ToList();
+
+            //var allAmc = Amc.ToList();
+            var customers = context.Customer.Where(x => lstRegionsprofile.Contains(x.DefDistRegionId.ToString())).ToList();
 
             var lstAmc = allAmc.Where(a => customers.Select(x => x.Id).Contains(a.BillTo)).ToList();
             var mAmc = (from amc in lstAmc select GetAMC(amc.Id, currentUserService.GetUserId()))
@@ -571,11 +612,8 @@ namespace Infrastructure.Services
                 grpAmc.Add(amc);
             }
 
-            var serviceRequests = (from sr in context.ServiceRequest
-                                   join i in context.Instrument.Where(x => x.BusinessUnitId == dashboardDate.BusinessUnitId && x.BrandId == dashboardDate.BrandId)
-                                   on sr.MachinesNo equals i.Id.ToString()
+            var serviceRequests = (from sr in context.ServiceRequest.Where(b => lstInstrs.Select(c => c.Id.ToString()).Contains(b.MachinesNo))
                                    select sr).ToList().Adapt<List<ServiceRequestResponse>>();
-
 
 
             foreach (ServiceRequestResponse sr in serviceRequests)
