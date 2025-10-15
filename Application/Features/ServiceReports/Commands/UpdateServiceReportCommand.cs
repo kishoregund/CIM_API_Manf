@@ -38,7 +38,7 @@ namespace Application.Features.ServiceReports.Commands
             ServiceReportInDb.Reason = request.ServiceReportRequest.Reason;
             ServiceReportInDb.RespInstrumentId = request.ServiceReportRequest.RespInstrumentId;
             ServiceReportInDb.Rework = request.ServiceReportRequest.Rework;
-            ServiceReportInDb.ServiceReportDate = request.ServiceReportRequest.ServiceReportDate;
+            //ServiceReportInDb.ServiceReportDate = request.ServiceReportRequest.ServiceReportDate;
             ServiceReportInDb.ServiceReportNo = request.ServiceReportRequest.ServiceReportNo;
             //ServiceReportInDb.ServiceRequestId = request.ServiceReportRequest.ServiceRequestId;
             ServiceReportInDb.SignCustName = request.ServiceReportRequest.SignCustName;

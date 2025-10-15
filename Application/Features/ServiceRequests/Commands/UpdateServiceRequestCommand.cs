@@ -65,7 +65,7 @@ namespace Application.Features.ServiceRequests.Commands
             ServiceRequestInDb.SiteId = request.ServiceRequestRequest.SiteId;
             ServiceRequestInDb.SiteName = request.ServiceRequestRequest.SiteName;
             ServiceRequestInDb.StageId = request.ServiceRequestRequest.StageId;
-            ServiceRequestInDb.StageId = request.ServiceRequestRequest.StageId;
+            ServiceRequestInDb.StatusId = request.ServiceRequestRequest.StatusId;
             ServiceRequestInDb.SiteUserId = request.ServiceRequestRequest.SiteUserId;
             ServiceRequestInDb.SubRequestTypeId = request.ServiceRequestRequest.SubRequestTypeId;
             ServiceRequestInDb.TotalCost = request.ServiceRequestRequest.TotalCost;

@@ -63,7 +63,7 @@ namespace Infrastructure.Services
 
         public async Task<InstrumentResponse> GetInstrumentBySerialNoAsync(string serialNo)
         {
-            var instrument = await (from i in Context.Instrument                                    
+            var instrument = await (from i in Context.Instrument
                                     join m in Context.Manufacturer on i.ManufId equals m.Id
                                     join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
                                     where i.SerialNos == serialNo
@@ -123,11 +123,18 @@ namespace Infrastructure.Services
             }
             else if (userProfile != null && userProfile.ContactType == "DR")
             {
-                if (userProfile.BusinessUnitIds.Contains(businessUnitId))
+                if (businessUnitId != "" && userProfile.BusinessUnitIds.Contains(businessUnitId))
                 {
                     lstInstrs = await (from i in Context.Instrument
                                        join ia in Context.InstrumentAllocation on i.Id equals ia.InstrumentId
                                        where ia.BusinessUnitId == Guid.Parse(businessUnitId) && ia.BrandId == Guid.Parse(brandId)
+                                       select i).ToListAsync();
+                }
+                else
+                {
+                    lstInstrs = await (from i in Context.Instrument
+                                       join ia in Context.InstrumentAllocation on i.Id equals ia.InstrumentId
+                                       where userProfile.BusinessUnitIds.Contains(ia.BusinessUnitId.ToString()) && userProfile.BrandIds.Contains(ia.BrandId.ToString())
                                        select i).ToListAsync();
                 }
             }
@@ -139,8 +146,15 @@ namespace Infrastructure.Services
                                    on ia.DistributorId equals d.Id
                                    select i).ToListAsync();
 
-            }//customer should not be shown instruments.
-
+            }
+            else if (userProfile != null && userProfile.ContactType == "CS")
+            {
+                lstInstrs = await (from i in Context.Instrument
+                                   join ci in Context.CustomerInstrument on i.Id equals ci.InstrumentId
+                                   join s in Context.Site.Where(x => userProfile.CustSites.Contains(x.Id.ToString()))
+                                   on ci.CustSiteId equals s.Id
+                                   select i).ToListAsync();
+            }
             lstInstruments = (from i in lstInstrs
                               join m in Context.Manufacturer on i.ManufId equals m.Id
                               join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()

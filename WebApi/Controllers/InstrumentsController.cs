@@ -265,6 +265,18 @@ namespace WebApi.Controllers
             }
             return NotFound(response);
         }
+        
+        [HttpGet("InAllby-insid/{InstrumentId}")]
+        [ShouldHavePermission(CimAction.View, CimFeature.InstrumentAllocation)]
+        public async Task<IActionResult> GetInstrumentAllocationByInsIdAsync(Guid InstrumentId)
+        {
+            var response = await Sender.Send(new GetInstrumentAllocationByInsIdQuery { InstrumentId = InstrumentId });
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return NotFound(response);
+        }
 
         [HttpGet("InAllall")]
         [ShouldHavePermission(CimAction.View, CimFeature.InstrumentAllocation)]

@@ -1,4 +1,5 @@
 ﻿
+using Application.Features.InstrumentAllocations.Queries;
 using Application.Features.Instruments.Responses;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Application.Features.Instruments
     public interface IInstrumentAllocationService
     {
         Task<InstrumentAllocation> GetInstrumentAllocationEntityAsync(Guid id);
+        Task<InstrumentAllocation> GetInstrumentAllocationByInsIdAsync(Guid insId);        
         Task<List<InstrumentAllocationResponse>> GetInstrumentAllocationsAsync();
         Task<Guid> CreateInstrumentAllocationAsync(InstrumentAllocation InstrumentAllocation);
         Task<Guid> UpdateInstrumentAllocationAsync(InstrumentAllocation InstrumentAllocation);

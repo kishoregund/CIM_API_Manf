@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.Services
 {
     public class InstrumentAllocationService(ApplicationDbContext context, ICurrentUserService currentUserService) : IInstrumentAllocationService
-    {      
+    {
         public async Task<List<InstrumentAllocationResponse>> GetInstrumentAllocationsAsync()
         {
             var userProfile = await context.VW_UserProfile.FirstOrDefaultAsync(x => x.UserId.ToString() == currentUserService.GetUserId());
@@ -28,7 +28,7 @@ namespace Infrastructure.Services
 
             return (from b in InstrumentAllocations
                     join bu in context.BusinessUnit on b.BusinessUnitId equals bu.Id
-                    join ins in context.Instrument on b.InstrumentId equals ins.Id  
+                    join ins in context.Instrument on b.InstrumentId equals ins.Id
                     join d in context.Distributor on b.DistributorId equals d.Id
                     join br in context.Brand on b.BrandId equals br.Id
                     select new InstrumentAllocationResponse
@@ -53,6 +53,9 @@ namespace Infrastructure.Services
 
         public async Task<InstrumentAllocation> GetInstrumentAllocationEntityAsync(Guid id)
             => await context.InstrumentAllocation.FirstOrDefaultAsync(x => x.Id == id);
+
+        public async Task<InstrumentAllocation> GetInstrumentAllocationByInsIdAsync(Guid insId)
+            => await context.InstrumentAllocation.FirstOrDefaultAsync(x => x.InstrumentId == insId);
 
         public async Task<Guid> CreateInstrumentAllocationAsync(InstrumentAllocation InstrumentAllocation)
         {

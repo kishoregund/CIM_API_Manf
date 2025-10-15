@@ -107,8 +107,8 @@ namespace Infrastructure.Services
             var instType = Context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId.ToString() == (Context.Instrument.FirstOrDefault(x => x.Id == serviceReport.InstrumentId).InsType)).ItemName;
 
             serviceReportResponse.AnalyticalAssit = serviceReport.AnalyticalAssit;
-            serviceReportResponse.BrandId = serviceReport.BrandId;
-            serviceReportResponse.BrandName = Context.Brand.FirstOrDefault(x => x.Id == serviceReport.BrandId).BrandName;
+            serviceReportResponse.BrandId = Context.InstrumentAllocation.FirstOrDefault(x=>x.InstrumentId == serviceReport.InstrumentId).BrandId;
+            serviceReportResponse.BrandName = Context.Brand.FirstOrDefault(x => x.Id == serviceReportResponse.BrandId).BrandName;
             serviceReportResponse.ComputerArlsn = serviceReport.ComputerArlsn;
             serviceReportResponse.CorrMaintenance = serviceReport.CorrMaintenance;
             serviceReportResponse.Id = serviceReport.Id;

@@ -76,8 +76,9 @@ namespace Infrastructure.Services
                         if (segment.ToUpper().Equals("RDTSP") && userProfile.ContactType == "DR")
                         {
                             serviceRequests = await (from sr in context.ServiceRequest.Where(x => !x.IsDeleted)
-                                                     join i in context.Instrument.Where(x => businessUnitId.ToString().Contains(x.BusinessUnitId.ToString()) && brandId.ToString().Contains(x.BrandId.ToString()))
-                                                         on sr.MachinesNo equals i.Id.ToString()
+                                                     join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
+                                                     join ia in context.InstrumentAllocation.Where(x => businessUnitId.ToString().Contains(x.BusinessUnitId.ToString()) && brandId.ToString().Contains(x.BrandId.ToString()))
+                                                     on i.Id equals ia.InstrumentId
                                                      select sr).OrderByDescending(x => x.IsCritical).ThenByDescending(x => x.CreatedOn).ToListAsync();
 
                             // first pullout SR for the loggedin user Distributor
