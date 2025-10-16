@@ -162,14 +162,14 @@ namespace Infrastructure.Common
                 screen.CategoryName = lItem.ItemName;
 
             }
-            else if (screen.ScreenCode == "SCURR" || screen.ScreenCode == "SCOUN" || screen.ScreenCode == "SCUST" || screen.ScreenCode == "SDIST" || screen.ScreenCode == "SINST" || screen.ScreenCode == "SSPAR" || screen.ScreenCode == "SMANF")
+            else if (screen.ScreenCode == "SCURR" || screen.ScreenCode == "SCOUN" || screen.ScreenCode == "SCUST" || screen.ScreenCode == "SDIST" || screen.ScreenCode == "SINST" || screen.ScreenCode == "SSPAR" || screen.ScreenCode == "SMANF" || screen.ScreenCode == "SINAL")
             {
                 lItem = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "PRGRP" && x.ItemCode == "MSTRS");
                 screen.Category = lItem.ListTypeItemId.ToString();
                 screen.CategoryName = lItem.ItemName;
             }
 
-            else if (screen.ScreenCode == "AUDIT" || screen.ScreenCode == "SIMXP" || screen.ScreenCode == "SSRCH" || screen.ScreenCode == "PSRRP" || screen.ScreenCode == "CUSDH" || screen.ScreenCode == "DHSET" || screen.ScreenCode == "DISDH")
+            else if (screen.ScreenCode == "PSRRP" || screen.ScreenCode == "CUSDH" || screen.ScreenCode == "DHSET" || screen.ScreenCode == "DISDH") //|| screen.ScreenCode == "SIMXP" || screen.ScreenCode == "SSRCH" || screen.ScreenCode == "AUDIT" 
             {
                 lItem = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "PRGRP" && x.ItemCode == "UTILS");
                 screen.Category = lItem.ListTypeItemId.ToString();
@@ -185,12 +185,12 @@ namespace Infrastructure.Common
                 screen.CategoryName = lItem.ItemName;
             }
 
-            else if (screen.ScreenCode == "SRQRP" || screen.ScreenCode == "SRCMR" || screen.ScreenCode == "PDQRQ" || screen.ScreenCode == "SRCRR")
-            {
-                lItem = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "PRGRP" && x.ItemCode == "REPTS");
-                screen.Category = lItem.ListTypeItemId.ToString();
-                screen.CategoryName = lItem.ItemName;
-            }
+            //else if (screen.ScreenCode == "SRQRP" || screen.ScreenCode == "SRCMR" || screen.ScreenCode == "PDQRQ" || screen.ScreenCode == "SRCRR")
+            //{
+            //    lItem = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "PRGRP" && x.ItemCode == "REPTS");
+            //    screen.Category = lItem.ListTypeItemId.ToString();
+            //    screen.CategoryName = lItem.ItemName;
+            //}
 
             return screen;
         }
