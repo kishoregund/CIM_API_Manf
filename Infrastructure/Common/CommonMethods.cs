@@ -72,6 +72,7 @@ namespace Infrastructure.Common
         }
         public List<ScreenPermissions> GetFormatRoleClaimsToScreenPermissions(List<string> roleClaims)
         {
+            string[] ignoreScreens = ["BASE", "USERS"];
             List<ScreenPermissions> ScreenPermissions = new();
             ScreenPermissions screenPermission = new();
             string screenName = string.Empty;
@@ -80,11 +81,12 @@ namespace Infrastructure.Common
             {
                 roleClaim = roleClaims[i];
                 string[] strPerm = roleClaim.Split('.');
-                if (strPerm[1].ToUpper() != "BASE")
+                if (!ignoreScreens.Contains(strPerm[1].ToUpper()))
+                //if (strPerm[1].ToUpper() != "BASE")
                 {
                     if (screenName == "" || screenName == strPerm[1])
                     {
-                        screenName = strPerm[1];                       
+                        screenName = strPerm[1];
                         screenPermission.ScreenName = screenName.Replace("_", " ");
                         if (ScreenPermissions.Any(x => x.ScreenName == screenPermission.ScreenName))
                         {
@@ -117,33 +119,37 @@ namespace Infrastructure.Common
                             screenPermission.Privilages = strPerm[2];//  context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId == Guid.Parse(strPerm[2])).ItemName;
                                                                      //screenPermission.Privilages = strPerm[2];
                         }
-                        if (i == roleClaims.Count - 1)
+                        //if (i == roleClaims.Count - 1)
+                        //{
+                        if (!ScreenPermissions.Any(x => x.ScreenName == screenPermission.ScreenName))
                         {
-                            if (!ScreenPermissions.Any(x => x.ScreenName == screenPermission.ScreenName))
+                            var listItem = context.VW_ListItems.FirstOrDefault(x => x.ItemName == screenPermission.ScreenName && x.ListCode == "SCRNS");
+                            if (listItem != null)
                             {
-                                var listItem = context.VW_ListItems.FirstOrDefault(x => x.ItemName == screenPermission.ScreenName && x.ListCode == "SCRNS");
-                                if (listItem != null)
-                                {
-                                    screenPermission.ScreenId = listItem.ListTypeItemId.ToString();
-                                    screenPermission.ScreenCode = listItem.ItemCode;
-                                    screenPermission.ScreenName = listItem.ItemName;
+                                screenPermission.ScreenId = listItem.ListTypeItemId.ToString();
+                                screenPermission.ScreenCode = listItem.ItemCode;
+                                screenPermission.ScreenName = listItem.ItemName;
 
-                                    ScreenPermissions.Add(getCategory(screenPermission));
+                                var permission = getCategory(screenPermission);
+                                if (permission != null)
+                                {
+                                    ScreenPermissions.Add(permission);
                                 }
                             }
                         }
+                        //}
                     }
                     else
                     {
-                        var listItem = context.VW_ListItems.FirstOrDefault(x => x.ItemName == screenPermission.ScreenName && x.ListCode == "SCRNS");
-                        if (listItem != null)
-                        {
-                            screenPermission.ScreenId = listItem.ListTypeItemId.ToString();
-                            screenPermission.ScreenCode = listItem.ItemCode;
-                            screenPermission.ScreenName = listItem.ItemName;
+                        //var listItem = context.VW_ListItems.FirstOrDefault(x => x.ItemName == screenPermission.ScreenName && x.ListCode == "SCRNS");
+                        //if (listItem != null)
+                        //{
+                        //    screenPermission.ScreenId = listItem.ListTypeItemId.ToString();
+                        //    screenPermission.ScreenCode = listItem.ItemCode;
+                        //    screenPermission.ScreenName = listItem.ItemName;
 
-                            ScreenPermissions.Add(getCategory(screenPermission));
-                        }
+                        //    ScreenPermissions.Add(getCategory(screenPermission));
+                        //}
                         screenPermission = new();
                         screenName = strPerm[1];
                         i--;
@@ -184,7 +190,10 @@ namespace Infrastructure.Common
                 screen.Category = lItem.ListTypeItemId.ToString();
                 screen.CategoryName = lItem.ItemName;
             }
-
+            else
+            {
+                screen = null;
+            }
             //else if (screen.ScreenCode == "SRQRP" || screen.ScreenCode == "SRCMR" || screen.ScreenCode == "PDQRQ" || screen.ScreenCode == "SRCRR")
             //{
             //    lItem = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "PRGRP" && x.ItemCode == "REPTS");
@@ -219,10 +228,10 @@ namespace Infrastructure.Common
                     p.RoleId = Guid.Parse(context.Roles.FirstOrDefault(x => x.Name.ToUpper().Trim() == "MANUFACTURER").Id);
                     p.SegmentId = context.VW_ListItems.FirstOrDefault(x => x.ListName.ToUpper() == "SEGMENTS" && x.ItemCode.ToUpper() == "RMANF").ListTypeItemId;
                     p.DistRegions = null;
-                    p.CustSites = null;  
+                    p.CustSites = null;
                     p.ManfSalesRegions = userContact.ChildId.ToString();
                     p.ManfBUIds = context.ManfBusinessUnit.Any() ? context.ManfBusinessUnit.FirstOrDefault().Id.ToString() : null;
-                    
+
                     break;
                 case "DR":
                     userContact = GetDistUserByContact(userRequest.ContactId);
@@ -326,7 +335,7 @@ namespace Infrastructure.Common
 
             return regions;
         }
-       
+
         public UserByContactResponse GetCustUserByContact(Guid contactId)
         {
             var regions = (from sc in context.SiteContact
@@ -608,7 +617,7 @@ namespace Infrastructure.Common
                 message.Subject = subject;
                 message.IsBodyHtml = true;
                 //message.Priority = MailPriority.High;
-                
+
                 message.Body = emailBody;
                 #endregion
 

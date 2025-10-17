@@ -22,8 +22,8 @@ using System.Security;
 namespace Infrastructure.Identity
 {
     public class RoleService(
-        RoleManager<ApplicationRole> roleManager, 
-        UserManager<ApplicationUser> userManager, 
+        RoleManager<ApplicationRole> roleManager,
+        UserManager<ApplicationUser> userManager,
         ApplicationDbContext context, ICurrentUserService currentUserService,
         IMultiTenantContextAccessor<CIMTenantInfo> tenantInfoContextAccessor, IConfiguration configuration) : IRoleService
     {
@@ -43,7 +43,7 @@ namespace Infrastructure.Identity
                 throw new IdentityException("Failed to create a role.", GetIdentityResultErrorDescriptions(result));
             }
             var roleId = await roleManager.GetRoleIdAsync(newRole);
-            
+
             UpdateRolePermissionsRequest updateRolePermissionsRequest = new();
             updateRolePermissionsRequest.RoleId = roleId;
             updateRolePermissionsRequest.Permissions = commonMethods.GetFormatScreenPermissionsToRoleClaims(request.Permissions);
@@ -117,7 +117,7 @@ namespace Infrastructure.Identity
             role.Permissions = await context.RoleClaims
                 .Where(rc => rc.RoleId == id && rc.ClaimType == ClaimConstants.Permission)
                 .Select(rc => rc.ClaimValue)
-                .ToListAsync(ct);         
+                .ToListAsync(ct);
 
             return role;
         }
@@ -132,7 +132,7 @@ namespace Infrastructure.Identity
 
             return Permissions;
         }
-        
+
 
         public async Task<List<RoleDto>> GetRolesAsync(CancellationToken ct)
         {
@@ -254,7 +254,11 @@ namespace Infrastructure.Identity
                 screenPermission.ScreenCode = listItem.ItemCode;
                 screenPermission.ScreenName = listItem.ItemName;
 
-                screenPermissions.Add(commonMethods.getCategory(screenPermission));
+                var perm = commonMethods.getCategory(screenPermission);
+                if (perm != null)
+                {
+                    screenPermissions.Add(perm);
+                }
             }
             return screenPermissions;
         }
@@ -268,6 +272,6 @@ namespace Infrastructure.Identity
             }
 
             return errorDescriptions;
-        }        
+        }
     }
 }
