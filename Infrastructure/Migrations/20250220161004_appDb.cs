@@ -2064,7 +2064,6 @@ namespace Infrastructure.Migrations
             ");
 
 
-
             /// temporal tables
             /// 
             //migrationBuilder.Sql(@"ALTER TABLE Masters.ListTypeItems ADD  ValidFrom DATETIME2 GENERATED ALWAYS AS ROW START NOT NULL,
