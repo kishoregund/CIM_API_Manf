@@ -875,6 +875,20 @@
 		"isescalationsupervisor": 0
 	},
 	{
+		"id": "058C8D43-4AD0-49F2-B46D-8416146CF3C5",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "ENGDH",
+		"itemname": "Engineer Dashboard",
+		"isescalationsupervisor": 0
+	},
+	{
+		"id": "29EFD880-B074-4188-B756-3C2933A5C9C5",
+		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
+		"code": "MANDH",
+		"itemname": "Manufacturer Dashboard",
+		"isescalationsupervisor": 0
+	},
+	{
 		"id": "8a48266c-134f-11ed-ba7d-0a91af0598e6",
 		"listtypeid": "f0d7fc0a-739a-11eb-adfc-0a91af0598e6",
 		"code": "AUDIT",

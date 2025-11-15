@@ -21,7 +21,7 @@ namespace Application.Features.Instruments.Commands
             request.InstrumentRequest.Spares.ForEach(x => x.InstrumentId = InstrumentId);
 
             var newInstrumentSpares = request.InstrumentRequest.Spares.Adapt<List<InstrumentSpares>>();
-            var spares =  instrumentSparesService.CreateInstrumentSparesAsync(newInstrumentSpares);
+            var spares =  await instrumentSparesService.CreateInstrumentSparesAsync(newInstrumentSpares);
 
 
             return await ResponseWrapper<Guid>.SuccessAsync(data: InstrumentId, message: "Record saved successfully.");

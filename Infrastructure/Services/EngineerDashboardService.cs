@@ -45,13 +45,13 @@ namespace Infrastructure.Services
                 //var bus = commonMethods.GetBusinessUnitList(userId, bUId);
                 //var brands = commonMethods.GetBrandList(userId, brandId);
 
-                var bus = userProfile.BusinessUnitIds.Split(',');
-                var brands = userProfile.BrandIds.Split(',');
+                //var bus = userProfile.BusinessUnitIds.Split(',');
+                //var brands = userProfile.BrandIds.Split(',');
 
                 var engSerReq = await (from s in context.ServiceRequest
                                        join rc in context.RegionContact on s.AssignedTo equals rc.Id
                                        join li in context.VW_ListItems on s.VisitType equals li.ListTypeItemId.ToString()
-                                       join i in context.Instrument.Where(x => bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()))
+                                       join i in context.Instrument//.Where(x => bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()))
                                        on s.MachinesNo equals i.Id.ToString()
                                        where s.AssignedTo == userProfile.ContactId
                                        select new EngServiceRequestResponse()
@@ -111,18 +111,18 @@ namespace Infrastructure.Services
                 //var bus = commonMethods.GetBusinessUnitList(userId, bUId);
                 //var brands = commonMethods.GetBrandList(userId, brandId);
 
-                var bus = userProfile.BusinessUnitIds.Split(',');
-                var brands = userProfile.BrandIds.Split(',');
+                //var bus = userProfile.BusinessUnitIds.Split(',');
+                //var brands = userProfile.BrandIds.Split(',');
 
-                var spr = context.VW_SparesRecommended.Where(x => !x.IsDeleted && bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()));
+                var spr = context.VW_SparesRecommended.Where(x => !x.IsDeleted && x.AssignedToId == userProfile.ContactId).ToList();// && bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()));
                 //var privilage = _context.Vw_Privilages.FirstOrDefault(x => x.UserId == userId && x.ScreenCode == "SPRCM" && x.UserName != "admin");
                 //if (privilage != null && privilage.PrivilageCode != "PARTS" && (privilage._create || privilage._read || privilage._update || privilage._delete))
                 //    spr = spr.Where(x => x.Createdby == userId);
 
 
-                var serReq = spr.Where(x => x.AssignedToId == userProfile.ContactId).ToList();
+                //var serReq = spr.Where(x => x.AssignedToId == userProfile.ContactId).ToList();
 
-                foreach (var item in serReq)
+                foreach (var item in spr)
                 {
                     if (GetDateDiff(item.CreatedOn, DateTime.Now, date)) lstSerReq.Add(item);
                 }
@@ -153,13 +153,13 @@ namespace Infrastructure.Services
                 //var bus = commonMethods.GetBusinessUnitList(userId, bUId);
                 //var brands = commonMethods.GetBrandList(userId, brandId);
 
-                var bus = userProfile.BusinessUnitIds.Split(',');
-                var brands = userProfile.BrandIds.Split(',');
+                //var bus = userProfile.BusinessUnitIds.Split(',');
+                //var brands = userProfile.BrandIds.Split(',');
 
                 var spConsumed = (from sc in context.SPConsumed
                                   join srp in context.ServiceReport on sc.ServiceReportId equals srp.Id
                                   join sr in context.ServiceRequest on srp.ServiceRequestId equals sr.Id
-                                  join i in context.Instrument.Where(x => bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()))
+                                  join i in context.Instrument//.Where(x => bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()))
                                   on sr.MachinesNo equals i.Id.ToString()
                                   where sr.AssignedTo == userProfile.ContactId
                                   select new SparesConsumedResponse()

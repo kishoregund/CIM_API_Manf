@@ -28,7 +28,7 @@ namespace Infrastructure.Identity.Constants
         public const string Spare_Part = nameof(Spare_Part);
         public const string BusinessUnit = nameof(BusinessUnit);
         public const string ManfBusinessUnit = nameof(ManfBusinessUnit);
-        public const string InstrumentAllocation = nameof(InstrumentAllocation);
+        public const string Instrument_Allocation = nameof(Instrument_Allocation);
         public const string Brand = nameof(Brand);
         public const string User_Profile = nameof(User_Profile);
         public const string Customer = nameof(Customer);
@@ -134,10 +134,10 @@ namespace Infrastructure.Identity.Constants
             new CimPermission("Update Brand", CimAction.Update, CimFeature.Brand),
             new CimPermission("Delete Brand", CimAction.Delete, CimFeature.Brand),
 
-            new CimPermission("View InstrumentAllocation", CimAction.View, CimFeature.InstrumentAllocation),
-            new CimPermission("Create InstrumentAllocation", CimAction.Create, CimFeature.InstrumentAllocation),
-            new CimPermission("Update InstrumentAllocation", CimAction.Update, CimFeature.InstrumentAllocation),
-            new CimPermission("Delete InstrumentAllocation", CimAction.Delete, CimFeature.InstrumentAllocation),
+            new CimPermission("View InstrumentAllocation", CimAction.View, CimFeature.Instrument_Allocation),
+            new CimPermission("Create InstrumentAllocation", CimAction.Create, CimFeature.Instrument_Allocation),
+            new CimPermission("Update InstrumentAllocation", CimAction.Update, CimFeature.Instrument_Allocation),
+            new CimPermission("Delete InstrumentAllocation", CimAction.Delete, CimFeature.Instrument_Allocation),
 
             new CimPermission("View Customer", CimAction.View, CimFeature.Customer),
             new CimPermission("Create Customer", CimAction.Create, CimFeature.Customer),

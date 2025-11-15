@@ -175,7 +175,7 @@ namespace Infrastructure.Common
                 screen.CategoryName = lItem.ItemName;
             }
 
-            else if (screen.ScreenCode == "PSRRP" || screen.ScreenCode == "CUSDH" || screen.ScreenCode == "DHSET" || screen.ScreenCode == "DISDH") //|| screen.ScreenCode == "SIMXP" || screen.ScreenCode == "SSRCH" || screen.ScreenCode == "AUDIT" 
+            else if (screen.ScreenCode == "PSRRP" || screen.ScreenCode == "CUSDH" || screen.ScreenCode == "DHSET" || screen.ScreenCode == "DISDH" || screen.ScreenCode == "ENGDH" || screen.ScreenCode == "MANDH") //|| screen.ScreenCode == "SIMXP" || screen.ScreenCode == "SSRCH" || screen.ScreenCode == "AUDIT" 
             {
                 lItem = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "PRGRP" && x.ItemCode == "UTILS");
                 screen.Category = lItem.ListTypeItemId.ToString();

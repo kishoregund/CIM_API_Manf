@@ -34,15 +34,15 @@ namespace Application.Features.Distributors.Validators
             RuleFor(x => x).Must(x => !distributorService.IsDuplicateAsync(x.DistributorRequest.DistName).Result)
                 .WithMessage("Distributor already exists.");
 
+            RuleFor(x => x.DistributorRequest.ManfBusinessUnitId)
+                .NotEmpty()
+                .WithMessage("Manufacturer Business Unit is required.")
+                .When(x => distributorService.IsManfBURequired());
+
+            
             RuleFor(x => x).Must(x => distributorService.IsDistributorSubscribedAsync().Result)
               .WithMessage("You cannot create multiple Distributors.");
 
-            RuleFor(x => x.DistributorRequest.ManfBusinessUnitId)                
-                .Must(x => distributorService.IsManfBURequired())
-                .NotEmpty()
-                .WithMessage("Manufacturer Business Unit is required.");
-
-            
         }
 
     }

@@ -138,6 +138,10 @@ namespace Infrastructure.Identity
             {
                 throw new ConflictException("Business Unit and Brand does not exsits.");
             }
+            if (request.ContactType == "DR" && !context.Brand.Any())
+            {
+                throw new ConflictException("Brand does not exsits.");
+            }
             if (request.ContactType == "MSR" && !context.ManfBusinessUnit.Any())
             {
                 throw new ConflictException("Manufacturer BU's does not exsits.");

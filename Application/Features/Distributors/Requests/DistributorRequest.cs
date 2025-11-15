@@ -15,6 +15,7 @@
         public bool IsBlocked { get; set; }
         [SkipGlobalValidationAttribute]
         public string Code { get; set; }
+        [SkipGlobalValidationAttribute]
         public string ManufacturerIds { get; set; }
 
         #region Address

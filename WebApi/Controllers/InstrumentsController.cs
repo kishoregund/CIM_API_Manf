@@ -218,7 +218,7 @@ namespace WebApi.Controllers
 
         //// Instrument Allocation
         [HttpPost("InAlladd")]
-        [ShouldHavePermission(CimAction.Create, CimFeature.InstrumentAllocation)]
+        [ShouldHavePermission(CimAction.Create, CimFeature.Instrument_Allocation)]
         public async Task<IActionResult> CreateInstrumentAllocationAsync([FromBody] InstrumentAllocationRequest createInstrumentAllocation)
         {
             var response = await Sender.Send(new CreateInstrumentAllocationCommand { InstrumentAllocationRequest = createInstrumentAllocation });
@@ -230,7 +230,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("InAllupdate")]
-        [ShouldHavePermission(CimAction.Update, CimFeature.InstrumentAllocation)]
+        [ShouldHavePermission(CimAction.Update, CimFeature.Instrument_Allocation)]
         public async Task<IActionResult> UpdateInstrumentAllocationAsync([FromBody] InstrumentAllocationRequest updateInstrumentAllocation)
         {
             var response = await Sender.Send(new UpdateInstrumentAllocationCommand { InstrumentAllocationRequest = updateInstrumentAllocation });
@@ -243,7 +243,7 @@ namespace WebApi.Controllers
 
 
         [HttpDelete("InAlldelete/{InstrumentAllocationId}")]
-        [ShouldHavePermission(CimAction.Delete, CimFeature.InstrumentAllocation)]
+        [ShouldHavePermission(CimAction.Delete, CimFeature.Instrument_Allocation)]
         public async Task<IActionResult> DeleteInstrumentAllocationAsync(Guid InstrumentAllocationId)
         {
             var response = await Sender.Send(new DeleteInstrumentAllocationCommand { InstrumentAllocationId = InstrumentAllocationId });
@@ -255,7 +255,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("InAllby-id/{InstrumentAllocationId}")]
-        [ShouldHavePermission(CimAction.View, CimFeature.InstrumentAllocation)]
+        [ShouldHavePermission(CimAction.View, CimFeature.Instrument_Allocation)]
         public async Task<IActionResult> GetInstrumentAllocationByIdAsync(Guid InstrumentAllocationId)
         {
             var response = await Sender.Send(new GetInstrumentAllocationByIdQuery { InstrumentAllocationId = InstrumentAllocationId });
@@ -267,7 +267,7 @@ namespace WebApi.Controllers
         }
         
         [HttpGet("InAllby-insid/{InstrumentId}")]
-        [ShouldHavePermission(CimAction.View, CimFeature.InstrumentAllocation)]
+        [ShouldHavePermission(CimAction.View, CimFeature.Instrument_Allocation)]
         public async Task<IActionResult> GetInstrumentAllocationByInsIdAsync(Guid InstrumentId)
         {
             var response = await Sender.Send(new GetInstrumentAllocationByInsIdQuery { InstrumentId = InstrumentId });
@@ -279,7 +279,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("InAllall")]
-        [ShouldHavePermission(CimAction.View, CimFeature.InstrumentAllocation)]
+        [ShouldHavePermission(CimAction.View, CimFeature.Instrument_Allocation)]
         public async Task<IActionResult> GetInstrumentAllocationsAsync()
         {
             var response = await Sender.Send(new GetInstrumentAllocationQuery());
