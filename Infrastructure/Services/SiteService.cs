@@ -27,7 +27,7 @@ namespace Infrastructure.Services
                 var regions = userProfile.DistRegions.Split(',');
                 return await (from c in Context.Customer.Where(x => x.DefDistId == userProfile.EntityParentId)
                               join s in Context.Site on c.Id equals s.CustomerId
-                              where regions.Contains(s.RegionId.ToString())
+                              where regions.Contains(s.RegionId.ToString()) && s.CustomerId == customerId
                               select s).Distinct().ToListAsync();
             }
             else
