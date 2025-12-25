@@ -51,7 +51,7 @@ namespace Infrastructure.Services
                                     IsDeleted = i.IsDeleted,
                                     ManufId = i.ManufId,
                                     ManufName = m.ManfName,
-                                    SerialNos = i.SerialNos,
+                                    SerialNos = it.ItemName + " - " + i.SerialNos,
                                     CreatedBy = i.CreatedBy,
                                     CreatedOn = i.CreatedOn
                                 }).FirstOrDefaultAsync();
