@@ -22,6 +22,9 @@ namespace Infrastructure.Services
         public async Task<List<Site>> GetSitesbyUserIdAsync(Guid customerId)
         {            
             var userProfile = Context.VW_UserProfile.FirstOrDefault(x => x.UserId == Guid.Parse(currentUserService.GetUserId()));
+            if (userProfile == null)
+                return null;
+
             if (userProfile.ContactType == "DR")
             {
                 var regions = userProfile.DistRegions.Split(',');

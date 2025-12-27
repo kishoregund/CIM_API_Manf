@@ -7,6 +7,7 @@ using Infrastructure.Common;
 using Infrastructure.Identity;
 using Infrastructure.Persistence.Contexts;
 using Mapster;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -266,17 +267,14 @@ namespace Infrastructure.Services
             await context.SaveChangesAsync();
             return OfferRequest.Id;
         }
-
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<List<SparepartsOfferRequestResponse>> GetSparepartsByInstrumentPartNoAsync(string instrumentIds, string partNo)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var sps = new List<Sparepart>();
 
-            var sp = context.Spareparts.Where(x => !x.IsDeleted);
+            var sp = await context.Spareparts.Where(x => !x.IsDeleted).ToListAsync();
 
-            var listInstrument = instrumentIds.Split(",");
-            var lstSpares = context.InstrumentSpares.Where(x => listInstrument.Contains(x.InstrumentId.ToString())).ToList();
+            var listInstrument = instrumentIds.ToUpper().Split(",");
+            var lstSpares = await context.InstrumentSpares.Where(x => listInstrument.Contains(x.InstrumentId.ToString().ToUpper())).ToListAsync();
 
             foreach (var ins in lstSpares.Select(item => sp
                          .Where(x => x.PartNo.ToLower().StartsWith(partNo.ToLower()) && x.Id == item.SparepartId)
@@ -300,7 +298,7 @@ namespace Infrastructure.Services
                 DiscountPercentage = 0,
                 AfterDiscount = 0,
                 Amount = 0,
-                ItemDescription = context.Spareparts.FirstOrDefault(x => x.Id == sparePartsOfferRequest.Id)?.ItemDesc,
+                ItemDescription = sparePartsOfferRequest.ItemDesc,// context.Spareparts.FirstOrDefault(x => x.Id == sparePartsOfferRequest.Id)?.ItemDesc,
                 Currency = context.Currency.FirstOrDefault(x => x.Id == sparePartsOfferRequest.CurrencyId)?.Code,
             };
             return mSparePartsOfferRequest;
