@@ -1988,7 +1988,7 @@ namespace Infrastructure.Migrations
             ALTER TABLE Transactions.CustSPInventory ADD CONSTRAINT [FK_CustInven_Customer_CustId] FOREIGN KEY (CustomerId) REFERENCES Masters.Customer([Id]) ON DELETE NO ACTION; 
             ALTER TABLE Transactions.CustSPInventory ADD CONSTRAINT [FK_CustInven_Spare_SpareId] FOREIGN KEY (SparePartId) REFERENCES Masters.Sparepart([Id]) ON DELETE NO ACTION; 
             ALTER TABLE Transactions.CustSPInventory ADD CONSTRAINT [FK_CustInven_Site_SiteId] FOREIGN KEY (SiteId) REFERENCES Masters.Site([Id]) ON DELETE NO ACTION; 
-            ALTER TABLE Transactions.CustSPInventory ADD CONSTRAINT [FK_CustInven_Instr_InstrumentId] FOREIGN KEY (InstrumentId) REFERENCES Masters.Instrument([Id]) ON DELETE NO ACTION; 
+            -- ALTER TABLE Transactions.CustSPInventory ADD CONSTRAINT [FK_CustInven_Instr_InstrumentId] FOREIGN KEY (InstrumentId) REFERENCES Masters.Instrument([Id]) ON DELETE NO ACTION; 
 
             ALTER TABLE Transactions.EngScheduler ADD CONSTRAINT [FK_EngSch_SerReq_SerReqId] FOREIGN KEY (SerReqId) REFERENCES Transactions.ServiceRequest([Id]) ON DELETE NO ACTION; 
             ALTER TABLE [Transactions].[EngScheduler]  WITH CHECK ADD  CONSTRAINT [FK_EngSch_EngAction_ActionId] FOREIGN KEY ([ActionId]) REFERENCES [Transactions].SREngAction ([Id])
