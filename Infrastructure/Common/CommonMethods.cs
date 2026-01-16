@@ -598,7 +598,7 @@ namespace Infrastructure.Common
         }
 
 
-        public bool SendEmailMethod(string email, string emailBody, string subject)
+        public bool SendEmailMethod(string emails, string emailBody, string subject)
         {
             try
             {
@@ -606,7 +606,9 @@ namespace Infrastructure.Common
                 var message = new MailMessage();
 
                 #region set To,Cc abd Bcc
-                message.To.Add(new MailAddress(email));
+                string[] recipients = emails.Split(',');
+                foreach (string email in recipients) { message.To.Add(new MailAddress(email)); }
+
                 message.CC.Add(new MailAddress("kishoregund@gmail.com"));
                 //message.Bcc.Add(new MailAddress(arrStr.Trim()));
                 //message.ReplyToList.Add(new MailAddress(arrStr.Trim(), "reply-to"));

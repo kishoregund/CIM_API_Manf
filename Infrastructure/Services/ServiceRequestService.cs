@@ -261,7 +261,7 @@ namespace Infrastructure.Services
             await context.ServiceRequest.AddAsync(serviceRequest);
             await context.SaveChangesAsync();
 
-            var regionId = context.Site.FirstOrDefault(x => x.Id == serviceRequest.SiteId)?.DistId;
+            var regionId = context.Site.FirstOrDefault(x => x.Id == serviceRequest.SiteId)?.RegionId;
             var lstEmails = (from users in context.VW_UserProfile.Where(x => x.SegmentCode == "RDTSP" && x.EntityChildId == regionId)
                              select users.Email).ToList();
             
@@ -294,6 +294,7 @@ namespace Infrastructure.Services
             //}
 
             #region Notification
+
 
             //var userProfile = _context.VW_UserProfiles.FirstOrDefault(x => x.Userid == mServiceRequest.Createdby);
             //var userRole = _context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId == userProfile.Roleid);

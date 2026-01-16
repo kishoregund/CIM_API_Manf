@@ -161,6 +161,7 @@ namespace Infrastructure.Services
                                         join ci in Context.CustomerInstrument on i.Id equals ci.InstrumentId
                                         join m in Context.Manufacturer on i.ManufId equals m.Id
                                         join it in Context.ListTypeItems on i.InsType equals it.Id.ToString()
+                                        where ci.CustSiteId == siteId
                                         select new InstrumentResponse
                                         {
                                             Id = i.Id,
