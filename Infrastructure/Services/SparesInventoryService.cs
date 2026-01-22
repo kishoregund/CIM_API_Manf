@@ -93,7 +93,8 @@ namespace Infrastructure.Services
 
             if (userProfile.ContactType == "CS")
             {
-                var custSPIn = (from spi in custSPInventory
+                
+                var custSPIn = (from spi in custSPInventory.Where(x => userProfile.CustSites.Contains(x.SiteId.ToString()))
                                 join site in Context.Site on spi.SiteId equals site.Id
                                 select new { spi, site })
                     .Where(x => x.spi.IsDeleted == false
