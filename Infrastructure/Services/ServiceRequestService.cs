@@ -197,6 +197,7 @@ namespace Infrastructure.Services
         public async Task<Guid> CreateServiceRequestAsync(Domain.Entities.ServiceRequest serviceRequest)
         {
             serviceRequest.SerReqNo = await GetServiceRequestNoAsync();
+            serviceRequest.SerReqDate = Convert.ToDateTime(serviceRequest.SerReqDate).ToString("dd/MM/yyyy");
             serviceRequest.AlarmDetails = string.IsNullOrEmpty(serviceRequest.AlarmDetails) ? "Breakdown" : serviceRequest.AlarmDetails;
             serviceRequest.BreakdownType = string.IsNullOrEmpty(serviceRequest.BreakdownType) ? "Breakdown" : serviceRequest.BreakdownType;
             serviceRequest.BreakoccurDetailsId = serviceRequest.BreakoccurDetailsId == Guid.Empty ? context.VW_ListItems.

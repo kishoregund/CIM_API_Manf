@@ -20,7 +20,7 @@ namespace Application.Features.ServiceReports.Commands
             SRPEngWorkTimeInDb.StartTime = request.SRPEngWorkTimeRequest.StartTime;
             SRPEngWorkTimeInDb.TotalDays = request.SRPEngWorkTimeRequest.TotalDays;
             SRPEngWorkTimeInDb.TotalHrs = request.SRPEngWorkTimeRequest.TotalHrs;
-            SRPEngWorkTimeInDb.WorkTimeDate = request.SRPEngWorkTimeRequest.WorkTimeDate;
+            SRPEngWorkTimeInDb.WorkTimeDate = request.SRPEngWorkTimeRequest.WorkTimeDate.Date;
             SRPEngWorkTimeInDb.ServiceReportId = request.SRPEngWorkTimeRequest.ServiceReportId;
             SRPEngWorkTimeInDb.UpdatedBy = request.SRPEngWorkTimeRequest.UpdatedBy;
 
