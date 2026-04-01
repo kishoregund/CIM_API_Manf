@@ -8,6 +8,7 @@ using Application.Features.AMCS.Responses;
 using System.Globalization;
 using Application.Features.Dashboards.Responses;
 using System.Collections.Generic;
+using Mapster;
 
 namespace Infrastructure.Services
 {
@@ -52,69 +53,80 @@ namespace Infrastructure.Services
             List<AmcResponse> lstAMCs = new List<AmcResponse>();
             if (userProfile.ContactType == "DR")
             {
-                var regions = userProfile.DistRegions.Split(',');
-                lstAMCs=  await (from a in context.AMC
-                              join s in context.Site on a.CustSite equals s.Id
-                              where regions.Contains(s.RegionId.ToString())
-                              select new AmcResponse
-                              {
-                                  BaseCurrencyAmt = a.BaseCurrencyAmt,
-                                  BillTo = a.BillTo,
-                                  BrandId = a.BrandId,
-                                  ConversionAmount = a.ConversionAmount,
-                                  CurrencyId = a.CurrencyId,
-                                  CustSite = a.CustSite,
-                                  EDate = a.EDate,
-                                  FirstVisitDate = a.FirstVisitDate,
-                                  Id = a.Id,
-                                  IsActive = a.IsActive,
-                                  IsDeleted = a.IsDeleted,
-                                  IsMultipleBreakdown = a.IsMultipleBreakdown,
-                                  PaymentTerms = a.PaymentTerms,
-                                  Project = a.Project,
-                                  SDate = a.SDate,
-                                  SecondVisitDate = a.SecondVisitDate,
-                                  ServiceQuote = a.ServiceQuote,
-                                  ServiceType = a.ServiceType,
-                                  SqDate = a.SqDate,
-                                  TnC = a.TnC,
-                                  Zerorate = a.Zerorate,
-                                  CustSiteName = s.CustRegName,
-                                  Period = a.SDate + " - " + a.EDate
-                              }).ToListAsync();
+                //var regions = userProfile.DistRegions.Split(',');
+                var regions = userProfile.DistRegions
+                                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                    .Select(Guid.Parse)
+                                    .ToArray();
+
+                lstAMCs = await (from a in context.AMC
+                                 join s in context.Site on a.CustSite equals s.Id
+                                 where regions.Contains(s.RegionId)
+                                 select new AmcResponse
+                                 {
+                                     BaseCurrencyAmt = a.BaseCurrencyAmt,
+                                     BillTo = a.BillTo,
+                                     BrandId = a.BrandId,
+                                     ConversionAmount = a.ConversionAmount,
+                                     CurrencyId = a.CurrencyId,
+                                     CustSite = a.CustSite,
+                                     EDate = a.EDate,
+                                     FirstVisitDate = a.FirstVisitDate,
+                                     Id = a.Id,
+                                     IsActive = a.IsActive,
+                                     IsDeleted = a.IsDeleted,
+                                     IsMultipleBreakdown = a.IsMultipleBreakdown,
+                                     PaymentTerms = a.PaymentTerms,
+                                     Project = a.Project,
+                                     SDate = a.SDate,
+                                     SecondVisitDate = a.SecondVisitDate,
+                                     ServiceQuote = a.ServiceQuote,
+                                     ServiceType = a.ServiceType,
+                                     SqDate = a.SqDate,
+                                     TnC = a.TnC,
+                                     Zerorate = a.Zerorate,
+                                     CustSiteName = s.CustRegName,
+                                     Period = a.SDate + " - " + a.EDate
+                                 }).ToListAsync();
             }
             else if (userProfile.ContactType == "CS")
             {
-                var sites = userProfile.CustSites.Split(',');
-                lstAMCs=  await (from a in context.AMC
-                              join s in context.Site on a.CustSite equals s.Id
-                              where sites.Contains(s.Id.ToString())
-                              select new AmcResponse
-                              {
-                                  BaseCurrencyAmt = a.BaseCurrencyAmt,
-                                  BillTo = a.BillTo,
-                                  BrandId = a.BrandId,
-                                  ConversionAmount = a.ConversionAmount,
-                                  CurrencyId = a.CurrencyId,
-                                  CustSite = a.CustSite,
-                                  EDate = a.EDate,
-                                  FirstVisitDate = a.FirstVisitDate,
-                                  Id = a.Id,
-                                  IsActive = a.IsActive,
-                                  IsDeleted = a.IsDeleted,
-                                  IsMultipleBreakdown = a.IsMultipleBreakdown,
-                                  PaymentTerms = a.PaymentTerms,
-                                  Project = a.Project,
-                                  SDate = a.SDate,
-                                  SecondVisitDate = a.SecondVisitDate,
-                                  ServiceQuote = a.ServiceQuote,
-                                  ServiceType = a.ServiceType,
-                                  SqDate = a.SqDate,
-                                  TnC = a.TnC,
-                                  Zerorate = a.Zerorate,
-                                  CustSiteName = s.CustRegName,
-                                  Period = a.SDate + " - " + a.EDate
-                              }).ToListAsync();
+                //var sites = userProfile.CustSites.Split(',');
+                var sites = userProfile.CustSites
+                                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                .Select(Guid.Parse)
+                                .ToArray();
+
+
+                lstAMCs = await (from a in context.AMC
+                                 join s in context.Site on a.CustSite equals s.Id
+                                 where sites.Contains(s.Id)
+                                 select new AmcResponse
+                                 {
+                                     BaseCurrencyAmt = a.BaseCurrencyAmt,
+                                     BillTo = a.BillTo,
+                                     BrandId = a.BrandId,
+                                     ConversionAmount = a.ConversionAmount,
+                                     CurrencyId = a.CurrencyId,
+                                     CustSite = a.CustSite,
+                                     EDate = a.EDate,
+                                     FirstVisitDate = a.FirstVisitDate,
+                                     Id = a.Id,
+                                     IsActive = a.IsActive,
+                                     IsDeleted = a.IsDeleted,
+                                     IsMultipleBreakdown = a.IsMultipleBreakdown,
+                                     PaymentTerms = a.PaymentTerms,
+                                     Project = a.Project,
+                                     SDate = a.SDate,
+                                     SecondVisitDate = a.SecondVisitDate,
+                                     ServiceQuote = a.ServiceQuote,
+                                     ServiceType = a.ServiceType,
+                                     SqDate = a.SqDate,
+                                     TnC = a.TnC,
+                                     Zerorate = a.Zerorate,
+                                     CustSiteName = s.CustRegName,
+                                     Period = a.SDate + " - " + a.EDate
+                                 }).ToListAsync();
             }
             return lstAMCs;
         }

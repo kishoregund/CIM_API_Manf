@@ -67,7 +67,7 @@ namespace Infrastructure.Services
                 CustomerInstrumentService customerInstrumentService = new(context, currentUserService, configuration);
 
                 var instrument = customerInstrumentService.GetAssignedCustomerInstrumentsAsync(string.Empty, string.Empty).Result
-                    .FirstOrDefault(x=>x.InstrumentId.ToString() == id);
+                    .FirstOrDefault(x => x.InstrumentId.ToString() == id);
 
                 if (instrument != null)
                 {
@@ -181,10 +181,10 @@ namespace Infrastructure.Services
 
                     //result.Result = true;
                     //result.Object = insOwner;
-                   
+
                 }
-                
-                
+
+
             }
             catch (Exception ex)
             {
@@ -216,7 +216,7 @@ namespace Infrastructure.Services
             //    offerRequestProcess = offerRequestProcess.Where(x => x.CreatedBy == userId);
             //}
 
-            var payRecStage = context.VW_ListItems.FirstOrDefault(y => y.ItemCode == "PYRCT" && y.ListCode == "OFRQP");
+            //var payRecStage = context.VW_ListItems.FirstOrDefault(y => y.ItemCode == "PYRCT" && y.ListCode == "OFRQP");
 
             decimal poCost = 0;
 
@@ -238,40 +238,40 @@ namespace Infrastructure.Services
                 dashboardDateModel.CreatedOn = item.CreatedOn;
                 if (commonMethods.GetDateDiff(dashboardDateModel))
                 {
-                        amcCost += item.Zerorate * item.BaseCurrencyAmt;
-                    //else othrCost += item.Zerorate * item.BaseCurrencyAmt;
+                    amcCost += item.Zerorate * item.BaseCurrencyAmt;
                 }
             }
 
             var lstSites = await commonMethods.GetSitesByUserIdAsync();
-            var serviceRequests = (from sr in context.ServiceRequest.Where(x => lstSites.Contains(x.SiteId.ToString())).ToList()
-                                   join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
-                                   select sr).ToList().Adapt<List<ServiceRequestResponse>>();
+            othrCost = (from sr in context.ServiceRequest
+                        where lstSites.Contains(sr.SiteId.ToString())
+                        join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
+                        select sr.TotalCost ?? 0)   // select the numeric value, default to 0 if null
+                                    .Sum();
 
 
+            //foreach (ServiceRequestResponse sr in serviceRequests)
+            //{
+            //    var visitType = context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId == Guid.Parse(sr.VisitType)).ItemCode;
+            //    switch (visitType)
+            //    {
+            //        case "PREV":
+            //            othrCost += sr.TotalCost != null ? sr.TotalCost : 0;
+            //            break;
 
-            foreach (ServiceRequestResponse sr in serviceRequests)
-            {
-                var visitType = context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId == Guid.Parse(sr.VisitType)).ItemCode;
-                switch (visitType)
-                {
-                    case "PREV":
-                        othrCost += sr.TotalCost != null ? sr.TotalCost : 0;
-                        break;
+            //        case "BRKDW":
+            //            othrCost += sr.TotalCost != null ? sr.TotalCost : 0;
+            //            break;
 
-                    case "BRKDW":
-                        othrCost += sr.TotalCost != null ? sr.TotalCost : 0;
-                        break;
+            //        case "ONCAL":
+            //            othrCost += sr.TotalCost != null ? sr.TotalCost : 0;
+            //            break;
 
-                    case "ONCAL":
-                        othrCost += sr.TotalCost != null ? sr.TotalCost : 0;
-                        break;
-
-                    case "PLAN":
-                        othrCost += sr.TotalCost != null ? sr.TotalCost : 0;
-                        break;
-                }
-            }
+            //        case "PLAN":
+            //            othrCost += sr.TotalCost != null ? sr.TotalCost : 0;
+            //            break;
+            //    }
+            //}
 
 
             return new { othrCost, amcCost, poCost };
@@ -650,7 +650,7 @@ namespace Infrastructure.Services
             var userProfile = await context.VW_UserProfile.FirstOrDefaultAsync(x => x.UserId.ToString() == currentUserService.GetUserId());
             CustomerResponse customer = (await context.Customer.FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == userProfile.EntityParentId)).Adapt<CustomerResponse>();
             var sites = userProfile.CustSites.Split(',');
-            customer.Sites = (await context.Site.Where(x => x.CustomerId == customer.Id && sites.Contains(x.Id.ToString()) ).ToListAsync()).Adapt<List<SiteResponse>>();
+            customer.Sites = (await context.Site.Where(x => x.CustomerId == customer.Id && sites.Contains(x.Id.ToString())).ToListAsync()).Adapt<List<SiteResponse>>();
             foreach (SiteResponse site in customer.Sites)
             {
                 site.SiteContacts = await context.SiteContact.Where(x => x.SiteId == site.Id).ToListAsync();
@@ -673,7 +673,7 @@ namespace Infrastructure.Services
 
             //return result;
         }
-        
+
         /*
         private CustomerModel GetCustomer(string id, string rFor, string userId)
         {
@@ -789,7 +789,7 @@ namespace Infrastructure.Services
         public async Task<List<OfferRequestResponse>> GetAllOfferrequestAsync()
         {
             OfferRequestService offerRequestService = new OfferRequestService(context, currentUserService, configuration);
-            return await offerRequestService.GetOfferRequestsAsync();           
+            return await offerRequestService.GetOfferRequestsAsync();
         }
 
         /*

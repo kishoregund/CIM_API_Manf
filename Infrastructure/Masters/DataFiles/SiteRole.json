@@ -369,8 +369,8 @@
     "roleId": "6b3e93c7-65b9-48bb-8082-3aa8e9f6b52d",
     "screenid": "8a302575-134f-11ed-ba7d-0a91af0598e6", // user profile
     "create": 0,
-    "read": 1,
-    "update": 1,
+    "read": 0,
+    "update": 0,
     "delete": 0,
     "category": "892c16ee-134f-11ed-ba7d-0a91af0598e6",
     "commercial": 0,
@@ -403,11 +403,11 @@
     "updatedon": "2023-04-11 16:52:01",
     "isdeleted": 0,
     "roleId": "6b3e93c7-65b9-48bb-8082-3aa8e9f6b52d",
-    "screenid": "8a6b9da9-134f-11ed-ba7d-0a91af0598e6", // profile
-    "create": 1,
-    "read": 1,
-    "update": 1,
-    "delete": 1,
+    "screenid": "8a6b9da9-134f-11ed-ba7d-0a91af0598e6", // role
+    "create": 0,
+    "read": 0,
+    "update": 0,
+    "delete": 0,
     "category": "892c16ee-134f-11ed-ba7d-0a91af0598e6",
     "commercial": 0,
     "privilages": "e83c3c23-4f8b-11ed-9c75-0a91af0598e6",

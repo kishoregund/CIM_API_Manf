@@ -14,6 +14,7 @@ namespace Application.Models
         public string DBServerName { get; set; }
         public string DBUserId { get; set; }
         public string DBPassword { get; set; }
+        public string DistEmails { get; set; }
         public EmailSettings EmailSettings { get; set; }
 
     }

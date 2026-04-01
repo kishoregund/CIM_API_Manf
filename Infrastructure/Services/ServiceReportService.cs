@@ -18,6 +18,7 @@ using Application.Models;
 using System.Net.Mail;
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Infrastructure.Services
 {
@@ -236,8 +237,13 @@ namespace Infrastructure.Services
 
             #region set To,Cc abd Bcc
             message.To.Add(new MailAddress(serreq?.Email));
-            message.To.Add(new MailAddress(serreq?.OperatorEmail));
-            message.CC.Add(new MailAddress("kishoregund@gmail.com"));
+            message.To.Add(new MailAddress(serreq?.OperatorEmail));            
+            var demails = appSettings.DistEmails.Split(',');
+            foreach (string email in demails)
+            {
+                message.CC.Add(new MailAddress(email));
+            }
+
             //message.Bcc.Add(new MailAddress(arrStr.Trim()));
             //message.ReplyToList.Add(new MailAddress(arrStr.Trim(), "reply-to"));
             #endregion
