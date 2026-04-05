@@ -666,6 +666,8 @@ namespace Infrastructure.Common
             return isManfSubscribed;
         }
 
+        
+
         ///// not neeeded
         ///
         private string GetRegionContactDesignation(Guid contactId)

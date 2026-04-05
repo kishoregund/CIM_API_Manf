@@ -304,7 +304,7 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("file/{id}")]
-        public async Task<IActionResult> DeleteFile(string id)
+        public async Task<IActionResult> DeleteFile(Guid id)
         {
             var fileShare = await _context.FileShare.FindAsync(id);
             if (fileShare == null)

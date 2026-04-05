@@ -195,61 +195,54 @@ namespace Infrastructure.Services
 
         public async Task<object> GetCostDataAsync(DashboardDateRequest dashboardDateModel)
         {
-            //var result = new Message();
-
             var userProfile = await context.VW_UserProfile.FirstOrDefaultAsync(x => x.UserId.ToString() == currentUserService.GetUserId());
+            var permissions = context.RoleClaims.Where(x => x.RoleId == userProfile.RoleId.ToString()).ToList();
+            
+            
             var offerRequestService = new OfferRequestService(context, currentUserService, configuration);
             var commonMethods = new CommonMethods(context, currentUserService, configuration);
 
-            //var claimsIdentity = this.User.Identity as ClaimsIdentity;
-            //var userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-            //var bUId = claimsIdentity.FindFirst(ClaimTypes.Country)?.Value;
-            //var brandId = claimsIdentity.FindFirst(ClaimTypes.GivenName)?.Value;
-
             var lstOfferReq = offerRequestService.GetOfferRequestsAsync().Result;
 
-            //var privilage = context.Vw_Privilages.FirstOrDefault(x => x.UserId == userId && x.ScreenCode == "CUSDH" && x.UserName != "admin");
             var offerRequestProcess = context.OfferRequestProcess.Where(x => !x.IsDeleted);
 
-            //if (privilage != null && privilage.PrivilageCode != "PARTS" && (privilage._create || privilage._read || privilage._update || privilage._delete))
-            //{
-            //    offerRequestProcess = offerRequestProcess.Where(x => x.CreatedBy == userId);
-            //}
-
-            //var payRecStage = context.VW_ListItems.FirstOrDefault(y => y.ItemCode == "PYRCT" && y.ListCode == "OFRQP");
-
             decimal poCost = 0;
-
-            foreach (var item in lstOfferReq)
-            {
-                dashboardDateModel.CreatedOn = item.CreatedOn;
-                if (commonMethods.GetDateDiff(dashboardDateModel)) poCost += item.TotalAmt * item.BasePCurrencyAmt;
-            }
-
-            var aMCDL = new AmcService(context, currentUserService);
-            var lstAmc = await aMCDL.GetAllAsync();
-            var amcSTId = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "SERTY" && x.ItemCode == "AMC")?.ListTypeItemId;
-
             decimal? othrCost = 0;
             decimal? amcCost = 0;
 
-            foreach (var item in lstAmc)
+            if (permissions.Any(x => x.ClaimValue.ToUpper().Equals("PERMISSION.SPAREPART_QUOTATION.COMMERCIAL")))
             {
-                dashboardDateModel.CreatedOn = item.CreatedOn;
-                if (commonMethods.GetDateDiff(dashboardDateModel))
+                foreach (var item in lstOfferReq)
                 {
-                    amcCost += item.Zerorate * item.BaseCurrencyAmt;
+                    dashboardDateModel.CreatedOn = item.CreatedOn;
+                    if (commonMethods.GetDateDiff(dashboardDateModel)) poCost += item.TotalAmt * item.BasePCurrencyAmt;
                 }
             }
+            if (permissions.Any(x => x.ClaimValue.ToUpper().Equals("PERMISSION.AMC.COMMERCIAL")))
+            {
+                var aMCDL = new AmcService(context, currentUserService);
+                var lstAmc = await aMCDL.GetAllAsync();
+                //var amcSTId = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "SERTY" && x.ItemCode == "AMC")?.ListTypeItemId;
+                             
+                foreach (var item in lstAmc)
+                {
+                    dashboardDateModel.CreatedOn = item.CreatedOn;
+                    if (commonMethods.GetDateDiff(dashboardDateModel))
+                    {
+                        amcCost += item.Zerorate * item.BaseCurrencyAmt;
+                    }
+                }
+            }
+            if (permissions.Any(x => x.ClaimValue.ToUpper().Equals("PERMISSION.SERVICE_REQUEST.COMMERCIAL")))
+            {
+                var lstSites = await commonMethods.GetSitesByUserIdAsync();
+                othrCost = (from sr in context.ServiceRequest
+                            where lstSites.Contains(sr.SiteId.ToString())
+                            join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
+                            select sr.TotalCost ?? 0)   // select the numeric value, default to 0 if null
+                                        .Sum();
 
-            var lstSites = await commonMethods.GetSitesByUserIdAsync();
-            othrCost = (from sr in context.ServiceRequest
-                        where lstSites.Contains(sr.SiteId.ToString())
-                        join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
-                        select sr.TotalCost ?? 0)   // select the numeric value, default to 0 if null
-                                    .Sum();
-
-
+            }
             //foreach (ServiceRequestResponse sr in serviceRequests)
             //{
             //    var visitType = context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId == Guid.Parse(sr.VisitType)).ItemCode;

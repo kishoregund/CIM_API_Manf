@@ -49,7 +49,7 @@
 		"update": 1,
 		"delete": 0,
 		"category": "8925e586-134f-11ed-ba7d-0a91af0598e6",
-		"commercial": 0,
+		"commercial": 1,
 		"privilages": "e83c3c23-4f8b-11ed-9c75-0a91af0598e6",
 		"companyid": "fd395ac9-8bb8-4d9c-9b55-e21eec2fa6eb"
 	},
@@ -175,7 +175,7 @@
 		"update": 1,
 		"delete": 1,
 		"category": "8925e586-134f-11ed-ba7d-0a91af0598e6",
-		"commercial": 0,
+		"commercial": 1,
 		"privilages": "e83c3c23-4f8b-11ed-9c75-0a91af0598e6",
 		"companyid": "fd395ac9-8bb8-4d9c-9b55-e21eec2fa6eb"
 	},
