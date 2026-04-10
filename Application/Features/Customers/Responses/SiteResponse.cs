@@ -21,6 +21,7 @@
         public string Place { get; set; }
         public string City { get; set; }
         public Guid CountryId { get; set; }
+        public string CountryName { get; set; }
         public string Zip { get; set; }
         public string GeoLat { get; set; }
         public string GeoLong { get; set; }

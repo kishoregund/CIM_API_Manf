@@ -1,4 +1,5 @@
 ﻿using Application.Features.Customers.Responses;
+using Application.Features.Masters;
 
 namespace Application.Features.Customers.Queries
 {
@@ -7,11 +8,12 @@ namespace Application.Features.Customers.Queries
         public Guid SiteId { get; set; }
     }
 
-    public class GetSiteByIdQueryHandler(ISiteService SiteService, ISiteContactService siteContactService) : IRequestHandler<GetSiteByIdQuery, IResponseWrapper>
+    public class GetSiteByIdQueryHandler(ISiteService SiteService, ISiteContactService siteContactService, ICountryService countryService) : IRequestHandler<GetSiteByIdQuery, IResponseWrapper>
     {
         public async Task<IResponseWrapper> Handle(GetSiteByIdQuery request, CancellationToken cancellationToken)
         {
             var SiteInDb = (await SiteService.GetSiteAsync(request.SiteId)).Adapt<SiteResponse>();
+            SiteInDb.CountryName = countryService.GetCountryAsync(SiteInDb.CountryId).Result.Name;
             SiteInDb.SiteContacts = await siteContactService.GetSiteContactsAsync(request.SiteId);
 
             if (SiteInDb is not null)
