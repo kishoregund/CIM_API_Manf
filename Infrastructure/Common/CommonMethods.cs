@@ -641,14 +641,16 @@ namespace Infrastructure.Common
                     client.UseDefaultCredentials = true;
                 #endregion
 
+                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
                 client.Send(message);
                 message.Dispose();
-                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
 
                 return true;
             }
             catch (Exception ex)
             {
+                // TODO: replace with proper logger injection
+                System.Diagnostics.Debug.WriteLine($"[SendEmailMethod] SMTP error: {ex.Message} | Inner: {ex.InnerException?.Message}");
                 return false;
             }
         }
