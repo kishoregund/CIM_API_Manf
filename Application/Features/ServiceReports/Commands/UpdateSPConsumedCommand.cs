@@ -24,6 +24,7 @@ namespace Application.Features.ServiceReports.Commands
             SPConsumedInDb.PartNo = request.SPConsumedRequest.PartNo;
             SPConsumedInDb.QtyAvailable = request.SPConsumedRequest.QtyAvailable;
             SPConsumedInDb.QtyConsumed = request.SPConsumedRequest.QtyConsumed;
+            SPConsumedInDb.ItemDesc = request.SPConsumedRequest.ItemDesc;
             SPConsumedInDb.ServiceReportId = request.SPConsumedRequest.ServiceReportId;
             SPConsumedInDb.UpdatedBy = request.SPConsumedRequest.UpdatedBy;
 

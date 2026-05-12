@@ -538,55 +538,53 @@ namespace Infrastructure.Common
 
         private bool SendEmail(CreateUserRequest usr, string BU, string brand)
         {
-#pragma warning disable CS0168 // Variable is declared but never used
             try
             {
                 var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
-                var message = new MailMessage();
 
-                #region set To,Cc abd Bcc
-                message.To.Add(new MailAddress(usr.Email));
-                message.CC.Add(new MailAddress("kishoregund@gmail.com"));
-                //message.Bcc.Add(new MailAddress(arrStr.Trim()));
-                //message.ReplyToList.Add(new MailAddress(arrStr.Trim(), "reply-to"));
-                #endregion
-
-                #region set Email body
-                message.From = new MailAddress(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.DisplayName);
-                message.Subject = appSettings.EmailSettings.Subject;
-                message.IsBodyHtml = true;
-                message.Priority = MailPriority.High;
-                var body = "Hi,<br><br> Welcome to Avante Grade! <br><br> Please use below credentials to login to Avante.<br> Username: " + usr.Email + "<br> Password: " + usr.Password + "<br><br>";
-                if (BU != "")
-                    body += " Business Unit: " + BU + "<br> Brand: " + brand;
-                body += "<br><br><a href='https://service.avantgardeinc.com/'>Please Click here to Login.</a>" +
-                    "<br><br><br>Thank you,<br>Avante Team<br>";
-                body += "<br><br><br><br> *This is a system generated email and you will get the exact schedule date and time from engineer and service coordinator";
-
-                message.Body = body;
-                #endregion
-
-
-                #region set Credential
-                var client = new SmtpClient
+                using (var message = new MailMessage())
                 {
-                    EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL),
-                    Host = appSettings.EmailSettings.Host,
-                    Port = Convert.ToInt32(appSettings.EmailSettings.Port)
-                };
+                    #region set To,Cc abd Bcc
+                    message.To.Add(new MailAddress(usr.Email));
+                    #endregion
 
-                if (!string.IsNullOrEmpty(appSettings.EmailSettings.SMTPPassword))
-                {
-                    client.Credentials = new System.Net.NetworkCredential(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.SMTPPassword);
-                    //client.UseDefaultCredentials = false;
+                    #region set Email body
+                    message.From = new MailAddress(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.DisplayName);
+                    message.Subject = appSettings.EmailSettings.Subject;
+                    message.IsBodyHtml = true;
+                    message.Priority = MailPriority.High;
+                    var body = "Hi,<br><br> Welcome to Avante Grade! <br><br> Please use below credentials to login to Avante.<br> Username: " + usr.Email + "<br> Password: " + usr.Password + "<br><br>";
+                    if (BU != "")
+                        body += " Business Unit: " + BU + "<br> Brand: " + brand;
+                    body += "<br><br><a href='https://service.avantgardeinc.com/'>Please Click here to Login.</a>" +
+                        "<br><br><br>Thank you,<br>Avante Team<br>";
+                    body += "<br><br><br><br> *This is a system generated email and you will get the exact schedule date and time from engineer and service coordinator";
+
+                    message.Body = body;
+                    message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
+                    #endregion
+
+                    #region set Credential
+                    using (var client = new SmtpClient
+                    {
+                        EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL),
+                        Host = appSettings.EmailSettings.Host,
+                        Port = Convert.ToInt32(appSettings.EmailSettings.Port)
+                    })
+                    {
+                        if (!string.IsNullOrEmpty(appSettings.EmailSettings.SMTPPassword))
+                        {
+                            client.Credentials = new System.Net.NetworkCredential(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.SMTPPassword);
+                        }
+                        else
+                        {
+                            client.UseDefaultCredentials = true;
+                        }
+                        #endregion
+
+                        client.Send(message);
+                    }
                 }
-                else
-                    client.UseDefaultCredentials = true;
-                #endregion
-
-                client.Send(message);
-                message.Dispose();
-                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
 
                 return true;
             }
@@ -594,7 +592,6 @@ namespace Infrastructure.Common
             {
                 return false;
             }
-#pragma warning restore CS0168 // Variable is declared but never used
         }
 
 
@@ -603,53 +600,48 @@ namespace Infrastructure.Common
             try
             {
                 var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
-                var message = new MailMessage();
 
-                #region set To,Cc abd Bcc
-                string[] recipients = emails.Split(',');
-                foreach (string email in recipients) { message.To.Add(new MailAddress(email)); }
-
-                message.CC.Add(new MailAddress("kishoregund@gmail.com"));
-                //message.Bcc.Add(new MailAddress(arrStr.Trim()));
-                //message.ReplyToList.Add(new MailAddress(arrStr.Trim(), "reply-to"));
-                #endregion
-
-                #region set Email body
-                message.From = new MailAddress(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.DisplayName);
-                message.Subject = subject;
-                message.IsBodyHtml = true;
-                //message.Priority = MailPriority.High;
-
-                message.Body = emailBody;
-                #endregion
-
-
-                #region set Credential
-                var client = new SmtpClient
+                using (var message = new MailMessage())
                 {
-                    EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL),
-                    Host = appSettings.EmailSettings.Host,
-                    Port = Convert.ToInt32(appSettings.EmailSettings.Port)
-                };
+                    #region set To,Cc abd Bcc
+                    string[] recipients = emails.Split(',');
+                    foreach (string email in recipients) { message.To.Add(new MailAddress(email.Trim())); }
+                    #endregion
 
-                if (!string.IsNullOrEmpty(appSettings.EmailSettings.SMTPPassword))
-                {
-                    client.Credentials = new System.Net.NetworkCredential(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.SMTPPassword);
-                    //client.UseDefaultCredentials = false;
+                    #region set Email body
+                    message.From = new MailAddress(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.DisplayName);
+                    message.Subject = subject;
+                    message.IsBodyHtml = true;
+                    message.Body = emailBody;
+                    message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
+                    #endregion
+
+                    #region set Credential
+                    using (var client = new SmtpClient
+                    {
+                        EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL),
+                        Host = appSettings.EmailSettings.Host,
+                        Port = Convert.ToInt32(appSettings.EmailSettings.Port)
+                    })
+                    {
+                        if (!string.IsNullOrEmpty(appSettings.EmailSettings.SMTPPassword))
+                        {
+                            client.Credentials = new System.Net.NetworkCredential(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.SMTPPassword);
+                        }
+                        else
+                        {
+                            client.UseDefaultCredentials = true;
+                        }
+                        #endregion
+
+                        client.Send(message);
+                    }
                 }
-                else
-                    client.UseDefaultCredentials = true;
-                #endregion
-
-                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
-                client.Send(message);
-                message.Dispose();
 
                 return true;
             }
             catch (Exception ex)
             {
-                // TODO: replace with proper logger injection
                 System.Diagnostics.Debug.WriteLine($"[SendEmailMethod] SMTP error: {ex.Message} | Inner: {ex.InnerException?.Message}");
                 return false;
             }

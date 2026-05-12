@@ -15,6 +15,7 @@
         public string ConfigValueName { get; set; }
         public string PartNo { get; set; }
         public string ItemDesc { get; set; }
+        public string PartNoDesc { get; set; }
         public int Qty { get; set; }
         public Guid PartType { get; set; }
         public string PartTypeName { get; set; }

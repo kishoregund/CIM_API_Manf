@@ -13,6 +13,7 @@ using Application.Features.ServiceRequests;
 using Application.Features.Spares;
 using Application.Features.Travels;
 using Application.Features.UserProfiles;
+using Infrastructure.Common;
 using Infrastructure.Identity;
 using Infrastructure.OpenApi;
 using Infrastructure.Persistence;
@@ -92,7 +93,8 @@ namespace Infrastructure
                 .AddScoped<IBankDetailsService, BankDetailsService>()
                 .AddScoped<IPastServiceReportService, PastServiceReportService>()
                 .AddScoped<IInstrumentAllocationService, InstrumentAllocationService>()
-                .AddScoped<INotificationsService, NotificationsService>();
+                .AddScoped<INotificationsService, NotificationsService>()
+                .AddScoped<CommonMethods>();
         }
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
