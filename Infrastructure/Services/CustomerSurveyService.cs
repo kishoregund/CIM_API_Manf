@@ -54,6 +54,8 @@ namespace Infrastructure.Services
             var surveys = await ( from s in Context.CustomerSatisfactionSurvey
                                   join c in Context.RegionContact on s.EngineerId equals c.Id
                                   join sr in Context.ServiceRequest on s.ServiceRequestId equals sr.Id
+                                  join cs in Context.Customer on sr.CustId equals cs.Id
+                                  join si in Context.Site on sr.SiteId equals si.Id
                                   select new CustomerSurveyResponse
                                   {
                                       Comments = s.Comments,
@@ -62,6 +64,8 @@ namespace Infrastructure.Services
                                       CreatedBy = s.CreatedBy,
                                       CreatedOn = s.CreatedOn,
                                       DistId = s.DistId,
+                                      CustomerName = cs.CustName,
+                                      SiteName = si.CustRegName,
                                       Email = s.Email,
                                       EngineerId = s.EngineerId,
                                       EngineerName = c.FirstName + " " + c.LastName,

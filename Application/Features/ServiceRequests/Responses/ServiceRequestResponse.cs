@@ -18,6 +18,7 @@
         public string SerReqNo { get; set; }
         public string SerReqDate { get; set; }
         public string SerResolutionDate { get; set; }
+        public string CustomerName { get; set; }
         public string SiteName { get; set; }
         public string SDate { get; set; }
         public string EDate { get; set; }

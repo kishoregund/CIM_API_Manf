@@ -237,7 +237,8 @@ namespace Infrastructure.Services
 
             #region set To,Cc abd Bcc
             message.To.Add(new MailAddress(serreq?.Email));
-            message.To.Add(new MailAddress(serreq?.OperatorEmail));            
+            message.To.Add(new MailAddress(serreq?.OperatorEmail));
+            message.CC.Add(new MailAddress("kishoregund@gmail.com"));
             var demails = appSettings.DistEmails.Split(',');
             foreach (string email in demails)
             {
@@ -428,6 +429,7 @@ namespace Infrastructure.Services
 
                 message.To.Add(new MailAddress(serRequest.Email));
                 message.To.Add(new MailAddress(serRequest.OperatorEmail));
+                message.CC.Add(new MailAddress("kishoregund@gmail.com"));
                 //message.CC.Add(new MailAddress(arrStr.Trim()));
                 //message.Bcc.Add(new MailAddress(arrStr.Trim()));
                 //message.ReplyToList.Add(new MailAddress(arrStr.Trim(), "reply-to"));

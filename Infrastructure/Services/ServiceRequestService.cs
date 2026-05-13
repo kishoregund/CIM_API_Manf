@@ -411,6 +411,7 @@ namespace Infrastructure.Services
             mServiceRequest.VisitType = ServiceRequest.VisitType;
             mServiceRequest.VisitTypeName = context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId.ToString() == ServiceRequest.VisitType)?.ItemName;
             mServiceRequest.XrayGenerator = ServiceRequest.XrayGenerator;
+            mServiceRequest.CustomerName = context.Customer.FirstOrDefaultAsync(x=>x.Id == ServiceRequest.CustId).Result.CustName;
             mServiceRequest.SiteId = ServiceRequest.SiteId;
             mServiceRequest.CustId = ServiceRequest.CustId;
             mServiceRequest.DistId = ServiceRequest.DistId;

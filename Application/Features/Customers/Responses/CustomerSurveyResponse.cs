@@ -20,6 +20,8 @@ namespace Application.Features.Customers.Responses
         public string EngineerName { get; set; }
         public Guid ServiceRequestId { get; set; }
         public string ServiceRequestNo { get; set; }
+        public string CustomerName { get; set; }
+        public string SiteName { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string OnTime { get; set; }
