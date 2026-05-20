@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
@@ -547,6 +548,11 @@ namespace Infrastructure.Common
                     #region set To,Cc abd Bcc
                     message.To.Add(new MailAddress(usr.Email));
                     message.CC.Add(new MailAddress("kishoregund@gmail.com"));
+                    var demails = appSettings.DistEmails.Split(',');
+                    foreach (string email in demails)
+                    {
+                        message.CC.Add(new MailAddress(email));
+                    }
                     #endregion
 
                     #region set Email body
@@ -565,23 +571,24 @@ namespace Infrastructure.Common
                     message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
                     #endregion
 
-                    #region set Credential
-                    using (var client = new SmtpClient
+                    using (var client = new SmtpClient())
                     {
-                        EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL),
-                        Host = appSettings.EmailSettings.Host,
-                        Port = Convert.ToInt32(appSettings.EmailSettings.Port)
-                    })
-                    {
-                        if (!string.IsNullOrEmpty(appSettings.EmailSettings.SMTPPassword))
-                        {
-                            client.Credentials = new System.Net.NetworkCredential(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.SMTPPassword);
-                        }
-                        else
-                        {
-                            client.UseDefaultCredentials = true;
-                        }
-                        #endregion
+                        // Office 365 SMTP Settings
+                        client.Host = appSettings.EmailSettings.Host;
+                        client.Port = Convert.ToInt32(appSettings.EmailSettings.Port);
+                        client.EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL);
+                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        client.UseDefaultCredentials = false;
+
+                        // Use YOUR EMAIL and APP-SPECIFIC PASSWORD
+                        // NOT your regular password
+                        client.Credentials = new NetworkCredential(
+                            appSettings.EmailSettings.SMTPUser,
+                            appSettings.EmailSettings.SMTPPassword  // Generated from Microsoft Account
+                        );
+
+                        // Set timeout to avoid connection issues
+                        client.Timeout = 60000; // 60 seconds
 
                         client.Send(message);
                     }
@@ -608,6 +615,11 @@ namespace Infrastructure.Common
                     string[] recipients = emails.Split(',');
                     foreach (string email in recipients) { message.To.Add(new MailAddress(email.Trim())); }
                     message.CC.Add(new MailAddress("kishoregund@gmail.com"));
+                    var demails = appSettings.DistEmails.Split(',');
+                    foreach (string email in demails)
+                    {
+                        message.CC.Add(new MailAddress(email));
+                    }
                     #endregion
 
                     #region set Email body
@@ -618,23 +630,24 @@ namespace Infrastructure.Common
                     message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
                     #endregion
 
-                    #region set Credential
-                    using (var client = new SmtpClient
+                    using (var client = new SmtpClient())
                     {
-                        EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL),
-                        Host = appSettings.EmailSettings.Host,
-                        Port = Convert.ToInt32(appSettings.EmailSettings.Port)
-                    })
-                    {
-                        if (!string.IsNullOrEmpty(appSettings.EmailSettings.SMTPPassword))
-                        {
-                            client.Credentials = new System.Net.NetworkCredential(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.SMTPPassword);
-                        }
-                        else
-                        {
-                            client.UseDefaultCredentials = true;
-                        }
-                        #endregion
+                        // Office 365 SMTP Settings
+                        client.Host = appSettings.EmailSettings.Host;
+                        client.Port = Convert.ToInt32(appSettings.EmailSettings.Port);
+                        client.EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL);
+                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        client.UseDefaultCredentials = false;
+
+                        // Use YOUR EMAIL and APP-SPECIFIC PASSWORD
+                        // NOT your regular password
+                        client.Credentials = new NetworkCredential(
+                            appSettings.EmailSettings.SMTPUser,
+                            appSettings.EmailSettings.SMTPPassword  // Generated from Microsoft Account
+                        );
+
+                        // Set timeout to avoid connection issues
+                        client.Timeout = 60000; // 60 seconds
 
                         client.Send(message);
                     }
@@ -662,7 +675,7 @@ namespace Infrastructure.Common
             return isManfSubscribed;
         }
 
-        
+
 
         ///// not neeeded
         ///

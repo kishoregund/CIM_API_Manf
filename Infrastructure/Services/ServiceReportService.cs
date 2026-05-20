@@ -1,24 +1,25 @@
-﻿using Application.Features.ServiceReports;
+﻿using Application.Features.Identity.Users;
+using Application.Features.ServiceReports;
+using Application.Features.ServiceReports.Requests;
+using Application.Features.ServiceReports.Responses;
+using Application.Models;
+using Domain.Entities;
+using Domain.Views;
 using Infrastructure.Persistence.Contexts;
+using Mapster;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Application.Features.Identity.Users;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Features.ServiceReports.Responses;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
-using Domain.Entities;
-using Mapster;
-using Domain.Views;
-using Application.Features.ServiceReports.Requests;
-using Application.Models;
-using System.Net.Mail;
-using System.Globalization;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Infrastructure.Services
 {
@@ -263,26 +264,27 @@ namespace Infrastructure.Services
             }
             #endregion
 
-            #region set Credential
-            var client = new SmtpClient
+            using (var client = new SmtpClient())
             {
-                EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL),
-                Host = appSettings.EmailSettings.Host,
-                Port = Convert.ToInt32(appSettings.EmailSettings.Port)
-            };
+                // Office 365 SMTP Settings
+                client.Host = appSettings.EmailSettings.Host;
+                client.Port = Convert.ToInt32(appSettings.EmailSettings.Port);
+                client.EnableSsl = Convert.ToBoolean(appSettings.EmailSettings.SSL);
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
 
-            if (!string.IsNullOrEmpty(appSettings.EmailSettings.SMTPPassword))
-            {
-                client.Credentials = new System.Net.NetworkCredential(appSettings.EmailSettings.SMTPUser, appSettings.EmailSettings.SMTPPassword);
-                //client.UseDefaultCredentials = false;
+                // Use YOUR EMAIL and APP-SPECIFIC PASSWORD
+                // NOT your regular password
+                client.Credentials = new NetworkCredential(
+                    appSettings.EmailSettings.SMTPUser,
+                    appSettings.EmailSettings.SMTPPassword  // Generated from Microsoft Account
+                );
+
+                // Set timeout to avoid connection issues
+                client.Timeout = 60000; // 60 seconds
+
+                client.Send(message);
             }
-            else
-                client.UseDefaultCredentials = true;
-            #endregion
-
-            client.Send(message);
-            message.Dispose();
-            message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
 
             if (Attachment != null)
             {
@@ -430,6 +432,11 @@ namespace Infrastructure.Services
                 message.To.Add(new MailAddress(serRequest.Email));
                 message.To.Add(new MailAddress(serRequest.OperatorEmail));
                 message.CC.Add(new MailAddress("kishoregund@gmail.com"));
+                var demails = _appSettings.DistEmails.Split(',');
+                foreach (string email in demails)
+                {
+                    message.CC.Add(new MailAddress(email));
+                }
                 //message.CC.Add(new MailAddress(arrStr.Trim()));
                 //message.Bcc.Add(new MailAddress(arrStr.Trim()));
                 //message.ReplyToList.Add(new MailAddress(arrStr.Trim(), "reply-to"));
@@ -458,26 +465,27 @@ namespace Infrastructure.Services
                 #endregion
 
 
-                #region set Credential
-                var client = new SmtpClient
+                using (var client = new SmtpClient())
                 {
-                    EnableSsl = Convert.ToBoolean(_appSettings.EmailSettings.SSL),
-                    Host = _appSettings.EmailSettings.Host,
-                    Port = Convert.ToInt32(_appSettings.EmailSettings.Port)
-                };
+                    // Office 365 SMTP Settings
+                    client.Host = _appSettings.EmailSettings.Host;
+                    client.Port = Convert.ToInt32(_appSettings.EmailSettings.Port);
+                    client.EnableSsl = Convert.ToBoolean(_appSettings.EmailSettings.SSL);
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.UseDefaultCredentials = false;
 
-                if (!string.IsNullOrEmpty(_appSettings.EmailSettings.SMTPPassword))
-                {
-                    client.Credentials = new System.Net.NetworkCredential(_appSettings.EmailSettings.SMTPUser, _appSettings.EmailSettings.SMTPPassword);
-                    //client.UseDefaultCredentials = false;
+                    // Use YOUR EMAIL and APP-SPECIFIC PASSWORD
+                    // NOT your regular password
+                    client.Credentials = new NetworkCredential(
+                        _appSettings.EmailSettings.SMTPUser,
+                        _appSettings.EmailSettings.SMTPPassword  // Generated from Microsoft Account
+                    );
+
+                    // Set timeout to avoid connection issues
+                    client.Timeout = 60000; // 60 seconds
+
+                    client.Send(message);
                 }
-                else
-                    client.UseDefaultCredentials = true;
-                #endregion
-
-                await client.SendMailAsync(message);
-                message.Dispose();
-                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
 
             }
             catch (Exception ex)
