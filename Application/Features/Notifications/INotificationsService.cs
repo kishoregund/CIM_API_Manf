@@ -10,6 +10,7 @@ namespace Application.Features.Notifications
     {
         Task<Domain.Entities.Notifications> GetNotificationsByIdAsync(Guid id);
         Task<List<Domain.Entities.Notifications>> GetNotificationsAsync(Guid userId);
+        Task<int> GetUnreadNotificationsCountAsync(Guid userId);
         Task<Guid> CreateNotificationsAsync(Domain.Entities.Notifications Notification);
         Task<Guid> UpdateNotificationsAsync(Domain.Entities.Notifications Notification);
         Task<bool> DeleteNotificationsAsync(Guid id);

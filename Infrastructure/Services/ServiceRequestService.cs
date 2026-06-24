@@ -23,7 +23,7 @@ using Domain.Views;
 namespace Infrastructure.Services
 {
     public class ServiceRequestService(ApplicationDbContext context, ICurrentUserService currentUserService,
-        IEngSchedulerService engSchedulerService = null, ISRAssignedHistoryService srAssignedHistoryService = null, IConfiguration  configuration =null,
+        IEngSchedulerService engSchedulerService = null, ISRAssignedHistoryService srAssignedHistoryService = null, IConfiguration configuration = null,
         ISREngActionService srEngActionService = null, ISREngCommentsService srEngCommentsService = null) : IServiceRequestService
     {
 
@@ -50,7 +50,7 @@ namespace Infrastructure.Services
                 }
                 //else if (userProfile.SegmentCode == "RCUST")
                 //{
-                    return await context.ServiceRequest.Where(x => x.CreatedBy == userProfile.UserId).ToListAsync();
+                return await context.ServiceRequest.Where(x => x.CreatedBy == userProfile.UserId).ToListAsync();
                 //}
             }
             else
@@ -110,7 +110,7 @@ namespace Infrastructure.Services
                         else if (segment.ToUpper().Equals("RENG"))
                         {
                             serviceRequests = await (from sr in context.ServiceRequest.Where(x => !x.IsDeleted)
-                                                     //join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
+                                                         //join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
                                                      select sr).OrderByDescending(x => x.IsCritical).ThenByDescending(x => x.CreatedOn).ToListAsync();
 
                             serviceRequests = serviceRequests.Where(x => x.AssignedTo == userProfile.ContactId)
@@ -256,7 +256,7 @@ namespace Infrastructure.Services
 
                 //result.Result = true;
                 //result.ResultMessage = "Please verify if the AMC is defined and a Contract Agreement is done in AMC to benefit AMC services.";
-                
+
             }
 
             await context.ServiceRequest.AddAsync(serviceRequest);
@@ -265,7 +265,7 @@ namespace Infrastructure.Services
             var regionId = context.Site.FirstOrDefault(x => x.Id == serviceRequest.SiteId)?.RegionId;
             var lstEmails = (from users in context.VW_UserProfile.Where(x => x.SegmentCode == "RDTSP" && x.EntityChildId == regionId)
                              select users.Email).ToList();
-            
+
             var email = lstEmails.Aggregate("", (current, t) => current + (t + ","));
             if (email.Length > 1) email = email.Remove(email.Length - 1, 1);
 
@@ -273,11 +273,11 @@ namespace Infrastructure.Services
             if (serviceRequest.IsNotUnderAmc)
             {
                 var body = $"Hi,<br><br> Greetings! <br><br>Service Request having Service Request No.: {serviceRequest.SerReqNo} has been raised by Customer and it is not covered in the AMC or the Contract Agreement is not done. <br>"
-                    + "Kindly look into it and update at the earliest. " 
+                    + "Kindly look into it and update at the earliest. "
                     + "<br><br><br>Thank you,<br>Avante Team<br>";
                 body += "<br><br><br><br> *This is a system generated email and you will get the exact schedule date and time from engineer and service coordinator";
                 const string subject = "Uncovered Service Request";
-                
+
                 commonMethods.SendEmailMethod(email, body, subject);
             }
             else
@@ -411,7 +411,7 @@ namespace Infrastructure.Services
             mServiceRequest.VisitType = ServiceRequest.VisitType;
             mServiceRequest.VisitTypeName = context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId.ToString() == ServiceRequest.VisitType)?.ItemName;
             mServiceRequest.XrayGenerator = ServiceRequest.XrayGenerator;
-            mServiceRequest.CustomerName = context.Customer.FirstOrDefaultAsync(x=>x.Id == ServiceRequest.CustId).Result.CustName;
+            mServiceRequest.CustomerName = context.Customer.FirstOrDefaultAsync(x => x.Id == ServiceRequest.CustId).Result.CustName;
             mServiceRequest.SiteId = ServiceRequest.SiteId;
             mServiceRequest.CustId = ServiceRequest.CustId;
             mServiceRequest.DistId = ServiceRequest.DistId;
@@ -446,7 +446,7 @@ namespace Infrastructure.Services
 
             mServiceRequest.EngAction = srEngActionService != null ? srEngActionService.GetSREngActionBySRIdAsync(mServiceRequest.Id).Result : null;
             mServiceRequest.EngComments = srEngCommentsService != null ? srEngCommentsService.GetSREngCommentBySRIdAsync(mServiceRequest.Id).Result : null;
-            mServiceRequest.AssignedHistory = srAssignedHistoryService != null ? srAssignedHistoryService.GetSRAssignedHistoryBySRIdAsync(mServiceRequest.Id).Result:null;
+            mServiceRequest.AssignedHistory = srAssignedHistoryService != null ? srAssignedHistoryService.GetSRAssignedHistoryBySRIdAsync(mServiceRequest.Id).Result : null;
             mServiceRequest.ScheduledCalls = engSchedulerService != null ? engSchedulerService.GetEngSchedulerBySRIdAsync(ServiceRequest.Id).Result.Where(x => x.EngId == ServiceRequest.AssignedTo).OrderByDescending(x => x.CreatedOn).ToList() : null;
             return mServiceRequest;
         }
@@ -515,12 +515,12 @@ namespace Infrastructure.Services
         public async Task<List<ServiceRequestResponse>> GetServiceRequestByDistAsync(Guid distId)
         {
             var lstServiceRequest = new List<ServiceRequestResponse>();
-            
-            var serReq = await (from a in context.ServiceRequest.Where(x => !x.IsDeleted) 
-                          //join b in context.Instrument  ///.Where(x => x.BusinessUnitId.ToString() == businessUnitId && x.BrandId.ToString() == brandId) 
-                          //on a.MachinesNo equals b.Id.ToString()
-                          where a.DistId == distId
-                          select a).OrderBy(x => x.IsCritical).ThenBy(x => x.SerReqNo).ToListAsync();
+
+            var serReq = await (from a in context.ServiceRequest.Where(x => !x.IsDeleted)
+                                    //join b in context.Instrument  ///.Where(x => x.BusinessUnitId.ToString() == businessUnitId && x.BrandId.ToString() == brandId) 
+                                    //on a.MachinesNo equals b.Id.ToString()
+                                where a.DistId == distId
+                                select a).OrderBy(x => x.IsCritical).ThenBy(x => x.SerReqNo).ToListAsync();
 
 
             foreach (var r in serReq)
@@ -548,6 +548,169 @@ namespace Infrastructure.Services
             }
 
             return lstServiceRequest;
+        }
+
+        public async Task NotifyDistributorForServiceRequestAsync(ServiceRequest serviceRequest, string action)
+        {
+            try
+            {
+                var currentUserId = Guid.Parse(currentUserService.GetUserId());
+                var userProfile = await context.VW_UserProfile.FirstOrDefaultAsync(x => x.UserId == currentUserId);
+
+                if (userProfile == null)
+                    return;
+
+                // Only notify if user is Distributor
+                if (userProfile.SegmentCode == "RCUST")
+                {
+                    var distributor = await context.Distributor.FirstOrDefaultAsync(d => d.Id == serviceRequest.DistId);
+                    if (distributor == null)
+                        return;
+
+                    var customer = await context.Customer.FirstOrDefaultAsync(c => c.Id == serviceRequest.CustId);
+                    var site = await context.Site.FirstOrDefaultAsync(s => s.Id == serviceRequest.SiteId);
+
+                    var distributorUsers = await context.VW_UserProfile.Where(x => x.SegmentCode == "RDTSP" && x.EntityParentId == serviceRequest.DistId).ToListAsync();
+
+                    var statusAction = action == "created" ? "SUBMITTED" : "UPDATED";
+                    var notificationMessage = $"Service Request {serviceRequest.SerReqNo} has been {statusAction}";
+                    if (customer != null)
+                        notificationMessage += $" for customer '{customer.CustName}'";
+                    if (site != null)
+                        notificationMessage += $" at site '{site.CustRegName}'";
+
+                    foreach (VW_UserProfile user in distributorUsers)
+                    {
+                        var notification = new Notifications
+                        {
+                            Id = Guid.NewGuid(),
+                            Remarks = notificationMessage,
+                            RoleId = userProfile.RoleId,
+                            RaisedBy = currentUserService.GetUserId(),
+                            UserId = user.UserId,
+                            IsActive = true,
+                            IsDeleted = false,
+                            CreatedBy = currentUserId,
+                            CreatedOn = DateTime.Now,
+                            UpdatedBy = currentUserId,
+                            UpdatedOn = DateTime.Now
+                        };
+
+                        await context.Notifications.AddAsync(notification);
+                        await context.SaveChangesAsync();
+
+                        // Send email to distributor
+                        var emailBody = $@"
+                    <html>
+                    <body style='font-family: Arial, sans-serif;'>
+                        <h3>Service Request Notification</h3>
+                        <p><strong>Service Request Number:</strong> {serviceRequest.SerReqNo}</p>
+                        <p><strong>Status:</strong> {statusAction}</p>
+                        <p><strong>Customer:</strong> {customer?.CustName ?? "N/A"}</p>
+                        <p><strong>Site:</strong> {site?.CustRegName ?? "N/A"}</p>
+                        <p><strong>Request Date:</strong> {serviceRequest.SerReqDate}</p>
+                        <p><strong>Message:</strong> {notificationMessage}</p>
+                        <p><strong>Action Required:</strong> Please review this service request in the CIM dashboard.</p>
+                        <hr/>
+                        <p><em>This is an automated notification. Please do not reply to this email.</em></p>
+                    </body>
+                    </html>";
+
+                        if (!string.IsNullOrEmpty(user.Email))
+                        {
+                            var commonMethods = new CommonMethods(context, currentUserService, configuration);
+                            commonMethods.SendEmailMethod(
+                                user.Email,
+                                emailBody,
+                                $"Service Request {serviceRequest.SerReqNo} - {statusAction}"
+                            );
+                        }
+                    }
+                }
+                else if (userProfile.SegmentCode == "RENG" && action == "updated")
+                {
+                    await NotifyDistributorForEngineerResponseAsync(serviceRequest, userProfile);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[NotifyDistributorForServiceRequest] Error: {ex.Message}");
+            }
+        }
+
+        public async Task NotifyDistributorForEngineerResponseAsync(ServiceRequest serviceRequest, VW_UserProfile userProfile)
+        {
+            try
+            {
+                var currentUserId = Guid.Parse(currentUserService.GetUserId());                               
+
+                var distributor = await context.Distributor.FirstOrDefaultAsync(d => d.Id == serviceRequest.DistId);
+                if (distributor == null)
+                    return;
+                             
+                var engineer = await context.RegionContact.FirstOrDefaultAsync(rc => rc.Id == userProfile.ContactId);
+
+                // Get all distributor users with RDTSP segment code
+                var distributorUsers = await context.VW_UserProfile.Where(x => x.SegmentCode == "RDTSP" && x.EntityParentId == serviceRequest.DistId).ToListAsync();
+
+                // Get action name from VW_ListItems
+                var status = context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId == serviceRequest.StatusId)?.ItemName;
+
+                var notificationMessage = $"Engineer {engineer?.FirstName} {engineer?.LastName} has {status.ToLower()} the Service Request {serviceRequest.SerReqNo}";
+
+                foreach (VW_UserProfile distributorUser in distributorUsers)
+                {
+                    var notification = new Notifications
+                    {
+                        Id = Guid.NewGuid(),
+                        Remarks = notificationMessage,
+                        RoleId = distributorUser.RoleId,
+                        RaisedBy = currentUserService.GetUserId(),
+                        UserId = distributorUser.UserId,
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedBy = currentUserId,
+                        CreatedOn = DateTime.Now,
+                        UpdatedBy = currentUserId,
+                        UpdatedOn = DateTime.Now
+                    };
+
+                    await context.Notifications.AddAsync(notification);
+                    await context.SaveChangesAsync();
+
+                    // Send email to distributor
+                    var emailBody = $@"
+                    <html>
+                    <body style='font-family: Arial, sans-serif;'>
+                        <h3>Engineer Response to Service Request</h3>
+                        <p><strong>Service Request Number:</strong> {serviceRequest.SerReqNo}</p>
+                        <p><strong>Engineer Name:</strong> {engineer?.FirstName} {engineer?.LastName}</p>
+                        <p><strong>Action Taken:</strong> <strong style='color: {(status.ToUpper() == "ACCEPTED" ? "green" : "red")};'>{status}</strong></p>                        
+                        <p><strong>Request Date:</strong> {serviceRequest.SerReqDate}</p>                        
+                        <p><strong>Action Required:</strong> Please review the engineer's response in the CIM dashboard.</p>
+                        <hr/>
+                        <p><em>This is a system generated email and you will get the exact schedule date and time from engineer and service coordinator</em></p>
+                    </body>
+                    </html>";
+                    //<p><strong>Customer:</strong> {customer?.CustName ?? "N/A"}</p>
+                    //<p><strong>Site:</strong> {site?.CustRegName ?? "N/A"}</p>
+                    // { (!string.IsNullOrEmpty(comments) ? $"<p><strong>Comments:</strong> {comments}</p>" : "")}
+                    if (!string.IsNullOrEmpty(distributorUser.Email))
+                    {
+                        var commonMethods = new CommonMethods(context, currentUserService, configuration);
+                        commonMethods.SendEmailMethod(
+                            distributorUser.Email,
+                            emailBody,
+                            $"Service Request {serviceRequest.SerReqNo} - Engineer Response: {status}"
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[NotifyDistributorForEngineerResponse] Error: {ex.Message}");
+            }
         }
 
     }

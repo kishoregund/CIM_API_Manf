@@ -23,5 +23,6 @@ namespace Application.Features.ServiceRequests
         Task<Guid> UpdateServiceRequestAsync(Domain.Entities.ServiceRequest serviceRequest);
         Task<bool> DeleteServiceRequestAsync(Guid id);
         Task<List<ServiceRequestResponse>> GetServiceRequestBySRPIdAsync(Guid serviceReportId);
+        Task NotifyDistributorForServiceRequestAsync(Domain.Entities.ServiceRequest serviceRequest, string action);
     }
 }

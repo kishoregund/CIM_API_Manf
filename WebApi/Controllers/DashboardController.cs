@@ -8,6 +8,7 @@ using Infrastructure.Identity.Auth;
 using Infrastructure.Identity.Constants;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Application.Features.Notifications.Queries;
 
 namespace WebApi.Controllers
 {
@@ -221,6 +222,29 @@ namespace WebApi.Controllers
                 return Ok(response);
             }
             return BadRequest(response);
+        }
+
+        [HttpGet("notification-count")]
+        public async Task<IActionResult> GetNotificationCountAsync()
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var loggedInUserId = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(loggedInUserId))
+                return Unauthorized();
+
+            try
+            {
+                var response = await Sender.Send(new GetUnreadNotificationsCountQuery { UserId = Guid.Parse(loggedInUserId) });
+                if (response.IsSuccessful)
+                {
+                    return Ok(response);
+                }
+                return BadRequest(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

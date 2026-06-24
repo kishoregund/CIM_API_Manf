@@ -13,14 +13,15 @@ namespace Infrastructure.Services
         public async Task<List<Notifications>> GetNotificationsAsync(Guid userId)
             => await context.Notifications.Where(x => x.UserId == userId).ToListAsync();
 
+        public async Task<int> GetUnreadNotificationsCountAsync(Guid userId)
+            => await context.Notifications.CountAsync(x => x.UserId == userId && x.IsActive && !x.IsDeleted);
+
         public async Task<Notifications> GetNotificationsByIdAsync(Guid id)
             => await context.Notifications.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<Guid> CreateNotificationsAsync(Notifications Notifications)
         {
             Notifications.CreatedOn = DateTime.Now;
-            Notifications.CreatedBy = Guid.Empty;
-            Notifications.UpdatedBy = Guid.Empty;
 
             await context.Notifications.AddAsync(Notifications);
             await context.SaveChangesAsync();

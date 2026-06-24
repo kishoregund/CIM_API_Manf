@@ -94,7 +94,9 @@ namespace Infrastructure
                 .AddScoped<IPastServiceReportService, PastServiceReportService>()
                 .AddScoped<IInstrumentAllocationService, InstrumentAllocationService>()
                 .AddScoped<INotificationsService, NotificationsService>()
-                .AddScoped<CommonMethods>();
+                .AddScoped<CommonMethods>()
+                .AddHostedService<AmcExpirationBackgroundService>()
+                .AddHostedService<InstrumentWarrantyBackgroundService>();
         }
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)

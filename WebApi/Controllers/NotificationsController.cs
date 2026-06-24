@@ -66,5 +66,29 @@ namespace WebApi.Controllers
             }
             return NotFound(response);
         }
+
+        [HttpGet("unread-count")]
+        //[ShouldHavePermission(CimAction.View, CimFeature.Notifications)]
+        public async Task<IActionResult> GetUnreadNotificationCountAsync()
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var LoggedInUserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(LoggedInUserId))
+                return Unauthorized();
+
+            try
+            {
+                var response = await Sender.Send(new GetUnreadNotificationsCountQuery { UserId = Guid.Parse(LoggedInUserId) });
+                if (response.IsSuccessful)
+                {
+                    return Ok(response);
+                }
+                return BadRequest(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

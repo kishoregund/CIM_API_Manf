@@ -1,6 +1,7 @@
 ﻿using Application.Features.ServiceRequests.Commands;
 using Application.Features.ServiceRequests.Queries;
 using Application.Features.ServiceRequests.Requests;
+using Application.Features.ServiceRequests;
 using Infrastructure.Identity.Auth;
 using Infrastructure.Identity.Constants;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Application.Features.SRAssignedHistorys.Commands;
 using Application.Features.SRAssignedHistorys.Queries;
 using Application.Features.Customers.Queries;
 using Application.Models;
+using Mapster;
 
 
 namespace WebApi.Controllers
@@ -15,6 +17,13 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class ServiceRequestsController : BaseApiController
     {
+        private readonly IServiceRequestService _serviceRequestService;
+
+        public ServiceRequestsController(IServiceRequestService serviceRequestService)
+        {
+            _serviceRequestService = serviceRequestService;
+        }
+
         [HttpPost("add")]
         [ShouldHavePermission(CimAction.Create, CimFeature.Service_Request)]
         public async Task<IActionResult> CreateServiceRequestAsync([FromBody] ServiceRequestRequest createServiceRequest)
@@ -22,6 +31,8 @@ namespace WebApi.Controllers
             var response = await Sender.Send(new CreateServiceRequestCommand { ServiceRequestRequest = createServiceRequest });
             if (response.IsSuccessful)
             {
+                var sr = createServiceRequest.Adapt<Domain.Entities.ServiceRequest>();
+                await _serviceRequestService.NotifyDistributorForServiceRequestAsync(sr, "created");
                 return Ok(response);
             }
             return BadRequest(response);
@@ -34,6 +45,10 @@ namespace WebApi.Controllers
             var response = await Sender.Send(new UpdateServiceRequestCommand { ServiceRequestRequest = updateServiceRequest });
             if (response.IsSuccessful)
             {
+                var sr = updateServiceRequest.Adapt<Domain.Entities.ServiceRequest>();
+                await _serviceRequestService.NotifyDistributorForServiceRequestAsync(sr, "updated");
+
+                
                 return Ok(response);
             }
             return BadRequest(response);
@@ -332,7 +347,7 @@ namespace WebApi.Controllers
         {
             var response = await Sender.Send(new CreateSREngActionCommand { SREngActionRequest = createSREngAction });
             if (response.IsSuccessful)
-            {
+            {              
                 return Ok(response);
             }
             return BadRequest(response);
