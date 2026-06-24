@@ -5,6 +5,7 @@ using Application.Features.ServiceReports.Responses;
 using Application.Models;
 using Domain.Entities;
 using Domain.Views;
+using Infrastructure.Common;
 using Infrastructure.Persistence.Contexts;
 using Mapster;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
@@ -205,7 +206,214 @@ namespace Infrastructure.Services
 
             Context.Entry(ServiceReport).State = EntityState.Modified;
             await Context.SaveChangesAsync();
+
+            // Send real-time notification to distributor when report is submitted (with engineer signature)
+            if (!string.IsNullOrEmpty(ServiceReport.EngSignature))
+            {
+                await NotifyDistributorForServiceReportSubmissionAsync(ServiceReport);
+            }
+
+            // Send real-time notification to distributor when customer signs report
+            if (!string.IsNullOrEmpty(ServiceReport.CustSignature))
+            {
+                await NotifyDistributorForCustomerSignatureAsync(ServiceReport);
+            }
+
             return ServiceReport.Id;
+        }
+
+        /// <summary>
+        /// Notifies distributor in real-time when engineer submits service report with signature
+        /// </summary>
+        private async Task NotifyDistributorForServiceReportSubmissionAsync(Domain.Entities.ServiceReport serviceReport)
+        {
+            try
+            {
+                // Get service request details
+                var serviceRequest = await Context.ServiceRequest
+                    .FirstOrDefaultAsync(x => x.Id == serviceReport.ServiceRequestId);
+
+                if (serviceRequest == null) return;
+
+                // Get site and distributor
+                var site = await Context.Site
+                    .FirstOrDefaultAsync(x => x.Id == serviceRequest.SiteId);
+                var customer = site != null ? await Context.Customer
+                    .FirstOrDefaultAsync(x => x.Id == site.CustomerId) : null;
+                var distributor = site != null ? await Context.Distributor
+                    .FirstOrDefaultAsync(x => x.Id == site.DistId) : null;
+
+                if (distributor == null) return;
+
+                // Get distributor contacts (RDTSP - Regional Distributors)
+                var distributorContacts = await Context.VW_UserProfile
+                    .Where(x => x.SegmentCode == "RDTSP" && x.EntityParentId == distributor.Id)
+                    .ToListAsync();
+
+                if (distributorContacts.Count == 0) return;
+
+                // Get engineer details
+                var engineer = await Context.RegionContact
+                    .FirstOrDefaultAsync(x => x.Id == serviceRequest.AssignedTo);
+
+                // Check if notification already sent for this report
+                var existingNotification = await Context.Notifications
+                    .FirstOrDefaultAsync(x =>
+                        x.Remarks.Contains($"Service Report") &&
+                        x.Remarks.Contains(serviceReport.ServiceReportNo) &&
+                        x.CreatedOn.Date == DateTime.Now.Date);
+
+                if (existingNotification != null)
+                {
+                    return;
+                }
+
+                // Create notifications for each distributor contact
+                foreach (var contact in distributorContacts)
+                {
+                    try
+                    {
+                        // Create in-app notification
+                        var notification = new Notifications
+                        {
+                            Id = Guid.NewGuid(),
+                            Remarks = $"Service Report submitted: {serviceReport.ServiceReportNo} for Service Request: {serviceRequest.SerReqNo} at {site?.CustRegName ?? "N/A"} ({customer?.CustName ?? "N/A"}). Engineer: {engineer?.FirstName} {engineer?.LastName}",
+                            RoleId = contact.RoleId,
+                            RaisedBy = currentUserService.GetUserId(),
+                            UserId = contact.UserId,
+                            IsActive = true,
+                            IsDeleted = false,
+                            CreatedBy = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = DateTime.Now,
+                            UpdatedBy = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                            UpdatedOn = DateTime.Now
+                        };
+
+                        await Context.Notifications.AddAsync(notification);
+                        await Context.SaveChangesAsync();
+
+                        // Send email notification
+                        await SendServiceReportSubmissionEmailAsync(contact, serviceReport, serviceRequest, site, customer, engineer);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[NotifyDistributorForServiceReportSubmission] Error notifying contact {contact.UserId}: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[NotifyDistributorForServiceReportSubmission] Error: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Sends email notification about service report submission
+        /// </summary>
+        private async Task SendServiceReportSubmissionEmailAsync(
+            VW_UserProfile recipient,
+            Domain.Entities.ServiceReport serviceReport,
+            ServiceRequest serviceRequest,
+            Site site,
+            Customer customer,
+            RegionContact engineer)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(recipient.Email)) return;
+
+                var emailBody = $@"
+                <html>
+                <body style='font-family: Arial, sans-serif;'>
+                    <h3>📋 Service Report Submitted</h3>
+                    
+                    <div style='background-color: #d4edda; padding: 15px; border-left: 4px solid #28a745; margin: 10px 0;'>
+                        <p><strong>✓ INFO:</strong> Engineer has submitted service report for your review.</p>
+                    </div>
+                    
+                    <h4>Service Report Details:</h4>
+                    <table style='width: 100%; border-collapse: collapse; margin-bottom: 20px;'>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Service Report #:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{serviceReport.ServiceReportNo}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Service Request #:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{serviceRequest.SerReqNo}</td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Engineer:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{engineer?.FirstName} {engineer?.LastName}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Customer:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{customer?.CustName ?? "N/A"}</td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Site Location:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{site?.CustRegName ?? "N/A"}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Service Date:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{serviceReport.ServiceReportDate:dd/MM/yyyy}</td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Report Status:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong style='color: #28a745;'>{(serviceReport.IsCompleted ? "COMPLETED" : "SUBMITTED")}</strong></td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Work Finished:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{(serviceReport.WorkFinished ? "Yes" : "No")}</td>
+                        </tr>
+                    </table>
+                    
+                    {(string.IsNullOrEmpty(serviceReport.EngineerComments) ? "" : $@"
+                    <h4>Engineer Comments:</h4>
+                    <div style='padding: 15px; background-color: #f0f0f0; border-left: 4px solid #007bff; margin-bottom: 20px;'>
+                        <p>{serviceReport.EngineerComments}</p>
+                    </div>")}
+                    
+                    <div style='margin-top: 20px; padding: 15px; background-color: #e7f3ff; border-left: 4px solid #2196F3;'>
+                        <p><strong>✓ Next Steps:</strong></p>
+                        <ul>
+                            <li>Review the submitted service report in the CIM system</li>
+                            <li>Verify all service details are complete and accurate</li>
+                            <li>Approve the service report if satisfactory</li>
+                            <li>Contact engineer if any clarification is needed</li>
+                        </ul>
+                    </div>
+                    
+                    <div style='margin-top: 20px; padding: 15px; background-color: #f0f0f0;'>
+                        <p><strong>Service Summary:</strong></p>
+                        <ul>
+                            <li>Installation Service: {(serviceReport.Installation ? "Yes" : "No")}</li>
+                            <li>Preventive Maintenance: {(serviceReport.PrevMaintenance ? "Yes" : "No")}</li>
+                            <li>Corrective Maintenance: {(serviceReport.CorrMaintenance ? "Yes" : "No")}</li>
+                            <li>Work Completed: {(serviceReport.WorkCompleted ? "Yes" : "No")}</li>
+                            {(serviceReport.Interrupted ? $"<li style='color: #dc3545;'><strong>Service Interrupted: Yes</strong> - {serviceReport.Reason ?? "No reason provided"}</li>" : "")}
+                        </ul>
+                    </div>
+                    
+                    <hr style='margin: 20px 0; border: none; border-top: 2px solid #ddd;' />
+                    
+                    <p style='color: #666; font-size: 12px;'>
+                        <em>This is an automated notification generated when service reports are submitted.</em>
+                    </p>
+                    <p style='color: #666; font-size: 12px;'>
+                        <em>This is a system-generated email. Please contact your administrator for support.</em>
+                    </p>
+                </body>
+                </html>";
+
+                var subject = $"Service Report {serviceReport.ServiceReportNo} Submitted - SR: {serviceRequest.SerReqNo}";
+
+                var cm = new CommonMethods(Context, currentUserService, configuration);
+                cm.SendEmailMethod(recipient.Email, emailBody, subject);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[SendServiceReportSubmissionEmailAsync] Error sending email: {ex.Message}");
+            }
         }
 
         public async Task<bool> UploadServiceReportAsync(UploadServiceReportRequest uploadServiceReport)
@@ -495,5 +703,213 @@ namespace Infrastructure.Services
 #pragma warning restore CS0168 // Variable is declared but never used
         }
 
+        /// <summary>
+        /// Notifies distributor in real-time when customer signs service report
+        /// </summary>
+        private async Task NotifyDistributorForCustomerSignatureAsync(Domain.Entities.ServiceReport serviceReport)
+        {
+            try
+            {
+                // Get service request details
+                var serviceRequest = await Context.ServiceRequest
+                    .FirstOrDefaultAsync(x => x.Id == serviceReport.ServiceRequestId);
+
+                if (serviceRequest == null) return;
+
+                // Get site and distributor
+                var site = await Context.Site
+                    .FirstOrDefaultAsync(x => x.Id == serviceRequest.SiteId);
+                var customer = site != null ? await Context.Customer
+                    .FirstOrDefaultAsync(x => x.Id == site.CustomerId) : null;
+                var distributor = site != null ? await Context.Distributor
+                    .FirstOrDefaultAsync(x => x.Id == site.DistId) : null;
+
+                if (distributor == null) return;
+
+                // Get distributor contacts (RDTSP - Regional Distributors)
+                var distributorContacts = await Context.VW_UserProfile
+                    .Where(x => x.SegmentCode == "RDTSP" && x.EntityParentId == distributor.Id)
+                    .ToListAsync();
+
+                if (distributorContacts.Count == 0) return;
+
+                // Get engineer details
+                var engineer = await Context.RegionContact
+                    .FirstOrDefaultAsync(x => x.Id == serviceRequest.AssignedTo);
+
+                //// Check if notification already sent for this report
+                //var existingNotification = await Context.Notifications
+                //    .FirstOrDefaultAsync(x =>
+                //        x.Remarks.Contains($"Customer signed") &&
+                //        x.Remarks.Contains(serviceReport.ServiceReportNo) &&
+                //        x.CreatedOn.Date == DateTime.Now.Date);
+
+                //if (existingNotification != null)
+                //{
+                //    return;
+                //}
+
+                // Create notifications for each distributor contact
+                foreach (var contact in distributorContacts)
+                {
+                    try
+                    {
+                        // Create in-app notification
+                        var notification = new Notifications
+                        {
+                            Id = Guid.NewGuid(),
+                            Remarks = $"Service Report signed by customer: {serviceReport.ServiceReportNo} for Service Request: {serviceRequest.SerReqNo} at {site?.CustRegName ?? "N/A"} ({customer?.CustName ?? "N/A"}). Signed by: {serviceReport.SignCustName}. Engineer: {engineer?.FirstName} {engineer?.LastName}",
+                            RoleId = contact.RoleId,
+                            RaisedBy = currentUserService.GetUserId(),
+                            UserId = contact.UserId,
+                            IsActive = true,
+                            IsDeleted = false,
+                            CreatedBy = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = DateTime.Now,
+                            UpdatedBy = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                            UpdatedOn = DateTime.Now
+                        };
+
+                        await Context.Notifications.AddAsync(notification);
+                        await Context.SaveChangesAsync();
+
+                        // Send email notification
+                        await SendCustomerSignatureEmailAsync(contact, serviceReport, serviceRequest, site, customer, engineer);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[NotifyDistributorForCustomerSignature] Error notifying contact {contact.UserId}: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[NotifyDistributorForCustomerSignature] Error: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Sends email notification about customer signature on service report
+        /// </summary>
+        private async Task SendCustomerSignatureEmailAsync(
+            VW_UserProfile recipient,
+            Domain.Entities.ServiceReport serviceReport,
+            ServiceRequest serviceRequest,
+            Site site,
+            Customer customer,
+            RegionContact engineer)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(recipient.Email)) return;
+
+                var emailBody = $@"
+                <html>
+                <body style='font-family: Arial, sans-serif;'>
+                    <h3>✅ Service Report Signed by Customer</h3>
+                    
+                    <div style='background-color: #d4edda; padding: 15px; border-left: 4px solid #28a745; margin: 10px 0;'>
+                        <p><strong>✓ CONFIRMED:</strong> Customer has signed the service report. Service completion approved by customer.</p>
+                    </div>
+                    
+                    <h4>Service Report Details:</h4>
+                    <table style='width: 100%; border-collapse: collapse; margin-bottom: 20px;'>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Service Report #:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{serviceReport.ServiceReportNo}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Service Request #:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{serviceRequest.SerReqNo}</td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Engineer:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{engineer?.FirstName} {engineer?.LastName}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Customer:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{customer?.CustName ?? "N/A"}</td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Site Location:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{site?.CustRegName ?? "N/A"}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Service Date:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{serviceReport.ServiceReportDate:dd/MM/yyyy}</td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Signed By:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong style='color: #28a745;'>{serviceReport.SignCustName}</strong></td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Report Status:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong style='color: #28a745;'>{(serviceReport.IsCompleted ? "COMPLETED & APPROVED" : "SIGNED")}</strong></td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Work Finished:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{(serviceReport.WorkFinished ? "Yes" : "No")}</td>
+                        </tr>
+                    </table>
+                    
+                    {(string.IsNullOrEmpty(serviceReport.EngineerComments) ? "" : $@"
+                    <h4>Engineer Comments:</h4>
+                    <div style='padding: 15px; background-color: #f0f0f0; border-left: 4px solid #007bff; margin-bottom: 20px;'>
+                        <p>{serviceReport.EngineerComments}</p>
+                    </div>")}
+                    
+                    <div style='margin-top: 20px; padding: 15px; background-color: #d4edda; border-left: 4px solid #28a745;'>
+                        <p><strong>✓ Customer Approval Confirmed:</strong></p>
+                        <ul>
+                            <li>✓ Service work has been completed and approved by customer</li>
+                            <li>✓ Customer has signed the service report</li>
+                            <li>✓ Service is now documented and finalized</li>
+                            <li>✓ Report ready for billing/invoicing</li>
+                        </ul>
+                    </div>
+                    
+                    <div style='margin-top: 20px; padding: 15px; background-color: #f0f0f0;'>
+                        <p><strong>Service Summary:</strong></p>
+                        <ul>
+                            <li>Installation Service: {(serviceReport.Installation ? "Yes" : "No")}</li>
+                            <li>Preventive Maintenance: {(serviceReport.PrevMaintenance ? "Yes" : "No")}</li>
+                            <li>Corrective Maintenance: {(serviceReport.CorrMaintenance ? "Yes" : "No")}</li>
+                            <li>Work Completed: {(serviceReport.WorkCompleted ? "Yes" : "No")}</li>
+                            {(serviceReport.Interrupted ? $"<li style='color: #dc3545;'><strong>Service Interrupted: Yes</strong> - {serviceReport.Reason ?? "No reason provided"}</li>" : "")}
+                        </ul>
+                    </div>
+                    
+                    <div style='margin-top: 20px; padding: 15px; background-color: #e7f3ff; border-left: 4px solid #2196F3;'>
+                        <p><strong>Next Steps:</strong></p>
+                        <ul>
+                            <li>Review the signed service report</li>
+                            <li>Verify all service details and signatures</li>
+                            <li>Process billing/invoicing if applicable</li>
+                            <li>Archive the signed report</li>
+                            <li>Close the service request if all work is complete</li>
+                        </ul>
+                    </div>
+                    
+                    <hr style='margin: 20px 0; border: none; border-top: 2px solid #ddd;' />
+                    
+                    <p style='color: #666; font-size: 12px;'>
+                        <em>This is an automated notification generated when service reports are signed by customers.</em>
+                    </p>
+                    <p style='color: #666; font-size: 12px;'>
+                        <em>This is a system-generated email. Please contact your administrator for support.</em>
+                    </p>
+                </body>
+                </html>";
+
+                var subject = $"✓ Service Report {serviceReport.ServiceReportNo} - SIGNED BY CUSTOMER - SR: {serviceRequest.SerReqNo}";
+
+                var cm = new CommonMethods(Context, currentUserService, configuration);
+                cm.SendEmailMethod(recipient.Email, emailBody, subject);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[SendCustomerSignatureEmailAsync] Error sending email: {ex.Message}");
+            }
+        }
     }
 }

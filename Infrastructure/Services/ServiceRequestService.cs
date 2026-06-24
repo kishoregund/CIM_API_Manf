@@ -355,11 +355,34 @@ namespace Infrastructure.Services
 
         public async Task<Guid> UpdateServiceRequestAsync(Domain.Entities.ServiceRequest serviceRequest)
         {
+            // Get the original service request to check if AssignedTo changed
+            var originalServiceRequest = await context.ServiceRequest.AsNoTracking().FirstOrDefaultAsync(x => x.Id == serviceRequest.Id);
+            var assignedToChanged = originalServiceRequest != null && originalServiceRequest.AssignedTo != serviceRequest.AssignedTo;
+            var newAssignedTo = serviceRequest.AssignedTo;
+
             serviceRequest.UpdatedOn = DateTime.Now;
             serviceRequest.UpdatedBy = Guid.Parse(currentUserService.GetUserId());
 
             context.Entry(serviceRequest).State = EntityState.Modified;
             await context.SaveChangesAsync();
+
+            // Notify customer when engineer is assigned (AssignedTo changed and is not empty)
+            if (assignedToChanged && newAssignedTo != Guid.Empty)
+            {
+                try
+                {
+                    var engineer = await context.RegionContact.FirstOrDefaultAsync(x => x.Id == newAssignedTo);
+                    if (engineer != null)
+                    {
+                        await NotifyCustomerForEngineerAssignmentAsync(serviceRequest, engineer);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[UpdateServiceRequestAsync] Error notifying customer: {ex.Message}");
+                }
+            }
+
             return serviceRequest.Id;
         }
 
@@ -710,6 +733,145 @@ namespace Infrastructure.Services
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[NotifyDistributorForEngineerResponse] Error: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Notifies customer site contact when engineer is assigned to service request
+        /// </summary>
+        public async Task NotifyCustomerForEngineerAssignmentAsync(Domain.Entities.ServiceRequest serviceRequest, RegionContact engineer)
+        {
+            try
+            {
+                if (engineer == null || serviceRequest == null) return;
+
+                var site = await context.Site.FirstOrDefaultAsync(x => x.Id == serviceRequest.SiteId);
+                if (site == null) return;
+
+                var customer = await context.Customer.FirstOrDefaultAsync(x => x.Id == site.CustomerId);
+                var siteContacts = await context.VW_UserProfile.Where(x => x.SegmentCode == "RCUST" 
+                && x.EntityChildId == serviceRequest.SiteId && x.EntityParentId == serviceRequest.CustId).ToListAsync();
+
+                if (siteContacts.Count == 0) return;
+
+                foreach (var contact in siteContacts)
+                {
+                    try
+                    {
+                        // Create in-app notification
+                        var notification = new Notifications
+                        {
+                            Id = Guid.NewGuid(),
+                            Remarks = $"Engineer {engineer.FirstName} {engineer.LastName} has been assigned to Service Request {serviceRequest.SerReqNo}",
+                            RoleId = contact.RoleId,
+                            RaisedBy = currentUserService.GetUserId(),
+                            UserId = contact.UserId,
+                            IsActive = true,
+                            IsDeleted = false,
+                            CreatedBy = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = DateTime.Now,
+                            UpdatedBy = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                            UpdatedOn = DateTime.Now
+                        };
+
+                        await context.Notifications.AddAsync(notification);
+                        await context.SaveChangesAsync();
+
+                        // Send email notification
+                        await SendCustomerAssignmentEmailAsync(contact, engineer, serviceRequest, site, customer);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[NotifyCustomerForEngineerAssignment] Error notifying contact {contact.ContactId}: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[NotifyCustomerForEngineerAssignment] Error: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Sends email notification to customer when engineer is assigned
+        /// </summary>
+        private async Task SendCustomerAssignmentEmailAsync(
+            VW_UserProfile contact,
+            RegionContact engineer,
+            Domain.Entities.ServiceRequest serviceRequest,
+            Site site,
+            Customer customer)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(contact.Email)) return;
+
+                var emailBody = $@"
+                <html>
+                <body style='font-family: Arial, sans-serif;'>
+                    <h3>👨‍🔧 Engineer Assigned to Your Service Request</h3>
+                    
+                    <div style='background-color: #d1ecf1; padding: 15px; border-left: 4px solid #0c5460; margin: 10px 0;'>
+                        <p><strong>✓ INFO:</strong> An engineer has been assigned to address your service request.</p>
+                    </div>
+                    
+                    <h4>Engineer Assignment Details:</h4>
+                    <table style='width: 100%; border-collapse: collapse; margin-bottom: 20px;'>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Service Request #:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{serviceRequest.SerReqNo}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Assigned Engineer:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong style='color: #0c5460;'>{engineer.FirstName} {engineer.LastName}</strong></td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Customer:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{customer?.CustName ?? "N/A"}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Site Location:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{site?.CustRegName ?? "N/A"}</td>
+                        </tr>
+                        <tr style='background-color: #f8f9fa;'>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Request Type:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId.ToString() == serviceRequest.VisitType)?.ItemName ?? "N/A"}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 8px; border: 1px solid #ddd;'><strong>Request Date:</strong></td>
+                            <td style='padding: 8px; border: 1px solid #ddd;'>{serviceRequest.SerReqDate}</td>
+                        </tr>
+                    </table>
+                    
+                    <div style='margin-top: 20px; padding: 15px; background-color: #e7f3ff; border-left: 4px solid #2196F3;'>
+                        <p><strong>What's Next:</strong></p>
+                        <ul>
+                            <li>The assigned engineer will contact you shortly with schedule details</li>
+                            <li>Please ensure someone is available at the site during the scheduled visit</li>
+                            <li>Have any relevant documentation ready for the engineer</li>
+                            <li>You will receive a visit confirmation email with date and time</li>
+                        </ul>
+                    </div>
+                    
+                    <hr style='margin: 20px 0; border: none; border-top: 2px solid #ddd;' />
+                    
+                    <p style='color: #666; font-size: 12px;'>
+                        <em>This is an automated notification generated when engineers are assigned to service requests.</em>
+                    </p>
+                    <p style='color: #666; font-size: 12px;'>
+                        <em>This is a system-generated email. Please contact your administrator for support.</em>
+                    </p>
+                </body>
+                </html>";
+
+                var subject = $"Engineer Assignment - Service Request {serviceRequest.SerReqNo}";
+
+                var cm = new CommonMethods(context, currentUserService, configuration);
+                cm.SendEmailMethod(contact.Email, emailBody, subject);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[SendCustomerAssignmentEmailAsync] Error sending email: {ex.Message}");
             }
         }
 
