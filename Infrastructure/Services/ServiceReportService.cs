@@ -211,6 +211,7 @@ namespace Infrastructure.Services
             if (!string.IsNullOrEmpty(ServiceReport.EngSignature))
             {
                 await NotifyDistributorForServiceReportSubmissionAsync(ServiceReport);
+                await NotifyDistributorForCustomerSignatureAsync(ServiceReport);
             }
 
             // Send real-time notification to distributor when customer signs report
@@ -726,9 +727,9 @@ namespace Infrastructure.Services
 
                 if (distributor == null) return;
 
-                // Get distributor contacts (RDTSP - Regional Distributors)
+                // Get distributor contacts (RDTSP - Regional Distributors) & engineers for customer signature notification
                 var distributorContacts = await Context.VW_UserProfile
-                    .Where(x => x.SegmentCode == "RDTSP" && x.EntityParentId == distributor.Id)
+                    .Where(x => (x.SegmentCode == "RDTSP" || x.SegmentCode == "RENG") && x.EntityParentId == distributor.Id)
                     .ToListAsync();
 
                 if (distributorContacts.Count == 0) return;

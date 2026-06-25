@@ -749,7 +749,7 @@ namespace Infrastructure.Services
                 if (site == null) return;
 
                 var customer = await context.Customer.FirstOrDefaultAsync(x => x.Id == site.CustomerId);
-                var siteContacts = await context.VW_UserProfile.Where(x => x.SegmentCode == "RCUST" 
+                var siteContacts = await context.VW_UserProfile.Where(x => (x.SegmentCode == "RCUST" || x.SegmentCode == "RENG")
                 && x.EntityChildId == serviceRequest.SiteId && x.EntityParentId == serviceRequest.CustId).ToListAsync();
 
                 if (siteContacts.Count == 0) return;
