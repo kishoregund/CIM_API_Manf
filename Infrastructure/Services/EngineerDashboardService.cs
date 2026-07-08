@@ -49,14 +49,13 @@ namespace Infrastructure.Services
                 //var brands = userProfile.BrandIds.Split(',');
 
                 var engSerReq = await (from s in context.ServiceRequest
-                                       join rc in context.RegionContact on s.AssignedTo equals rc.Id
+                                       where s.AssignedTo.Contains(userProfile.ContactId.ToString())
                                        join li in context.VW_ListItems on s.VisitType equals li.ListTypeItemId.ToString()
-                                       join i in context.Instrument//.Where(x => bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()))
+                                       join i in context.Instrument
                                        on s.MachinesNo equals i.Id.ToString()
-                                       where s.AssignedTo == userProfile.ContactId
                                        select new EngServiceRequestResponse()
                                        {
-                                           ContactId = rc.Id.ToString(),
+                                           ContactId = userProfile.ContactId.ToString(),
                                            Createdby = s.CreatedBy.ToString(),
                                            CreatedOn = s.CreatedOn,
                                            IsDeleted = s.IsDeleted,
@@ -66,7 +65,7 @@ namespace Infrastructure.Services
                                            ServiceType = li.ItemName,
                                            ServiceTypeCode = li.ItemCode,
                                            ServiceTypeId = s.VisitType,
-                                           UserName = rc.FirstName + ' ' + rc.LastName
+                                           UserName = userProfile.FirstName + ' ' + userProfile.LastName
                                        }).ToListAsync();
 
 
@@ -161,10 +160,10 @@ namespace Infrastructure.Services
                                   join sr in context.ServiceRequest on srp.ServiceRequestId equals sr.Id
                                   join i in context.Instrument//.Where(x => bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()))
                                   on sr.MachinesNo equals i.Id.ToString()
-                                  where sr.AssignedTo == userProfile.ContactId
+                                  where sr.AssignedTo.Contains(userProfile.ContactId.ToString())
                                   select new SparesConsumedResponse()
                                   {
-                                      AssignedTo = sr.AssignedTo.ToString(),
+                                      AssignedTo = sr.AssignedTo,
                                       BrandId = i.BrandId.ToString(),
                                       BusinessUnitId = i.BusinessUnitId.ToString(),
                                       CreatedOn = srp.CreatedOn,

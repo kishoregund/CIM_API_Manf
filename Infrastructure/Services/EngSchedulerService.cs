@@ -106,13 +106,57 @@ namespace Infrastructure.Services
 
         public async Task<Guid> CreateEngSchedulerAsync(EngScheduler EngScheduler)
         {
-            EngScheduler.CreatedOn = DateTime.Now;
-            EngScheduler.UpdatedOn = DateTime.Now;
-            EngScheduler.CreatedBy = Guid.Parse(currentUserService.GetUserId());
-            EngScheduler.UpdatedBy = Guid.Parse(currentUserService.GetUserId());
 
-            await context.EngScheduler.AddAsync(EngScheduler);
-            await context.SaveChangesAsync();
+            try
+            {
+                // Validation: Check for required fields
+                if (EngScheduler.EngId == Guid.Empty)
+                    throw new ArgumentException("Engineer ID (EngId) is required.", nameof(EngScheduler.EngId));
+
+                if (string.IsNullOrWhiteSpace(EngScheduler.StartTime))
+                    throw new ArgumentException("Start time is required.", nameof(EngScheduler.StartTime));
+
+                if (string.IsNullOrWhiteSpace(EngScheduler.EndTime))
+                    throw new ArgumentException("End time is required.", nameof(EngScheduler.EndTime));
+
+                // Validation: Check for duplicate schedule (same engineer, same start time, same end time)
+                var existingSchedule = await context.EngScheduler
+                    .Where(x => !x.IsDeleted &&
+                               x.EngId == EngScheduler.EngId &&
+                               x.StartTime == EngScheduler.StartTime &&
+                               x.EndTime == EngScheduler.EndTime)
+                    .FirstOrDefaultAsync();
+
+                if (existingSchedule != null)
+                    throw new InvalidOperationException(
+                        $"A schedule already exists for engineer {EngScheduler.EngId} with the same start time ({EngScheduler.StartTime}) and end time ({EngScheduler.EndTime}).");
+
+                // Validation: Check for overlapping schedules (same engineer, overlapping time slots)
+                var overlappingSchedule = await context.EngScheduler
+                    .Where(x => !x.IsDeleted &&
+                               x.EngId == EngScheduler.EngId &&
+                               x.StartTime.CompareTo(EngScheduler.EndTime) < 0 &&
+                               x.EndTime.CompareTo(EngScheduler.StartTime) > 0)
+                    .FirstOrDefaultAsync();
+
+                if (overlappingSchedule != null)
+                    throw new InvalidOperationException(
+                        $"An overlapping schedule exists for engineer {EngScheduler.EngId}. " +
+                        $"Existing schedule: {overlappingSchedule.StartTime} to {overlappingSchedule.EndTime}. " +
+                        $"New schedule: {EngScheduler.StartTime} to {EngScheduler.EndTime}.");
+
+                EngScheduler.CreatedOn = DateTime.Now;
+                EngScheduler.UpdatedOn = DateTime.Now;
+                EngScheduler.CreatedBy = Guid.Parse(currentUserService.GetUserId());
+                EngScheduler.UpdatedBy = Guid.Parse(currentUserService.GetUserId());
+
+                await context.EngScheduler.AddAsync(EngScheduler);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                
+            }
             return EngScheduler.Id;
         }
 

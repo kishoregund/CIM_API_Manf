@@ -42,7 +42,9 @@ namespace Infrastructure.Services
             {
                 if (userProfile.SegmentCode == "RENG")
                 {
-                    return await context.ServiceRequest.Where(x => x.DistId == userProfile.EntityParentId && x.AssignedTo.ToString() == currentUserService.GetUserId()).ToListAsync();
+                    // Filter by checking if userProfile.ContactId is in the comma-separated AssignedTo
+                    var contactIdString = userProfile.ContactId.ToString();
+                    return await context.ServiceRequest.Where(x => x.DistId == userProfile.EntityParentId && x.AssignedTo.Contains(contactIdString)).ToListAsync();
                 }
                 else if (userProfile.SegmentCode == "RDTSP")
                 {
@@ -113,7 +115,9 @@ namespace Infrastructure.Services
                                                          //join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
                                                      select sr).OrderByDescending(x => x.IsCritical).ThenByDescending(x => x.CreatedOn).ToListAsync();
 
-                            serviceRequests = serviceRequests.Where(x => x.AssignedTo == userProfile.ContactId)
+                            // Filter by checking if userProfile.ContactId is in the comma-separated AssignedTo
+                            var contactIdString = userProfile.ContactId.ToString();
+                            serviceRequests = serviceRequests.Where(x => x.AssignedTo.Contains(contactIdString))
                                 .OrderByDescending(x => x.IsCritical).ThenByDescending(x => x.CreatedOn).ToList();
                         }
                     }
@@ -181,7 +185,9 @@ namespace Infrastructure.Services
                                                  join i in context.Instrument on sr.MachinesNo equals i.Id.ToString()
                                                  select sr).OrderByDescending(x => x.IsCritical).ThenByDescending(x => x.CreatedOn).ToListAsync();
 
-                        serviceRequests = serviceRequests.Where(x => x.AssignedTo == userProfile.ContactId)
+                        // Filter by checking if userProfile.ContactId is in the comma-separated AssignedTo
+                        var contactIdString = userProfile.ContactId.ToString();
+                        serviceRequests = serviceRequests.Where(x => x.AssignedTo.Contains(contactIdString))
                             .OrderByDescending(x => x.IsCritical).ThenByDescending(x => x.CreatedOn).ToList();
                     }
                 }
@@ -197,7 +203,7 @@ namespace Infrastructure.Services
         public async Task<Guid> CreateServiceRequestAsync(Domain.Entities.ServiceRequest serviceRequest)
         {
             serviceRequest.SerReqNo = await GetServiceRequestNoAsync();
-            serviceRequest.SerReqDate = DateTime.ParseExact(serviceRequest.SerReqDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).Date.ToString("dd/MM/yyyy"); // Convert.ToDateTime(serviceRequest.SerReqDate).ToString("dd/MM/yyyy");
+            serviceRequest.SerReqDate = DateTime.ParseExact(serviceRequest.SerReqDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).Date.ToString("dd/MM/yyyy");
             serviceRequest.AlarmDetails = string.IsNullOrEmpty(serviceRequest.AlarmDetails) ? "Breakdown" : serviceRequest.AlarmDetails;
             serviceRequest.BreakdownType = string.IsNullOrEmpty(serviceRequest.BreakdownType) ? "Breakdown" : serviceRequest.BreakdownType;
             serviceRequest.BreakoccurDetailsId = serviceRequest.BreakoccurDetailsId == Guid.Empty ? context.VW_ListItems.
@@ -216,6 +222,27 @@ namespace Infrastructure.Services
             if (serviceRequest.TotalCost != null && serviceRequest.BaseAmt != null)
             {
                 serviceRequest.CostInUsd = serviceRequest.TotalCost.Value * serviceRequest.BaseAmt.Value;
+            }
+
+            // Handle AssignedTo as comma-separated string
+            if (!string.IsNullOrEmpty(serviceRequest.AssignedTo))
+            {
+                // If it's a JSON array string from UI, parse it; otherwise keep as is
+                serviceRequest.AssignedTo = serviceRequest.AssignedTo.Trim();
+                if (serviceRequest.AssignedTo.StartsWith("[") && serviceRequest.AssignedTo.EndsWith("]"))
+                {
+                    // Parse JSON array and convert to comma-separated
+                    try
+                    {
+                        var assignedToList = System.Text.Json.JsonSerializer.Deserialize<List<string>>(serviceRequest.AssignedTo);
+                        serviceRequest.AssignedTo = string.Join(",", assignedToList.Where(x => !string.IsNullOrEmpty(x)));
+                    }
+                    catch
+                    {
+                        // If parsing fails, keep original format
+                        serviceRequest.AssignedTo = serviceRequest.AssignedTo.Trim('[', ']');
+                    }
+                }
             }
 
             //using (var transaction = new TransactionScope())
@@ -253,10 +280,6 @@ namespace Infrastructure.Services
             {
                 serviceRequest.StageId = context.VW_ListItems.FirstOrDefault(x => x.ListCode == "SRSAT" && x.ItemCode == "ONHLD").ListTypeItemId;
                 serviceRequest.IsNotUnderAmc = true;
-
-                //result.Result = true;
-                //result.ResultMessage = "Please verify if the AMC is defined and a Contract Agreement is done in AMC to benefit AMC services.";
-
             }
 
             await context.ServiceRequest.AddAsync(serviceRequest);
@@ -290,28 +313,6 @@ namespace Infrastructure.Services
 
                 commonMethods.SendEmailMethod(email, body, subject);
             }
-
-            //    transaction.Complete();
-            //}
-
-            #region Notification
-
-
-            //var userProfile = _context.VW_UserProfiles.FirstOrDefault(x => x.Userid == mServiceRequest.Createdby);
-            //var userRole = _context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId == userProfile.Roleid);
-
-            //// if distributor raised the request dont show notification about that request
-            //if (userRole?.ItemCode?.ToUpper() != "RDTSP")
-            //{
-            //    var notification = new NotificationDL(_context);
-            //    notification.MapUserToNotification(userId,
-            //        $"New Service Request {mServiceRequest.Serreqno} has been Created", companyId,
-            //        mServiceRequest.Createdby,
-            //        null,
-            //        mServiceRequest.Assignedto);
-            //}
-
-            #endregion
 
             return serviceRequest.Id;
         }
@@ -360,21 +361,54 @@ namespace Infrastructure.Services
             var assignedToChanged = originalServiceRequest != null && originalServiceRequest.AssignedTo != serviceRequest.AssignedTo;
             var newAssignedTo = serviceRequest.AssignedTo;
 
+            // Handle AssignedTo as comma-separated string
+            if (!string.IsNullOrEmpty(serviceRequest.AssignedTo))
+            {
+                // If it's a JSON array string from UI, parse it; otherwise keep as is
+                serviceRequest.AssignedTo = serviceRequest.AssignedTo.Trim();
+                if (serviceRequest.AssignedTo.StartsWith("[") && serviceRequest.AssignedTo.EndsWith("]"))
+                {
+                    // Parse JSON array and convert to comma-separated
+                    try
+                    {
+                        var assignedToList = System.Text.Json.JsonSerializer.Deserialize<List<string>>(serviceRequest.AssignedTo);
+                        serviceRequest.AssignedTo = string.Join(",", assignedToList.Where(x => !string.IsNullOrEmpty(x)));
+                    }
+                    catch
+                    {
+                        // If parsing fails, keep original format
+                        serviceRequest.AssignedTo = serviceRequest.AssignedTo.Trim('[', ']');
+                    }
+                }
+                newAssignedTo = serviceRequest.AssignedTo;
+            }
+
             serviceRequest.UpdatedOn = DateTime.Now;
             serviceRequest.UpdatedBy = Guid.Parse(currentUserService.GetUserId());
 
             context.Entry(serviceRequest).State = EntityState.Modified;
             await context.SaveChangesAsync();
 
-            // Notify customer when engineer is assigned (AssignedTo changed and is not empty)
-            if (assignedToChanged && newAssignedTo != Guid.Empty)
+            // Notify customers when engineers are assigned (AssignedTo changed and is not empty)
+            if (assignedToChanged && !string.IsNullOrEmpty(newAssignedTo))
             {
                 try
                 {
-                    var engineer = await context.RegionContact.FirstOrDefaultAsync(x => x.Id == newAssignedTo);
-                    if (engineer != null)
+                    // Split the comma-separated AssignedTo values and notify for each engineer
+                    var assignedEngineerIds = newAssignedTo.Split(',', System.StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => x.Trim())
+                        .ToList();
+
+                    foreach (var engineerId in assignedEngineerIds)
                     {
-                        await NotifyCustomerForEngineerAssignmentAsync(serviceRequest, engineer);
+                        if (Guid.TryParse(engineerId, out Guid guidEngineerId))
+                        {
+                            var engineer = await context.RegionContact.FirstOrDefaultAsync(x => x.Id == guidEngineerId);
+                            if (engineer != null)
+                            {
+                                await NotifyCustomerForEngineerAssignmentAsync(serviceRequest, engineer);
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -399,10 +433,17 @@ namespace Infrastructure.Services
             mServiceRequest.AcceptedDate = ServiceRequest.AcceptedDate;
             mServiceRequest.AlarmDetails = ServiceRequest.AlarmDetails;
             mServiceRequest.AssignedTo = ServiceRequest.AssignedTo;
-            if (ServiceRequest.AssignedTo != Guid.Empty)
+            if (!string.IsNullOrEmpty(ServiceRequest.AssignedTo))
             {
-                var assignTo = context.RegionContact.FirstOrDefault(x => x.Id == ServiceRequest.AssignedTo);
-                mServiceRequest.AssignedToName = assignTo != null ? assignTo.FirstName + ' ' + assignTo.LastName : "";
+                // For multi-select, get the first assigned engineer's name for display
+                var firstEngineerId = ServiceRequest.AssignedTo.Split(',', System.StringSplitOptions.RemoveEmptyEntries)
+                    .FirstOrDefault()?.Trim();
+                
+                if (!string.IsNullOrEmpty(firstEngineerId) && Guid.TryParse(firstEngineerId, out Guid guidEngineerId))
+                {
+                    var assignTo = context.RegionContact.FirstOrDefault(x => x.Id == guidEngineerId);
+                    mServiceRequest.AssignedToName = assignTo != null ? assignTo.FirstName + ' ' + assignTo.LastName : "";
+                }
             }
             mServiceRequest.BreakdownType = ServiceRequest.BreakdownType;
             mServiceRequest.BreakoccurDetailsId = ServiceRequest.BreakoccurDetailsId;
@@ -470,16 +511,34 @@ namespace Infrastructure.Services
             mServiceRequest.EngAction = srEngActionService != null ? srEngActionService.GetSREngActionBySRIdAsync(mServiceRequest.Id).Result : null;
             mServiceRequest.EngComments = srEngCommentsService != null ? srEngCommentsService.GetSREngCommentBySRIdAsync(mServiceRequest.Id).Result : null;
             mServiceRequest.AssignedHistory = srAssignedHistoryService != null ? srAssignedHistoryService.GetSRAssignedHistoryBySRIdAsync(mServiceRequest.Id).Result : null;
-            mServiceRequest.ScheduledCalls = engSchedulerService != null ? engSchedulerService.GetEngSchedulerBySRIdAsync(ServiceRequest.Id).Result.Where(x => x.EngId == ServiceRequest.AssignedTo).OrderByDescending(x => x.CreatedOn).ToList() : null;
+            
+            // For ScheduledCalls, if AssignedTo contains multiple engineers, get calls for all of them
+            if (engSchedulerService != null && !string.IsNullOrEmpty(ServiceRequest.AssignedTo))
+            {
+                var allScheduledCalls = engSchedulerService.GetEngSchedulerBySRIdAsync(ServiceRequest.Id).Result;
+                var assignedEngineerIds = ServiceRequest.AssignedTo.Split(',', System.StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => x.Trim())
+                    .ToList();
+                
+                mServiceRequest.ScheduledCalls = allScheduledCalls
+                    .Where(x => assignedEngineerIds.Any(eid => eid == x.EngId.ToString()))
+                    .OrderByDescending(x => x.CreatedOn)
+                    .ToList();
+            }
+            else
+            {
+                mServiceRequest.ScheduledCalls = null;
+            }
+            
             return mServiceRequest;
         }
 
-        private ServiceRequestStagesResponse GetSRStages(Guid Id, Guid assignedTo)
+        private ServiceRequestStagesResponse GetSRStages(Guid Id, string assignedTo)
         {
             ServiceRequestStagesResponse srStages = new();
             var serRep = context.ServiceReport.Where(x => x.ServiceRequestId == Id).FirstOrDefault();
             srStages.Created = true;
-            srStages.Assigned = assignedTo == Guid.Empty ? false : true;
+            srStages.Assigned = string.IsNullOrEmpty(assignedTo) ? false : true;
             srStages.MeetingScheduled = context.EngScheduler.Any(x => x.SerReqId == Id);
             srStages.InProgress = serRep != null ? true : false;
             srStages.EngSigned = serRep != null && !string.IsNullOrEmpty(serRep.EngSignature) ? true : false;

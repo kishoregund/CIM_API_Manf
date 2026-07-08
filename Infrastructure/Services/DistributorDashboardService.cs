@@ -129,10 +129,11 @@ namespace Infrastructure.Services
                 #endregion
 
                 var engHSerReq = (from s in context.ServiceRequest.Where(x => lstSites.Contains(x.SiteId.ToString()))
-                                  join rc in context.RegionContact on s.AssignedTo equals rc.Id
+                                  where s.DistId == userProfile.EntityParentId && !s.IsReportGenerated
+                                  let assignedEngineers = context.RegionContact.Where(rc => s.AssignedTo.Contains(rc.Id.ToString())).ToList()
+                                  from rc in assignedEngineers
                                   join site in context.Site on s.SiteId equals site.Id
                                   join c in context.Customer on s.CustId equals c.Id
-                                  where s.DistId == userProfile.EntityParentId && !s.IsReportGenerated
                                   select new DashboardDataResponse()
                                   {
                                       CustId = c.Id.ToString(),
@@ -169,7 +170,9 @@ namespace Infrastructure.Services
                         EngName = x.EngName,
                         EngId = x.EngId,
                         EngAssignedToCust = serReq.Where(req =>
-                            req.CustId.ToString().ToUpper() == x.CustId.ToUpper() && req.AssignedTo.ToString().ToUpper() == x.EngId.ToUpper() && req.DistId == userProfile.EntityParentId &&
+                            req.CustId.ToString().ToUpper() == x.CustId.ToUpper() && 
+                            req.AssignedTo.Contains(x.EngId) && 
+                            req.DistId == userProfile.EntityParentId &&
                             req.IsReportGenerated == false).ToList().Count()
                     };
 

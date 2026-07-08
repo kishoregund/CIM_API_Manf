@@ -38,9 +38,11 @@ namespace Infrastructure.Services
             }
             else if (userProfile != null && userProfile.SegmentCode == "RENG")
             {
+                // Filter by checking if userProfile.ContactId is in the comma-separated AssignedTo
+                var contactIdString = userProfile.ContactId.ToString();
                 var advance = (from a in context.AdvanceRequest
                                join sr in context.ServiceRequest on a.ServiceRequestId equals sr.Id
-                               where sr.AssignedTo == userProfile.ContactId
+                               where sr.AssignedTo.Contains(contactIdString)
                                select a).ToList();
                 AdvanceRequests = advance.Select(exp => GetAdvanceRequest(exp)).ToList();
             }

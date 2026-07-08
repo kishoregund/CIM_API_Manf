@@ -341,9 +341,11 @@ namespace Infrastructure.Services
 
                 if (siteContacts.Count == 0) return;
 
-                // Get engineer details
-                var engineer = await Context.RegionContact
-                    .FirstOrDefaultAsync(x => x.Id == serviceRequest.AssignedTo);
+                // Get engineer details - parse first engineer from comma-separated list
+                var firstEngineerId = serviceRequest.AssignedTo?.Split(',', System.StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim();
+                var engineer = !string.IsNullOrEmpty(firstEngineerId) && Guid.TryParse(firstEngineerId, out Guid guidEngineerId)
+                    ? await Context.RegionContact.FirstOrDefaultAsync(x => x.Id == guidEngineerId)
+                    : null;
 
                 // Create notifications for each site contact
                 foreach (var contact in siteContacts)

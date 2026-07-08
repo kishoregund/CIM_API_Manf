@@ -6,6 +6,13 @@
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        public string DisplayName
+        {
+            get
+            {
+                return string.Join(" ", new[] { FirstName, LastName }.Where(s => !string.IsNullOrWhiteSpace(s)));
+            }
+        } 
         public string PrimaryContactNo { get; set; }
         public string PrimaryEmail { get; set; }
         public string SecondaryContactNo { get; set; }

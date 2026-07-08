@@ -50,7 +50,7 @@ namespace Application.Features.ServiceRequests.Requests
         [SkipGlobalValidation]
         public string ResolveAction { get; set; }
         public string ComplaintRegisName { get; set; }
-        public Guid AssignedTo { get; set; }
+        public string AssignedTo { get; set; }
         public string VisitType { get; set; }
         public string RequestTime { get; set; }
         [SkipGlobalValidation]

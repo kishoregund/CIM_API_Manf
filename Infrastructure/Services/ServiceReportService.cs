@@ -53,9 +53,11 @@ namespace Infrastructure.Services
                 }
                 else if (userProfile.ContactType == "DR" && userProfile.SegmentCode == "RENG")
                 {
+                    // Filter by checking if userProfile.ContactId is in the comma-separated AssignedTo
+                    var contactIdString = userProfile.ContactId.ToString();
                     serviceReports = await (from srp in Context.ServiceReport
                                             join sr in Context.ServiceRequest on srp.ServiceRequestId equals sr.Id
-                                            where sr.AssignedTo == userProfile.ContactId
+                                            where sr.AssignedTo.Contains(contactIdString)
                                             select srp).ToListAsync();
                 }
             }
@@ -253,9 +255,11 @@ namespace Infrastructure.Services
 
                 if (distributorContacts.Count == 0) return;
 
-                // Get engineer details
-                var engineer = await Context.RegionContact
-                    .FirstOrDefaultAsync(x => x.Id == serviceRequest.AssignedTo);
+                // Get engineer details - parse first engineer from comma-separated list
+                var firstEngineerId = serviceRequest.AssignedTo?.Split(',', System.StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim();
+                var engineer = !string.IsNullOrEmpty(firstEngineerId) && Guid.TryParse(firstEngineerId, out Guid guidEngineerId)
+                    ? await Context.RegionContact.FirstOrDefaultAsync(x => x.Id == guidEngineerId)
+                    : null;
 
                 // Check if notification already sent for this report
                 var existingNotification = await Context.Notifications
@@ -433,7 +437,11 @@ namespace Infrastructure.Services
 
             UpdateAMC(serreq);
 
-            var engCon = Context.RegionContact.FirstOrDefault(x => x.Id == serreq.AssignedTo);
+            // Get first assigned engineer from comma-separated list
+            var firstEngineerId = serreq.AssignedTo?.Split(',', System.StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim();
+            var engCon = !string.IsNullOrEmpty(firstEngineerId) && Guid.TryParse(firstEngineerId, out Guid guidEngineerId)
+                ? Context.RegionContact.FirstOrDefault(x => x.Id == guidEngineerId)
+                : null;
             var EngName = engCon.FirstName + " " + engCon.LastName;
 
             var Attachment = SaveAttachments(uploadServiceReport.Pdf, uploadServiceReport.SerReqId.ToString(), serreq.SerReqNo);
@@ -734,9 +742,11 @@ namespace Infrastructure.Services
 
                 if (distributorContacts.Count == 0) return;
 
-                // Get engineer details
-                var engineer = await Context.RegionContact
-                    .FirstOrDefaultAsync(x => x.Id == serviceRequest.AssignedTo);
+                // Get engineer details - parse first engineer from comma-separated list
+                var firstEngineerId = serviceRequest.AssignedTo?.Split(',', System.StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim();
+                var engineer = !string.IsNullOrEmpty(firstEngineerId) && Guid.TryParse(firstEngineerId, out Guid guidEngineerId)
+                    ? await Context.RegionContact.FirstOrDefaultAsync(x => x.Id == guidEngineerId)
+                    : null;
 
                 //// Check if notification already sent for this report
                 //var existingNotification = await Context.Notifications
