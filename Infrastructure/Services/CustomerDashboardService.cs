@@ -581,12 +581,18 @@ namespace Infrastructure.Services
 
         public async Task<List<VW_SparesRecommended>> GetSparePartsRecommendedAsync()
         {
-            var commonMethods = new CommonMethods(context, currentUserService, configuration);
+            try
+            {
+                var commonMethods = new CommonMethods(context, currentUserService, configuration);
 
-            var sites = await commonMethods.GetSitesByUserIdAsync();
+                var sites = await commonMethods.GetSitesByUserIdAsync();
 
-            return context.VW_SparesRecommended.Where(x => sites.Contains(x.SiteId.ToString())).OrderBy(x => x.QtyRecommended).ToList();
-
+                return context.VW_SparesRecommended.Where(x => sites.Contains(x.SiteId.ToString())).OrderBy(x => x.QtyRecommended).ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<VW_SparesRecommended>();
+            }
             //var claimsIdentity = this.User.Identity as ClaimsIdentity;
             //var userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
             //var bUId = claimsIdentity.FindFirst(ClaimTypes.Country)?.Value;

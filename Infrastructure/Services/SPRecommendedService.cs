@@ -90,12 +90,14 @@ namespace Infrastructure.Services
             await Context.SPRecommended.AddAsync(SPRecommended);
             await Context.SaveChangesAsync();
 
-            // Send real-time notification to distributor
-            await NotifyDistributorForSparePartsRecommendedAsync(SPRecommended);
+            if (Convert.ToInt32(SPRecommended.QtyRecommended) > 0)
+            {
+                // Send real-time notification to distributor
+                await NotifyDistributorForSparePartsRecommendedAsync(SPRecommended);
 
-            // Send real-time notification to customer site contacts
-            await NotifyCustomerForSparePartsRecommendedAsync(SPRecommended);
-
+                // Send real-time notification to customer site contacts
+                await NotifyCustomerForSparePartsRecommendedAsync(SPRecommended);
+            }
             return SPRecommended.Id;
         }
 

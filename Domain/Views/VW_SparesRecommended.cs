@@ -20,7 +20,7 @@ namespace Domain.Views
         public Guid BusinessUnitId { get; set; }
         public Guid BrandId { get; set; }
         public string SerReqNo { get; set; }
-        public Guid AssignedToId { get; set; }
+        public string AssignedToId { get; set; }
         public string AssignedToFName { get; set; }
         public string AssignedToLName { get; set; }
         public DateTime ServiceReportDate { get; set; }

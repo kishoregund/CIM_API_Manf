@@ -113,7 +113,7 @@ namespace Infrastructure.Services
                 //var bus = userProfile.BusinessUnitIds.Split(',');
                 //var brands = userProfile.BrandIds.Split(',');
 
-                var spr = context.VW_SparesRecommended.Where(x => !x.IsDeleted && x.AssignedToId == userProfile.ContactId).ToList();// && bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()));
+                var spr = context.VW_SparesRecommended.Where(x => !x.IsDeleted && x.AssignedToId.Contains(userProfile.ContactId.ToString())).ToList();// && bus.Contains(x.BusinessUnitId.ToString()) && brands.Contains(x.BrandId.ToString()));
                 //var privilage = _context.Vw_Privilages.FirstOrDefault(x => x.UserId == userId && x.ScreenCode == "SPRCM" && x.UserName != "admin");
                 //if (privilage != null && privilage.PrivilageCode != "PARTS" && (privilage._create || privilage._read || privilage._update || privilage._delete))
                 //    spr = spr.Where(x => x.Createdby == userId);

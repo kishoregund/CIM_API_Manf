@@ -112,7 +112,7 @@ namespace Infrastructure.Services
             var instType = Context.VW_ListItems.FirstOrDefault(x => x.ListTypeItemId.ToString() == (Context.Instrument.FirstOrDefault(x => x.Id == serviceReport.InstrumentId).InsType)).ItemName;
 
             serviceReportResponse.AnalyticalAssit = serviceReport.AnalyticalAssit;
-            serviceReportResponse.BrandId = Context.InstrumentAllocation.FirstOrDefault(x=>x.InstrumentId == serviceReport.InstrumentId).BrandId;
+            serviceReportResponse.BrandId = Context.InstrumentAllocation.FirstOrDefault(x => x.InstrumentId == serviceReport.InstrumentId).BrandId;
             serviceReportResponse.BrandName = Context.Brand.FirstOrDefault(x => x.Id == serviceReportResponse.BrandId).BrandName;
             serviceReportResponse.ComputerArlsn = serviceReport.ComputerArlsn;
             serviceReportResponse.CorrMaintenance = serviceReport.CorrMaintenance;
@@ -168,6 +168,45 @@ namespace Infrastructure.Services
 
         public async Task<Guid> CreateServiceReportAsync(Domain.Entities.ServiceReport ServiceReport)
         {
+            // Validation: Check if ServiceRequestId is provided
+            if (ServiceReport.ServiceRequestId == Guid.Empty)
+                throw new ArgumentException("Service Request ID is required to create a service report.", nameof(ServiceReport.ServiceRequestId));
+
+            // Get the associated service request
+            var serviceRequest = await Context.ServiceRequest.FirstOrDefaultAsync(x => x.Id == ServiceReport.ServiceRequestId);
+            if (serviceRequest == null)
+                throw new InvalidOperationException($"Service Request with ID {ServiceReport.ServiceRequestId} does not exist.");
+
+            // Validation: Check for existing service reports for this service request
+            var existingReports = await Context.ServiceReport
+                .Where(x => x.ServiceRequestId == ServiceReport.ServiceRequestId && !x.IsDeleted && !x.IsCompleted)
+                .ToListAsync();
+
+            if (existingReports.Count > 0)
+            {
+                // If there are existing reports, check if ANY of them have WorkCompleted and WorkFinished marked as YES
+                var completedReports = existingReports
+                    .Where(x => x.WorkCompleted && x.WorkFinished)
+                    .ToList();
+
+                if (completedReports.Count > 0)
+                {
+                    throw new InvalidOperationException(
+                        $"Cannot create a new service report for Service Request {serviceRequest.SerReqNo}. " +
+                        $"A completed service report already exists with WorkCompleted and WorkFinished marked as yes. " +
+                        $"Existing Report: {completedReports.First().ServiceReportNo}");
+                }
+
+                // Log existing reports that are not fully completed
+                var incompleteReports = existingReports
+                    .Where(x => !(x.WorkCompleted && x.WorkFinished))
+                    .Select(x => $"{x.ServiceReportNo} (WorkCompleted: {x.WorkCompleted}, WorkFinished: {x.WorkFinished})")
+                    .ToList();
+
+                System.Diagnostics.Debug.WriteLine(
+                    $"[CreateServiceReportAsync] Existing incomplete reports found for SR {serviceRequest.SerReqNo}: {string.Join(", ", incompleteReports)}");
+            }
+
             var repNo = "SerRpt" + DateTime.Now.Year + DateTime.Now.Month.ToString() + (Context.ServiceReport.ToList().Count + 1);
 
             ServiceReport.ServiceReportNo = repNo;
@@ -423,25 +462,44 @@ namespace Infrastructure.Services
 
         public async Task<bool> UploadServiceReportAsync(UploadServiceReportRequest uploadServiceReport)
         {
-            var serreq = await Context.ServiceRequest.FirstOrDefaultAsync(x => x.Id == uploadServiceReport.SerReqId);
+
             var serRep = await Context.ServiceReport.FirstOrDefaultAsync(x => x.ServiceRequestId == uploadServiceReport.SerReqId);
+            var serreq = await Context.ServiceRequest.FirstOrDefaultAsync(x => x.Id == uploadServiceReport.SerReqId);
 
-            serreq.IsReportGenerated = true;
-            serreq.SerResolutionDate = DateTime.Today.ToString("dd/MM/yyy");
-            serreq.StageId = Context.VW_ListItems.FirstOrDefault(x => x.ListCode == "SRSAT" && x.ItemCode == "COMP").ListTypeItemId;
-            Context.Entry(serreq).State = EntityState.Modified;
+            if (serRep == null)
+                throw new InvalidOperationException($"Service Report for Service Request {serreq?.SerReqNo} does not exist.");
 
-            serRep.IsCompleted = true;
-            Context.Entry(serRep).State = EntityState.Modified;
-            Context.SaveChanges();
+            if (serRep.WorkCompleted && serRep.WorkFinished)
+            {                
+                serreq.IsReportGenerated = true;
+                serreq.SerResolutionDate = DateTime.Today.ToString("dd/MM/yyy");
+                serreq.StageId = Context.VW_ListItems.FirstOrDefault(x => x.ListCode == "SRSAT" && x.ItemCode == "COMP").ListTypeItemId;
+                Context.Entry(serreq).State = EntityState.Modified;
 
-            UpdateAMC(serreq);
+                serRep.IsCompleted = true;
+                Context.Entry(serRep).State = EntityState.Modified;
+                Context.SaveChanges();
+                UpdateAMC(serreq);
+            }
+            else
+            {
+                // Return appropriate message when work is not completed
+                throw new InvalidOperationException(
+                    $"Service Report {serRep.ServiceReportNo} cannot be marked as completed. " +
+                    $"Both 'WorkCompleted' and 'WorkFinished' must be marked as 'Yes'. " +
+                    $"Current Status: WorkCompleted = {serRep.WorkCompleted}, WorkFinished = {serRep.WorkFinished}. " +
+                    $"Please ensure all work is marked as completed and finished before uploading the final report.");
+            }
 
             // Get first assigned engineer from comma-separated list
             var firstEngineerId = serreq.AssignedTo?.Split(',', System.StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim();
             var engCon = !string.IsNullOrEmpty(firstEngineerId) && Guid.TryParse(firstEngineerId, out Guid guidEngineerId)
                 ? Context.RegionContact.FirstOrDefault(x => x.Id == guidEngineerId)
                 : null;
+
+            if (engCon == null)
+                throw new InvalidOperationException($"Engineer not found for Service Request {serreq?.SerReqNo}.");
+
             var EngName = engCon.FirstName + " " + engCon.LastName;
 
             var Attachment = SaveAttachments(uploadServiceReport.Pdf, uploadServiceReport.SerReqId.ToString(), serreq.SerReqNo);
@@ -586,15 +644,15 @@ namespace Infrastructure.Services
 
             //if (insUnderAMC != null)
             //{
-                // only service request should be updated with service quote no and not the amc items
+            // only service request should be updated with service quote no and not the amc items
 
-                //insUnderAMC.amcItems.ServiceRequestId = insUnderAMC.amc.Ismultiplebreakdown ? (insUnderAMC.amcItems.ServiceRequestId + "," + mServiceRequest.Id) : mServiceRequest.Id;
-                //insUnderAMC.amcItems.Date = DateTime.Now.ToString("dd/MM/yyyy");
-                //insUnderAMC.amcItems.EstStartDate = mServiceRequest.Serreqdate;
-                //insUnderAMC.amcItems.Status = Context.VW_ListItems.FirstOrDefault(x => x.ItemCode == "AICON" && x.ListCode == "AISTA")?.ListTypeItemId;
+            //insUnderAMC.amcItems.ServiceRequestId = insUnderAMC.amc.Ismultiplebreakdown ? (insUnderAMC.amcItems.ServiceRequestId + "," + mServiceRequest.Id) : mServiceRequest.Id;
+            //insUnderAMC.amcItems.Date = DateTime.Now.ToString("dd/MM/yyyy");
+            //insUnderAMC.amcItems.EstStartDate = mServiceRequest.Serreqdate;
+            //insUnderAMC.amcItems.Status = Context.VW_ListItems.FirstOrDefault(x => x.ItemCode == "AICON" && x.ListCode == "AISTA")?.ListTypeItemId;
 
-                //Context.Entry(insUnderAMC.amcItems).State = EntityState.Modified;
-                //Context.SaveChanges();
+            //Context.Entry(insUnderAMC.amcItems).State = EntityState.Modified;
+            //Context.SaveChanges();
 
             //}
         }
@@ -628,7 +686,7 @@ namespace Infrastructure.Services
 
         }
 
-        private async void SendEmail(ServiceRequest serRequest, ServiceReport serReport, AppSettings _appSettings,string engName)
+        private async void SendEmail(ServiceRequest serRequest, ServiceReport serReport, AppSettings _appSettings, string engName)
         {
 #pragma warning disable CS0168 // Variable is declared but never used
             try
@@ -706,7 +764,7 @@ namespace Infrastructure.Services
 
             }
             catch (Exception ex)
-            {                
+            {
 
             }
 #pragma warning restore CS0168 // Variable is declared but never used
