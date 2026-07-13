@@ -1133,7 +1133,7 @@ namespace Infrastructure.Migrations
                     BreakoccurDetailsId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ResolveAction = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ComplaintRegisName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AssignedTo = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AssignedTo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VisitType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RequestTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MachEngineer = table.Column<string>(type: "nvarchar(max)", nullable: true),

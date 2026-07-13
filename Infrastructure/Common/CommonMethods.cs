@@ -659,6 +659,7 @@ namespace Infrastructure.Common
             {
                 System.Diagnostics.Debug.WriteLine($"[SendEmailMethod] SMTP error: {ex.Message} | Inner: {ex.InnerException?.Message}");
                 return false;
+                //throw ex;
             }
         }
 
